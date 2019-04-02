@@ -2,8 +2,9 @@ TEMPLATE = app
 CONFIG += console
 CONFIG -= qt
 
-SOURCES += main.cpp \
-    Exception.cpp
+SOURCES += \
+    Exception.cpp \
+    test.cpp
 
 HEADERS += \
     smartPoint.h \
