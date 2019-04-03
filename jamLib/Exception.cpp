@@ -10,7 +10,7 @@ void Exception::init(const char *message, const char *file, int line)
     if(file != NULL)
     {
         char sl[16] = {0};
-        itoa(line,sl,10);
+        itoa(line,sl,10);  //参数1，要转换的数字。参数2，字符数组的指针。参数3，要转换成的进制数
         m_location = (char*)malloc(strlen(file) + strlen(sl) + 2);
         m_location = strcpy(m_location, file);
         m_location = strcat(m_location, ":");
