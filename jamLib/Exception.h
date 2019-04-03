@@ -1,7 +1,6 @@
 #ifndef EXCEPTION_H
 #define EXCEPTION_H
-namespace jamLib
-{
+namespace jamLib{
 class Exception
 {
 private:

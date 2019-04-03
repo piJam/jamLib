@@ -1,8 +1,7 @@
 #include"Exception.h"
 #include <cstdlib>
 #include <cstring>
-namespace jamLib
-{
+namespace jamLib{
 
 void Exception::init(const char *message, const char *file, int line)
 {

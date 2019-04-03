@@ -1,8 +1,7 @@
 /*  20190401 16:24  */
 #ifndef SMARTPOINT_H
 #define SMARTPOINT_H
-namespace jamLib
-{
+namespace jamLib{
 
 template<typename T>
 class SmartPoint
