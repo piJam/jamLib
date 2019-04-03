@@ -8,14 +8,8 @@ using namespace std;
 using namespace jamLib;
 int main()
 {
-     try
-    {
+    cout << "Hello JamLib!" << endl;
 
-    }
-    catch(const Exception& e)
-    {
-        cout << e.message() << endl;
-    }
     return 0;
 }
 
