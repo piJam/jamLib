@@ -1,10 +1,12 @@
 /*  20190401 16:24  */
 #ifndef SMARTPOINT_H
 #define SMARTPOINT_H
+#include "Object.h"
+
 namespace jamLib{
 
 template<typename T>
-class SmartPoint
+class SmartPoint : public Object
 {
 private:
     T* m_point;

@@ -1,7 +1,13 @@
 #ifndef EXCEPTION_H
 #define EXCEPTION_H
+#include "Object.h"
+
+
 namespace jamLib{
-class Exception
+
+#define THROW_EXCEPTION(e,m) (throw e(m,__FILE__,__LINE__))
+
+class Exception : public Object
 {
 private:
     char* m_message;
@@ -18,8 +24,13 @@ public:
 
     virtual const char* message() const;
     virtual const char* location() const;
-    virtual ~Exception()=0;
+    virtual ~Exception() = 0;
 
+
+};
+
+class InvalidOperationException : public Exception
+{
 
 };
 }

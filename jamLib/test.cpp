@@ -2,14 +2,20 @@
 #include <cstring>
 #include <cstdlib>
 #include "smartPoint.h"
-using namespace std;
+#include "Exception.h"
 
+using namespace std;
+using namespace jamLib;
 int main()
 {
-    int a = 9999;
-    char c[1]={0};
-    itoa(a,c,3);
-    cout << c << endl;
+     try
+    {
+
+    }
+    catch(const Exception& e)
+    {
+        cout << e.message() << endl;
+    }
     return 0;
 }
 
