@@ -8,8 +8,14 @@ using namespace std;
 using namespace jamLib;
 int main()
 {
-    SmartPoint<int> sp = NULL;
-    cout << "Hello JamLib!" << &sp << " value is :" << sp.isNull() << endl;
+    try{
+        //HROW_EXCEPTION(ArithmeticException,"wawawawa");
+        THROW(ArithmeticException);
+    }catch(Exception& e){
+
+        cout << e.message() << endl;
+
+    }
 
     return 9;
 }

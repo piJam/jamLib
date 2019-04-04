@@ -6,7 +6,7 @@
 namespace jamLib{
 
 #define THROW_EXCEPTION(e,m) (throw e(m,__FILE__,__LINE__))
-
+#define THROW(e) (throw e())
 class Exception : public Object
 {
 private:
@@ -30,6 +30,7 @@ public:
 };
 class ArithmeticException : public Exception
 {
+public:
     ArithmeticException():Exception(0){}
     ArithmeticException(const char* message):Exception(message){}
     ArithmeticException(const char* file,int line):Exception(file,line){}
