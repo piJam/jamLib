@@ -36,3 +36,4 @@
 Makefile
 Makefile.Debug
 Makefile.Release
+jamLib/jamLib.pro.user
