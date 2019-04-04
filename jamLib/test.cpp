@@ -1,15 +1,16 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include "smartPoint.h"
+#include "SmartPoint.h"
 #include "Exception.h"
 
 using namespace std;
 using namespace jamLib;
 int main()
 {
-    cout << "Hello JamLib!" << endl;
+    SmartPoint<int> sp = NULL;
+    cout << "Hello JamLib!" << &sp << " value is :" << sp.isNull() << endl;
 
-    return 0;
+    return 9;
 }
 
