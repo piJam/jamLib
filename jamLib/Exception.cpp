@@ -30,7 +30,6 @@ void Exception::init(const char *message, const char *file, int line)
 
 Exception::Exception(const char* message)
 {
-    std::cout << "------HAHAH------" << std::endl;
     init(message, NULL, 0);
 }
 Exception::Exception(const char* file,int line)
