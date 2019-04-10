@@ -4,6 +4,7 @@
 #include <iostream>
 namespace jamLib{
 
+
 void Exception::init(const char *message, const char *file, int line)
 {
     m_message = strdup(message);
@@ -74,5 +75,6 @@ Exception::~Exception()
     free(m_message);
     free(m_location);
 }
+
 
 }

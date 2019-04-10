@@ -4,19 +4,14 @@
 #include "SmartPoint.h"
 #include "Exception.h"
 
+#include "bs.h"
+
 using namespace std;
 using namespace jamLib;
 int main()
 {
-    try{
-        //HROW_EXCEPTION(ArithmeticException,"wawawawa");
-        THROW(ArithmeticException);
-    }catch(Exception& e){
 
-        cout << e.message() << endl;
 
-    }
-
-    return 9;
+    return 0;
 }
 

@@ -1,5 +1,7 @@
 #ifndef OBJECT_H
 #define OBJECT_H
+#include<iostream>
+using namespace std;
 namespace jamLib{
 class Object
 {

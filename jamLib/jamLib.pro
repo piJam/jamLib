@@ -5,10 +5,12 @@ CONFIG -= qt
 SOURCES += \
     Exception.cpp \
     test.cpp \
-    Object.cpp
+    Object.cpp \
+    bs.cpp
 
 HEADERS += \
     Exception.h \
     SmartPoint.h \
-    Object.h
+    Object.h \
+    bs.h
 
