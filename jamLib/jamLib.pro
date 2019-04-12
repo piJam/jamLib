@@ -12,5 +12,6 @@ HEADERS += \
     Exception.h \
     SmartPoint.h \
     Object.h \
-    bs.h
+    bs.h \
+    List.h
 
