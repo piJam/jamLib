@@ -6,12 +6,11 @@ SOURCES += \
     Exception.cpp \
     test.cpp \
     Object.cpp \
-    bs.cpp
-
+    Seqlist.cpp
 HEADERS += \
     Exception.h \
     SmartPoint.h \
     Object.h \
-    bs.h \
-    List.h
+    List.h \
+    Seqlist.h
 

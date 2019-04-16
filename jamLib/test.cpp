@@ -4,8 +4,6 @@
 #include "SmartPoint.h"
 #include "Exception.h"
 
-#include "bs.h"
-
 using namespace std;
 using namespace jamLib;
 int main()
