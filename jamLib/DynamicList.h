@@ -2,6 +2,9 @@
 #define DYNAMICLIST_H
 #include "Exception.h"
 #include "SeqList.h"
+
+namespace jamLib
+{
 template<typename T>
 class DynamicList : public SeqList<T>
 {
@@ -11,7 +14,7 @@ public:
     DynamicList(int capacity)
     {
         this ->m_array = new T[capacity];
-        if(m_array)
+        if(this ->m_array)
         {
             this->m_length = 0;
             this->m_capacity = capacity;
@@ -23,6 +26,7 @@ public:
         }
 
     }
+
     int capacity()const
     {
         return m_capacity;
@@ -31,15 +35,15 @@ public:
     void resize(int capacity)
     {
         T* array = new T[capacity];
-        if(sp != NULL)
+        if(array != NULL)
         {
             int length = capacity > this->m_capacity ? this->m_capacity : capacity;
             for(int i = 0; i<length; i++)
             {
-                array[i] = m_array[i]
+                array[i] = this-> m_array[i];
             }
 
-            T* temp = this->m_array;
+            T* temp = this ->m_array;
 
             this->m_length = length;
             this->m_capacity = capacity;
@@ -56,5 +60,5 @@ public:
         delete[] this->m_array;
     }
 };
-
+}
 #endif // DYNAMICLIST_H

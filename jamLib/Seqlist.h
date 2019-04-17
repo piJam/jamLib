@@ -29,6 +29,7 @@ public:
         }
         return ret;
     }
+
     virtual bool remove(int i)
     {
         bool ret = (0 <= i) && (i< m_length);
@@ -54,6 +55,7 @@ public:
         }
         return ret;
     }
+
     virtual bool set(int i,const T& e)
     {
         bool ret = (i >= 0)&&(i < m_length);
@@ -68,6 +70,7 @@ public:
     {
          return m_length;
     }
+
     virtual void clear()
     {
          m_length = 0;
@@ -83,11 +86,13 @@ public:
             THROW_EXCEPTION(IndexOutOfBoundsException,"invalid...");
         }
     }
+
     virtual T operator[](int i )const
     {
          return (const_cast<SeqList<T>&>(*this))[i]  ;
     }
 
+    //ø’º‰¥Û–°
     virtual int capacity() const = 0;
 };
 
