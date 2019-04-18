@@ -20,16 +20,19 @@ public:
         {
             for(int p = m_length - 1; p >= i; p--)
             {
-                *(m_array + p + 1) = *(m_array + p);
+                m_array[p + 1] = m_array[p];
             }
 
-           *(m_array + i) = e;
+           m_array[i] = e;
 
            m_length++;
         }
         return ret;
     }
-
+    virtual bool insert(const T& e)
+    {
+        return insert(m_length,e);
+    }
     virtual bool remove(int i)
     {
         bool ret = (0 <= i) && (i< m_length);

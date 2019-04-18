@@ -9,6 +9,7 @@ class List: public Object
 {
 public:
     virtual bool insert(int i,const T& e) = 0;
+    virtual bool insert(const T& e) = 0;
     virtual bool remove(int i) = 0;
 
     virtual bool get(int i,T& e) const = 0;

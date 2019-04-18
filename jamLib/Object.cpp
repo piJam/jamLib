@@ -3,19 +3,15 @@
 
 namespace jamLib{
 
-Object::~Object()
-{
-
-}
+Object::Object(){}
+Object::~Object(){}
 
 void* Object::operator new(unsigned int size) throw()
 {
-    cout << "--- void* Object::operator new(unsigned int size) throw() ---" << endl;
     return malloc(size);
 }
 void Object::operator delete(void* p)
 {
-     cout << "--- void Object::operator delete(void* p) ---" << endl;
      free(p);
 }
 

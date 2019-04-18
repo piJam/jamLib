@@ -4,8 +4,8 @@ CONFIG -= qt
 
 SOURCES += \
     Exception.cpp \
-    test.cpp \
-    Object.cpp
+    Object.cpp \
+    main.cpp
 HEADERS += \
     Exception.h \
     SmartPoint.h \
