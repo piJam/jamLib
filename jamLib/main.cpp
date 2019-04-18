@@ -7,6 +7,7 @@
 #include "DynamicList.h"
 #include "SeqList.h"
 #include "StaticArray.h"
+#include "DynamicArray.h"
 
 
 using namespace std;
@@ -21,12 +22,35 @@ int main()
     {
         ar1.set(i,i);
     }
-    for(int i = 0; i<ar1.length();i++)
+
+    StaticArray<int,6> ar;
+    ar = ar1;
+
+    for(int i = 0; i<ar.length();i++)
     {
-        int b = i;
-         ar1.get(i,b);
-        cout << b << endl;
+
+        cout << ar[i] << endl;
     }
+
+
+    DynamicArray<int> ds(10);
+
+
+    for(int i = 0; i<ds.length(); i++)
+    {
+        ds[i] = i*i;
+
+    }
+
+    DynamicArray<int> dss(10);// = ds ;
+
+    dss = ds;
+    for(int i = 0; i<dss.length(); i++)
+    {
+        cout<< dss[i] <<endl;
+    }
+
     return 0;
 }
+
 

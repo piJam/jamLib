@@ -46,8 +46,9 @@ public:
 
     T operator [](int i) const
     {
-        return (static_cast<Array<T>&>(*this))[i];
+        return ( static_cast<Array<T>&>(*this) )[i];
     }
+
     virtual int length() const = 0;
 
 };

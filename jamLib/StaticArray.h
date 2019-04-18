@@ -21,17 +21,17 @@ public:
         {
           // this -> m_array[i] =  obj[i];
 
-            m_space[i] = obj.m_space[i];
+            m_space[i] = obj.m_array[i];
         }
     }
 
     StaticArray<T,N>& operator=(const StaticArray<T,N>& obj)
     {
-        if(this != obj)
+        if(this != &obj)
         {
             for(int i = 0; i<length(); i++)
             {
-                 this ->  m_array[i] =  obj[i];
+                 this ->  m_array[i] =  obj.m_array[i];
             }
 
         }
