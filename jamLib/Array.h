@@ -1,5 +1,6 @@
 #ifndef ARRAY_H
 #define ARRAY_H
+#include <cstdio>
 #include "Object.h"
 #include "Exception.h"
 namespace jamLib
@@ -46,7 +47,17 @@ public:
 
     T operator [](int i) const
     {
-        return ( static_cast<Array<T>&>(*this) )[i];
+        printf("--------T operator [](int i) const--------------------\n");
+        if( (0 <= i)&&( i< length()))
+        {
+             return m_array[i];
+        }
+        else
+        {
+             THROW_EXCEPTION(IndexOutOfBoundsException,"invalid...");
+        }
+
+        // return ( static_cast<Array<T>&>(*this) )[i];
     }
 
     virtual int length() const = 0;

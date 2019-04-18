@@ -21,7 +21,7 @@ public:
         {
           // this -> m_array[i] =  obj[i];
 
-            m_space[i] = obj.m_array[i];
+            m_space[i] = obj[i];
         }
     }
 

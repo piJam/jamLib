@@ -23,8 +23,8 @@ int main()
         ar1.set(i,i);
     }
 
-    StaticArray<int,6> ar;
-    ar = ar1;
+    StaticArray<int,6> ar = ar1;;
+  //  ar = ar1;
 
     for(int i = 0; i<ar.length();i++)
     {
