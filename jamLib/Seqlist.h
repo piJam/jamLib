@@ -29,10 +29,12 @@ public:
         }
         return ret;
     }
+
     virtual bool insert(const T& e)
     {
         return insert(m_length,e);
     }
+
     virtual bool remove(int i)
     {
         bool ret = (0 <= i) && (i< m_length);
