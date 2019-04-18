@@ -45,7 +45,7 @@ public:
         return *this;
     }
 };
-/********************申请内存异常*********************/
+/********************操作异常*********************/
 class InvalidOperationException : public Exception
 {
 public:
