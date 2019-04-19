@@ -41,10 +41,12 @@ int main()
         ds[i] = i*i;
 
     }
-
-    DynamicArray<int> dss(10);// = ds ;
+    ds.resize(20);
+    DynamicArray<int> dss(1);// = ds ;
 
     dss = ds;
+
+    cout<< endl;
     for(int i = 0; i<dss.length(); i++)
     {
         cout<< dss[i] <<endl;

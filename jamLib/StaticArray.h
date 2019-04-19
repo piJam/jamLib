@@ -37,6 +37,7 @@ public:
         }
         return *this;
     }
+
     virtual int length() const
     {
         return N;
