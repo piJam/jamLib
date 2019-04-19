@@ -47,17 +47,7 @@ public:
 
     T operator [](int i) const
     {
-        printf("--------T operator [](int i) const--------------------\n");
-        if( (0 <= i)&&( i< length()))
-        {
-             return m_array[i];
-        }
-        else
-        {
-             THROW_EXCEPTION(IndexOutOfBoundsException,"invalid...");
-        }
-
-        // return ( static_cast<Array<T>&>(*this) )[i];
+       return ( const_cast<Array<T>&>(*this) )[i];
     }
 
     virtual int length() const = 0;
