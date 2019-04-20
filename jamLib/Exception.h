@@ -7,11 +7,21 @@ namespace jamLib{
 
 #define THROW_EXCEPTION(e,m) (throw e(m,__FILE__,__LINE__))
 #define THROW(e) (throw e())
+
 class Exception : public Object
 {
 private:
     char* m_message;
     char* m_location;
+
+
+#ifdef __APPLE__
+
+    void itoa(int line,char* str,int num);
+    char getCharCode(int num);
+
+#endif
+
 
     void init(const char* message,const char* file,int line);
 public:

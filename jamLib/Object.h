@@ -12,10 +12,10 @@ public:
 
     virtual ~Object() = 0;
     Object();
-    void* operator new(unsigned int size) throw();
+    void* operator new(size_t size) throw();
     void operator delete(void* p);
 
-    void* operator new[](unsigned int size) throw();
+    void* operator new[](size_t size) throw();
     void operator delete[](void* p);
 };
 }

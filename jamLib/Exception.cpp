@@ -4,7 +4,56 @@
 #include <iostream>
 namespace jamLib{
 
+#ifdef __APPLE__
 
+void Exception::itoa(int line, char *str, int num)
+{
+    int length = 0;
+        for(int i = 10; i < 10000000; i*=10)
+        {
+              length++;
+            if((line / i) == 0)
+            {
+                 break;
+            }
+        }
+
+        for(int i = 1; i <= length; i++)
+        {
+            str[length - i] = getCharCode (line % 10) ;
+            line /= 10;
+        }
+}
+
+char Exception::getCharCode(int num)
+{
+  switch (num)
+        {
+            case 0:
+               return 48;
+            case 1:
+               return 49;
+            case 2:
+               return 50;
+            case 3:
+                return 51;
+            case 4:
+                return 52;
+            case 5:
+                return 53;
+            case 6:
+                return 54;
+            case 7:
+                return 55;
+            case 8:
+                return 56;
+            case 9:
+                return 57;
+        }
+
+}
+
+#endif
 void Exception::init(const char *message, const char *file, int line)
 {
     m_message = strdup(message);
