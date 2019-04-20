@@ -1,7 +1,7 @@
 #ifndef DYNAMICLIST_H
 #define DYNAMICLIST_H
 #include "Exception.h"
-#include "Seqlist.h"
+#include "SeqList.h"
 
 namespace jamLib
 {

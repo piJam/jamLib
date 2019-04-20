@@ -8,11 +8,11 @@ SOURCES += \
     main.cpp
 HEADERS += \
     Exception.h \
-    SmartPoint.h \
+    SeqList.h \
     Object.h \
     List.h \
+    SmartPoint.h \
     StaticList.h \
-    SeqList.h \
     DynamicList.h \
     Array.h \
     StaticArray.h \
