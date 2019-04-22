@@ -96,44 +96,44 @@ public:
 
 //                delete[] temp;
 
-//            }else
-//            {
-//                THROW_EXCEPTION(IndexOutOfBoundsException,"on memory copy...");
-//            }
-            T* array = copy(obj.m_array,obj.m_length,obj.m_length);
-            update(array,obj.length());
+            //            }else
+            //            {
+            //                THROW_EXCEPTION(IndexOutOfBoundsException,"on memory copy...");
+            //            }
+                        T* array = copy(obj.m_array,obj.m_length,obj.m_length);
+                        update(array,obj.length());
 
-         }
-        return *this;
-    }
+                     }
+                    return *this;
+                }
 
-    void resize(int length)
-    {
-        if(length != m_length)
-        {
-//            int len =(length > m_length) ? m_length : length;  //用于老旧数组之间数据COPY。
-//             T *space = new T[length];
+                void resize(int length)
+                {
+                    if(length != m_length)
+                    {
+            //            int len =(length > m_length) ? m_length : length;  //用于老旧数组之间数据COPY。
+            //             T *space = new T[length];
 
-//             if(space != NULL)
-//             {
-//                 for(int i = 0; i<len; i++)
-//                 {
-//                      space[i] = this->m_array[i];
-//                 }
-//                T* temp = this->m_array;
+            //             if(space != NULL)
+            //             {
+            //                 for(int i = 0; i<len; i++)
+            //                 {
+            //                      space[i] = this->m_array[i];
+            //                 }
+            //                T* temp = this->m_array;
 
-//                this->m_length = length;
-//                this->m_array  = space;
+            //                this->m_length = length;
+            //                this->m_array  = space;
 
-//                delete[] temp;
+            //                delete[] temp;
 
-//              }else
-//              {
-//                  THROW_EXCEPTION(IndexOutOfBoundsException,"on memory...");
-//              }
-            update(copy(this->m_array,this->m_length,length),length);
-         }
-    }
+            //              }else
+            //              {
+            //                  THROW_EXCEPTION(IndexOutOfBoundsException,"on memory...");
+            //              }
+                        update(copy(this->m_array,this->m_length,length),length);
+                     }
+                }
 
     int length() const
     {
