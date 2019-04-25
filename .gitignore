@@ -32,6 +32,7 @@
 *.app
 
 # 忽略.DS_Store文件
+.qmake.stash
 .DS_Store
 Makefile
 Makefile.Debug
