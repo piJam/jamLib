@@ -19,9 +19,8 @@ public:
         this ->m_array = m_space;
         for(int i = 0; i < length(); i++)
         {
-          // this -> m_array[i] =  obj[i];
-
-            m_space[i] = obj[i];
+           this -> m_array[i] =  obj.m_array[i];
+            // m_space[i] = obj[i];
         }
     }
 
