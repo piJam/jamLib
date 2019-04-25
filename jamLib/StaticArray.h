@@ -33,7 +33,6 @@ public:
             {
                  this ->  m_array[i] =  obj.m_array[i];
             }
-
         }
         return *this;
     }

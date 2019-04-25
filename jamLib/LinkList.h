@@ -29,6 +29,7 @@ protected:
 
     Node* position(int i) const //获取要获取元素位置的上一个元素，利用上一个元素的next找到要操作的元素位置
     {
+
         Node* ret = reinterpret_cast<Node*>(&m_header);
 
         for(int p = 0; p < i ;p++)
@@ -48,6 +49,7 @@ public:
 
     bool insert(int i,const T& e)
     {
+
         bool ret = (0 <= i) && (i <= m_length);
         if(ret)
         {
