@@ -8,7 +8,7 @@
 #include "SeqList.h"
 #include "StaticArray.h"
 #include "DynamicArray.h"
-
+#include "LinkList.h"
 
 using namespace std;
 using namespace jamLib;
@@ -16,17 +16,6 @@ using namespace jamLib;
 int main()
 {
 
-    try{
-
-    THROW_EXCEPTION(IndexOutOfBoundsException,"this is no ...");
-
-    }
-    catch(Exception& e)
-    {
-
-        cout << e.message() << endl;
-         cout << e.location() << endl;
-    }
 
     return 0;
 }
