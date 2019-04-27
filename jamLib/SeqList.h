@@ -12,7 +12,7 @@ protected:
     int m_length;
 public:
 
-    virtual bool insert(int i,const T& e)
+    bool insert(int i,const T& e)
     {
         bool ret = (0 <= i)&&(i <= m_length); //判断i到 m_length 长度时空间还够不够用
         ret = ret && (m_length < capacity());
@@ -30,12 +30,12 @@ public:
         return ret;
     }
 
-    virtual bool insert(const T& e)
+    bool insert(const T& e)
     {
         return insert(m_length,e);
     }
 
-    virtual bool remove(int i)
+    bool remove(int i)
     {
         bool ret = (0 <= i) && (i< m_length);
 
@@ -51,7 +51,7 @@ public:
         return ret;
     }
 
-    virtual bool get(int i,T& e) const
+    bool get(int i,T& e) const
     {
         bool ret = (i >= 0)&&(i < m_length);
         if(ret)
@@ -61,7 +61,7 @@ public:
         return ret;
     }
 
-    virtual bool set(int i,const T& e)
+    bool set(int i,const T& e)
     {
         bool ret = (i >= 0)&&(i < m_length);
         if(ret)
@@ -71,17 +71,33 @@ public:
         return ret;
     }
 
-    virtual int length() const
+    int length() const
     {
          return m_length;
     }
 
-    virtual void clear()
+    int find(const T& e) const
+    {
+        int ret = -1;
+
+        for (int i = 0; i < m_length; i++)
+        {
+            if(m_array[i] == e)
+            {
+                ret = i;
+                break;
+            }
+
+        }
+        return ret;
+    }
+
+    void clear()
     {
          m_length = 0;
     }
 
-    virtual T& operator [](int i)
+    T& operator [](int i)
     {
         if((i >= 0)&&(i < m_length))
         {
@@ -92,10 +108,11 @@ public:
         }
     }
 
-    virtual T operator[](int i )const
+    T operator[](int i )const
     {
          return (const_cast<SeqList<T>&>(*this))[i]  ;
     }
+
 
     //空间大小
     virtual int capacity() const = 0;
