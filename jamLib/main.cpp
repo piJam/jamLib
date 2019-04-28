@@ -19,7 +19,7 @@ int main()
     list.insert(1);
     list.insert(1);
 
-   /*
+
    for(int i = 0;i < 10;i++)
    {
         list.insert(i*i);
@@ -40,12 +40,8 @@ int main()
 
   list.clear();
 
-   for(int i = 0; i< 9; i++)
-   {
-       cout<< list.get(i) << endl;
-   }
+    system("pause");
 
-   */
 
 
    return 0;
