@@ -5,7 +5,8 @@ CONFIG -= qt
 SOURCES += \
     Exception.cpp \
     Object.cpp \
-    main.cpp
+    main.cpp \
+    13.cpp
 HEADERS += \
     Exception.h \
     SeqList.h \
