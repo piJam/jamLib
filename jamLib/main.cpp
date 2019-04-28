@@ -1,14 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include "Object.h"
-#include "SmartPoint.h"
-#include "Exception.h"
-#include "StaticList.h"
-#include "DynamicList.h"
-#include "SeqList.h"
-#include "StaticArray.h"
-#include "DynamicArray.h"
+
 #include "LinkList.h"
 
 using namespace std;
@@ -22,10 +15,10 @@ public:
     {
         m_index = i;
     }
-    bool operator ==(const Test& t)
-    {
-        return (m_index == t.m_index);
-    }
+bool operator ==(const Test& e)
+{
+    return m_index == e.m_index;
+}
 
 };
 
@@ -44,7 +37,8 @@ int main()
     list.insert(test3);
     list.insert(test4);
 
-    test == test1;
+
+
 
    cout<< "position :"<< list.find(test1) <<endl;
 

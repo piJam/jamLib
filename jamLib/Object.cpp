@@ -1,10 +1,6 @@
 #include "Object.h"
-#include <cstdlib>
 
 namespace jamLib{
-
-Object::Object(){}
-Object::~Object(){}
 
 void* Object::operator new(size_t size) throw()
 {
@@ -17,6 +13,7 @@ void Object::operator delete(void* p)
 
 bool Object::operator ==(const Object& obj)
 {
+    std::cout <<"this :" << this <<"-&obj:"<< &obj << std::endl;
     return (this == &obj);
 }
 bool Object::operator !=(const Object& obj)
@@ -33,4 +30,5 @@ void Object::operator delete[](void* p)
     free(p);
 }
 
+Object::~Object(){}
 }
