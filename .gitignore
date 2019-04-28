@@ -8,4 +8,4 @@
 !*.cpp
 !*.c
 !jamLib.pro
-!.git/
+!/.git/*
