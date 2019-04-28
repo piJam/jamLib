@@ -20,6 +20,11 @@ int main()
     list.insert(1);
 
 
+<<<<<<< HEAD
+=======
+
+   /*
+>>>>>>> 0c93f9bbcfc3b13961e58c5d19823623b136a805
    for(int i = 0;i < 10;i++)
    {
         list.insert(i*i);

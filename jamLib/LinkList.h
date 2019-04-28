@@ -142,6 +142,25 @@ public:
         m_length = 0;
     }
 
+    int  find(const T& obj) const
+    {
+        int ret = -1;
+        Node* node = m_header.next;
+        int i = 0;
+        while(node)
+        {
+            if(node->value == obj)
+            {
+                ret = i;
+                break;
+            }else
+            {
+                node = node->next;
+                i++;
+            }
+        }
+        return ret;
+    }
     ~LinkList()
     {
         clear();
