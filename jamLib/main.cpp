@@ -20,36 +20,6 @@ int main()
     list.insert(1);
 
 
-<<<<<<< HEAD
-=======
-
-   /*
->>>>>>> 0c93f9bbcfc3b13961e58c5d19823623b136a805
-   for(int i = 0;i < 10;i++)
-   {
-        list.insert(i*i);
-   }
-
-   for(int i = 0; i< 10; i++)
-   {
-       cout<< list.get(i) << endl;
-   }
-
-   list.remove(6);
-   cout<<endl;
-
-   for(int i = 0; i< 9; i++)
-   {
-       cout<< list.get(i) << endl;
-   }
-
-  list.clear();
-
-    system("pause");
-
-
-
-   return 0;
 }
 
 
