@@ -6,7 +6,7 @@ SOURCES += \
     Exception.cpp \
     Object.cpp \
     main.cpp \
-    13.cpp
+    test.cpp
 HEADERS += \
     Exception.h \
     SeqList.h \
