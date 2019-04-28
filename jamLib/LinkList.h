@@ -142,7 +142,7 @@ public:
         m_length = 0;
     }
 
-    int  find(const T& obj) const
+    int find(const T& obj) const
     {
         int ret = -1;
         Node* node = m_header.next;
@@ -161,6 +161,7 @@ public:
         }
         return ret;
     }
+
     ~LinkList()
     {
         clear();
