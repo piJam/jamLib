@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
+#include "Object.h"
 #include "SmartPoint.h"
 #include "Exception.h"
 #include "StaticList.h"
@@ -13,20 +14,39 @@
 using namespace std;
 using namespace jamLib;
 
-int main()
+class Test : public Object
 {
-    LinkList<int> list;
-    list.insert(1);
-    list.insert(1);
-    list.insert(1);
-    list.insert(3,5);
-
-    for(int i = 0; i<list.length(); i++)
+    int m_index;
+public:
+    Test(int i = 0)
     {
-        cout << list.get(i) << endl;
+        m_index = i;
+    }
+    bool operator ==(const Test& t)
+    {
+        return (m_index == t.m_index);
     }
 
-    cout<< "position :"<< list.find(5) <<endl;
+};
+
+int main()
+{
+    LinkList<Test> list;
+    Test test;
+    Test test1(1);
+    Test test2(2);
+    Test test3(3);
+    Test test4(4);
+
+    list.insert(test);
+    list.insert(test1);
+    list.insert(test2);
+    list.insert(test3);
+    list.insert(test4);
+
+    test == test1;
+
+   cout<< "position :"<< list.find(test1) <<endl;
 
 
 }
