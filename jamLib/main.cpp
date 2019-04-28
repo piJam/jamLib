@@ -18,6 +18,15 @@ int main()
     LinkList<int> list;
     list.insert(1);
     list.insert(1);
+    list.insert(1);
+    list.insert(3,5);
+
+    for(int i = 0; i<list.length(); i++)
+    {
+        cout << list.get(i) << endl;
+    }
+
+    cout<< "position :"<< list.find(5) <<endl;
 
 
 }
