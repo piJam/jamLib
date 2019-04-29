@@ -22,7 +22,6 @@ public:
         }else{
 
             THROW_EXCEPTION(NoEnoughMemoryException,"on memory...");
-
         }
 
     }

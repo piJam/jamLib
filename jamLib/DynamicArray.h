@@ -61,14 +61,12 @@ public:
     DynamicArray(const DynamicArray<T>& obj)
     {
 //        this->m_array = new T[obj.m_length];
-
 //        if(this->m_array != NULL)
 //        {
 //            for(int i = 0; i<obj.length(); i++)
 //            {
 //               // this->m_array[i] = obj.m_array[i];  //调用方法重载不如直接调用变量效率高
 //                this->m_array[i] = obj.m_array[i];
-
 //            }
 //            this->m_length = obj.length();
 //        }else
@@ -93,47 +91,42 @@ public:
 //                T* temp = this->m_array;
 //                this->m_array = array;
 //                this->m_length = obj.m_length;
-
 //                delete[] temp;
+//            }else
+//            {
+//                THROW_EXCEPTION(IndexOutOfBoundsException,"on memory copy...");
+//            }
 
-            //            }else
-            //            {
-            //                THROW_EXCEPTION(IndexOutOfBoundsException,"on memory copy...");
-            //            }
-                        T* array = copy(obj.m_array,obj.m_length,obj.m_length);
-                        update(array,obj.length());
+                T* array = copy(obj.m_array,obj.m_length,obj.m_length);
+                update(array,obj.length());
 
-                     }
-                    return *this;
-                }
+          }
+          return *this;
+      }
 
-                void resize(int length)
-                {
-                    if(length != m_length)
-                    {
-            //            int len =(length > m_length) ? m_length : length;  //用于老旧数组之间数据COPY。
-            //             T *space = new T[length];
-
-            //             if(space != NULL)
-            //             {
-            //                 for(int i = 0; i<len; i++)
-            //                 {
-            //                      space[i] = this->m_array[i];
-            //                 }
-            //                T* temp = this->m_array;
-
-            //                this->m_length = length;
-            //                this->m_array  = space;
-
-            //                delete[] temp;
-
-            //              }else
-            //              {
-            //                  THROW_EXCEPTION(IndexOutOfBoundsException,"on memory...");
-            //              }
-                        update(copy(this->m_array,this->m_length,length),length);
-                     }
-                }
+      void resize(int length)
+      {
+           if(length != m_length)
+           {
+//            int len =(length > m_length) ? m_length : length;  //用于老旧数组之间数据COPY。
+//             T *space = new T[length];
+//             if(space != NULL)
+//             {
+//                 for(int i = 0; i<len; i++)
+//                 {
+//                      space[i] = this->m_array[i];
+//                 }
+//                T* temp = this->m_array;
+//                this->m_length = length;
+//                this->m_array  = space;
+//                delete[] temp;
+//              }else
+//              {
+//                  THROW_EXCEPTION(IndexOutOfBoundsException,"on memory...");
+//              }
+                update(copy(this->m_array,this->m_length,length),length);
+            }
+      }
 
     int length() const
     {
