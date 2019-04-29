@@ -26,25 +26,34 @@ protected:
     } m_header;
 
     int m_length;
+    int m_step;
+    Node* m_current;
 
     Node* position(int i) const //获取要获取元素位置的上一个元素，利用上一个元素的next找到要操作的元素位置
     {
-
-        Node* ret = reinterpret_cast<Node*>(&m_header);
-
+        Node* ret = reinterpret_cast<Node*>(&m_header); 
         for(int p = 0; p < i ;p++)
         {
-            ret = ret->next;
+            ret = ret->next;     
         }
-
         return ret;
     }
 
+    virtual Node* createNode()
+    {
+        return new Node();
+    }
+    virtual void destory(Node* pn)
+    {
+        delete pn;
+    }
 public:
     LinkList()
     {
         this->m_header.next = NULL;
         this->m_length = 0;
+        this->m_step = 0;
+        this->m_current = NULL;
     }
 
     bool insert(int i,const T& e)
@@ -53,7 +62,7 @@ public:
         bool ret = (0 <= i) && (i <= m_length);
         if(ret)
         {
-            Node* node = new Node();
+            Node* node = createNode();
 
             if(node != NULL)
             {
@@ -79,14 +88,15 @@ public:
     }
     bool remove(int i)
     {
-        bool ret = (0 <= i)&&( i < m_length);
+        bool ret
+                = (0 <= i)&&( i < m_length);
         if(ret)
         {
             Node* current = position(i);
 
             Node* del = current->next;
             current->next = del->next;
-            delete del;
+            destory(del);
             m_length--;
         }
         return 0;
@@ -137,7 +147,7 @@ public:
         {
             Node* toDel = m_header.next;
             m_header.next = toDel->next;
-            delete toDel;
+            destory(toDel);
         }
         m_length = 0;
     }
@@ -162,6 +172,46 @@ public:
         return ret;
     }
 
+   bool move(int i ,int step = 1)
+   {
+        bool ret = (0 <= i) && (i < m_length) && ( step > 0);
+        if(ret)
+        {
+            m_current = position(i)->next;
+            m_step = step;
+        }
+
+        return ret;
+   }
+
+   bool end()
+   {
+       return (m_current == NULL);
+   }
+
+   bool next()
+   {
+       int i = 0;
+       while ( (i < m_step) && !end() )
+       {
+            m_current = m_current->next;
+            i++;
+       }
+       return i == m_step;
+   }
+
+   T current()
+   {
+       if(!end())
+       {
+            return m_current ->value;
+
+       }else{
+
+           THROW_EXCEPTION(InvalidOperationException,"no data at current position");
+       }
+
+   }
     ~LinkList()
     {
         clear();

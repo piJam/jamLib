@@ -24,23 +24,22 @@ bool operator ==(const Test& e)
 
 int main()
 {
-    LinkList<Test> list;
-    Test test;
-    Test test1(1);
-    Test test2(2);
-    Test test3(3);
-    Test test4(4);
+    LinkList<int> list;
+    for(int i = 0; i<9;i++)
+    {
+        list.insert(i);
+    }
+ //   cout << list.get(0) << endl;
 
-    list.insert(test);
-    list.insert(test1);
-    list.insert(test2);
-    list.insert(test3);
-    list.insert(test4);
-
-
+ cout << endl;
+    for(list.move(0,2); !list.end(); list.next())
+    {
+        cout << list.current() << endl;
+    }
 
 
-   cout<< "position :"<< list.find(test1) <<endl;
+
+
 
 
 }
