@@ -24,21 +24,6 @@ bool operator ==(const Test& e)
 
 int main()
 {
-    LinkList<int> list;
-    for(int i = 0; i<9;i++)
-    {
-        list.insert(i);
-    }
- //   cout << list.get(0) << endl;
-
- cout << endl;
-    for(list.move(0,2); !list.end(); list.next())
-    {
-        cout << list.current() << endl;
-    }
-
-
-
 
 
 
