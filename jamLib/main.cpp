@@ -33,9 +33,9 @@ int main()
         st.insert(0,i);
     }
 
-    for(int i = 0; i < 10; i++)
+    for(st.move(0,5);!st.end();st.next())
     {
-        cout << st.get(i) << endl;
+        cout << st.current() << endl;
     }
 
 }
