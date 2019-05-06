@@ -3,6 +3,7 @@
 #include <cstdlib>
 
 #include "LinkList.h"
+#include "StaticLinkList.h"
 
 using namespace std;
 using namespace jamLib;
@@ -24,23 +25,18 @@ bool operator ==(const Test& e)
 
 int main()
 {
-    LinkList<int> list;
-    for(int i = 0; i<9;i++)
-    {
-        list.insert(i);
-    }
- //   cout << list.get(0) << endl;
 
- cout << endl;
-    for(list.move(0,2); !list.end(); list.next())
+    StaticLinkList<int,10> st;
+
+    for(int i = 0; i < 10; i++)
     {
-        cout << list.current() << endl;
+        st.insert(0,i);
     }
 
-
-
-
-
+    for(st.move(0,5);!st.end();st.next())
+    {
+        cout << st.current() << endl;
+    }
 
 }
 
