@@ -88,16 +88,21 @@ public:
     }
     bool remove(int i)
     {
-        bool ret
-                = (0 <= i)&&( i < m_length);
+        bool ret = (0 <= i)&&( i < m_length);
         if(ret)
         {
             Node* current = position(i);
-
             Node* del = current->next;
+
+            if(m_current == del)
+            {
+               m_current = del->next;
+            }
+
             current->next = del->next;
-            destroy(del);
+
             m_length--;
+            destroy(del);
         }
         return 0;
     }
@@ -147,9 +152,10 @@ public:
         {
             Node* toDel = m_header.next;
             m_header.next = toDel->next;
+            m_length--;
             destroy(toDel);
         }
-        m_length = 0;
+       // m_length = 0;
     }
 
     int find(const T& obj) const
