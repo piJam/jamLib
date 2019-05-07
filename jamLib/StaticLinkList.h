@@ -65,7 +65,10 @@ public:
     {
         return N;
     }
-
+    ~StaticLinkList()  //父类中的析构函数中有释放资源的操作,但是在析构函数中不会发生多态,子类不实现析构,父类只调用自己的destory函数,所以实现对父类clear的调用,调用自己的destory函数释放资源.
+    {
+        this->clear();
+    }
 };
 }
 
