@@ -11,10 +11,12 @@ using namespace jamLib;
 class Test : public Object
 {
     int m_index;
+    SmartPoint<Test> m_test;
 public:
     Test(int i = 0)
     {
         m_index = i;
+        this->m_test = NULL;
     }
 bool operator ==(const Test& e)
 {
@@ -25,17 +27,16 @@ bool operator ==(const Test& e)
 
 int main()
 {
-    LinkList<int> list;
+    LinkList<int> link;
 
-    for(int i = 0;i < 10 ;i++)
+    for(int i = 0;i < 10;i++)
     {
-        list.insert(i);
+        link.insert(i);
     }
-
-    for(list.move(0);!list.end();list.next())
-    {
-        cout<< list.current() << endl;
-    }
+for(link.move(0);!link.end();link.next())
+{
+    cout<< link.current() <<endl;
+}
 
 }
 

@@ -153,7 +153,7 @@ public:
     void clear()
     {
        // while(m_header.next)
-        while(m_header.next.isNull())
+        while(!m_header.next.isNull())
         {
             SmartPoint<Node> toDel = m_header.next;
             m_header.next = toDel->next;
