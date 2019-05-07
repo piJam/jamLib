@@ -44,6 +44,11 @@ public:
         return *m_point;
     }
 
+    T* get()
+    {
+        return m_point;
+    }
+
     bool isNull()
     {
         return (m_point == NULL) ;

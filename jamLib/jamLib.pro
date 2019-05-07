@@ -11,12 +11,12 @@ HEADERS += \
     SeqList.h \
     Object.h \
     List.h \
-    SmartPoint.h \
     StaticList.h \
     DynamicList.h \
     Array.h \
     StaticArray.h \
     DynamicArray.h \
     LinkList.h \
-    StaticLinkList.h
+    StaticLinkList.h \
+    SmartPoint.h
 

@@ -1,6 +1,7 @@
 #ifndef LINKLIST_H
 #define LINKLIST_H
 #include <iostream>
+#include "SmartPoint.h"
 #include "List.h"
 #include "Object.h"
 #include "Exception.h"
@@ -31,12 +32,13 @@ protected:
 
     Node* position(int i) const //获取要获取元素位置的上一个元素，利用上一个元素的next找到要操作的元素位置
     {
-        Node* ret = reinterpret_cast<Node*>(&m_header); 
+       // Node* ret = reinterpret_cast<Node*>(&m_header);
+        SmartPoint<Node> ret = reinterpret_cast<Node*>(&m_header);
         for(int p = 0; p < i ;p++)
         {
             ret = ret->next;     
         }
-        return ret;
+        return ret.get();
     }
 
     virtual Node* createNode()
