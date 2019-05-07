@@ -66,7 +66,7 @@ public:
         {
            // Node* node = createNode();
             SmartPoint<Node> node = createNode();
-            if(node.isNull())
+            if(!node.isNull())
             {
                 //Node* current = position(i);
                 SmartPoint<Node> current = position(i);

@@ -25,13 +25,23 @@ bool operator ==(const Test& e)
 
 };
 
+Test* get()
+{
+    SmartPoint<Test> test = new Test();
+
+    return test.get();
+}
+
 int main()
 {
-    LinkList<int> link;
+
+SmartPoint<Test> ls = get();
+
+      LinkList<int> link;
 
     for(int i = 0;i < 10;i++)
     {
-        link.insert(i);
+        link.insert(0,i);
     }
 for(link.move(0);!link.end();link.next())
 {
