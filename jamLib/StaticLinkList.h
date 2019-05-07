@@ -47,6 +47,7 @@ protected:
             {
                 m_index[i] = 0;
                 spn->~SNode();
+                break;
             }
         }
 
