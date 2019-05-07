@@ -2,8 +2,7 @@
 #include <cstring>
 #include <cstdlib>
 
-#include "LinkList.h"
-#include "StaticLinkList.h"
+#include "DynamicArray.h"
 
 using namespace std;
 using namespace jamLib;
@@ -25,17 +24,26 @@ bool operator ==(const Test& e)
 
 int main()
 {
+    DynamicArray<DynamicArray<int>> array;
+    array.resize(10);
 
-    StaticLinkList<int,10> st;
-
-    for(int i = 0; i < 10; i++)
+    for(int i = 0;i<array.length();i++)
     {
-        st.insert(0,i);
+        array[i].resize(i);
+        for(int j = 0; j < array[i].length(); j++)
+        {
+            array[i].set(j,j);
+        }
     }
 
-    for(st.move(0,5);!st.end();st.next())
+    for(int i = 0;i<array.length();i++)
     {
-        cout << st.current() << endl;
+
+        for(int j = 0; j < array[i].length(); j++)
+        {
+            cout << array[i][j];
+        }
+        cout << endl;
     }
 
 }
