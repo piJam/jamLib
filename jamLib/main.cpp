@@ -3,6 +3,7 @@
 #include <cstdlib>
 
 #include "DynamicArray.h"
+#include "LinkList.h"
 
 using namespace std;
 using namespace jamLib;
@@ -24,26 +25,16 @@ bool operator ==(const Test& e)
 
 int main()
 {
-    DynamicArray<DynamicArray<int>> array;
-    array.resize(10);
+    LinkList<int> list;
 
-    for(int i = 0;i<array.length();i++)
+    for(int i = 0;i < 10 ;i++)
     {
-        array[i].resize(i);
-        for(int j = 0; j < array[i].length(); j++)
-        {
-            array[i].set(j,j);
-        }
+        list.insert(i);
     }
 
-    for(int i = 0;i<array.length();i++)
+    for(list.move(0);!list.end();list.next())
     {
-
-        for(int j = 0; j < array[i].length(); j++)
-        {
-            cout << array[i][j];
-        }
-        cout << endl;
+        cout<< list.current() << endl;
     }
 
 }

@@ -24,7 +24,7 @@ public:
 
     SmartPoint<T>& operator =(const SmartPoint<T>& obj)
     {
-        if(this != obj)
+        if(this != &obj)
         {
             delete m_point;
             this->m_point = obj.m_point;
