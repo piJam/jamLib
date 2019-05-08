@@ -42,8 +42,6 @@ public:
         delete this-> m_pointer;
     }
 };
-
-
 }
 
 #endif // SMARTPOINT_H
