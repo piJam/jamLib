@@ -11,6 +11,16 @@ class SharedPointer : public Pointer<T>
 {
 protected:
     int* m_ref;
+    void assign(const SharedPointer<T>& obj)
+    {
+        this->m_ref = obj.m_ref;
+        this->m_pointer = obj.m_pointer;
+        if(this->m_ref)
+        {
+            *(this->m_ref)++;
+        }
+    }
+
 public:
     SharedPointer(T* t = NULL) : m_ref(NULL)
     {
@@ -29,17 +39,18 @@ public:
     }
     SharedPointer(const SharedPointer<T>& obj)
     {
-        this->m_ref = obj.m_ref;
-        this->m_pointer = obj.m_pointer;
-        if(this->m_ref)
-        {
-            *(this->m_ref)++;
-        }
+       assign(obj);
     }
 
     SharedPointer<T>& operator =(const SharedPointer<T>& obj)
     {
+        if(this != &obj)
+        {
+            clear();
+            assign(obj);
 
+        }
+        return *this;
     }
 
     void clear()
@@ -59,6 +70,10 @@ public:
                 delete p;
             }
         }
+    }
+    ~SharedPointer()
+    {
+        clear();
     }
 };
 
