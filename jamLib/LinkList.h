@@ -1,7 +1,5 @@
 #ifndef LINKLIST_H
 #define LINKLIST_H
-#include <iostream>
-#include "SmartPoint.h"
 #include "List.h"
 #include "Object.h"
 #include "Exception.h"

@@ -19,7 +19,7 @@ public:
     SmartPoint(const SmartPoint<T>& obj)
     {
         this->m_pointer = obj.m_pointer;
-        const_cast<SmartPoint<T>& >(obj).m_pointer = NULL;
+        const_cast<SmartPoint<T>&>(obj).m_pointer = NULL;
     }
 
     SmartPoint<T>& operator =(const SmartPoint<T>& obj)

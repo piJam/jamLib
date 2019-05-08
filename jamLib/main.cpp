@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-
+#include "SmartPoint.h"
 #include "DynamicArray.h"
 #include "LinkList.h"
 
@@ -18,11 +18,10 @@ public:
         m_index = i;
         this->m_test = NULL;
     }
-bool operator ==(const Test& e)
-{
-    return m_index == e.m_index;
-}
-
+    bool operator ==(const Test& e)
+    {
+        return m_index == e.m_index;
+    }
 };
 
 Test* get()
@@ -36,18 +35,5 @@ int main()
 {
 
 
-
-      LinkList<int> link;
-
-    for(int i = 0;i < 10;i++)
-    {
-        link.insert(0,i);
-    }
-for(link.move(0);!link.end();link.next())
-{
-    cout<< link.current() <<endl;
 }
-
-}
-
 
