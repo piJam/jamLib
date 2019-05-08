@@ -16,29 +16,29 @@ protected:
     struct Node : public Object
     {
         T value;
-        SmartPoint<Node> next;
+        Node* next;
     };
 
    // mutable Node m_header; //const方法中要修改变量的值，要加mutable修饰
     mutable struct : public Object
     {
         char reserved [sizeof(T)];
-        SmartPoint<Node> next;
+        Node* next;
     } m_header;
 
     int m_length;
     int m_step;
-    SmartPoint<Node> m_current;
+    Node* m_current;
 
     Node* position(int i) const //获取要获取元素位置的上一个元素，利用上一个元素的next找到要操作的元素位置
     {
-       // Node* ret = reinterpret_cast<Node*>(&m_header);
-        SmartPoint<Node> ret = reinterpret_cast<Node*>(&m_header);
+        Node* ret = reinterpret_cast<Node*>(&m_header);
+
         for(int p = 0; p < i ;p++)
         {
             ret = ret->next;
         }
-        return ret.get();
+        return ret;
     }
 
     virtual Node* createNode()
@@ -64,15 +64,13 @@ public:
         bool ret = (0 <= i) && (i <= m_length);
         if(ret)
         {
-           // Node* node = createNode();
-            SmartPoint<Node> node = createNode();
-            if(!node.isNull())
+            Node* node = createNode();
+            if(node)
             {
-                //Node* current = position(i);
-                SmartPoint<Node> current = position(i);
+                Node* current = position(i);
                 node->value = e;
                 node->next = current->next;
-                current->next = node.get();
+                current->next = node;
                 m_length++;
              }
             else
@@ -93,12 +91,8 @@ public:
         bool ret = (0 <= i)&&( i < m_length);
         if(ret)
         {
-           // Node* current = position(i);
-           // Node* del = current->next;
-
-            SmartPoint<Node> current = position(i);
-            SmartPoint<Node> del = current->next;
-
+            Node* current = position(i);
+            Node* del = current->next;
             if(m_current == del)
             {
                m_current = del->next;
@@ -107,7 +101,7 @@ public:
             current->next = del->next;
 
             m_length--;
-            //destroy(del);
+            destroy(del);
         }
         return 0;
     }
@@ -152,23 +146,22 @@ public:
     }
     void clear()
     {
-       // while(m_header.next)
-        while(!m_header.next.isNull())
+        while(m_header.next)
         {
-            SmartPoint<Node> toDel = m_header.next;
+            Node* toDel = m_header.next;
             m_header.next = toDel->next;
             m_length--;
-          //  destroy(toDel);
+            destroy(toDel);
         }
-       // m_length = 0;
+
     }
 
     int find(const T& obj) const
     {
         int ret = -1;
-        SmartPoint<Node> node = m_header.next;
+        Node* node = m_header.next;
         int i = 0;
-        while(node.isNull())
+        while(node)
         {
             if(node->value == obj)
             {
@@ -197,8 +190,7 @@ public:
 
    bool end()
    {
-       //return (m_current == NULL);
-       return m_current.isNull();
+       return (m_current == NULL);
    }
 
    bool next()

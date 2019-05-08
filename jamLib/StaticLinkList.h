@@ -7,7 +7,7 @@ template<typename T,int N>
 class StaticLinkList : public LinkList<T>
 {
 protected:
-    typedef typename LinkList<T>::Node Node;
+    typedef typename LinkList<T>::Node Node;  //typename 用于消除二义性，说明Node是一个类型，而不是一个变量
     struct SNode : public Node
     {
     public:

@@ -35,7 +35,7 @@ Test* get()
 int main()
 {
 
-SmartPoint<Test> ls = get();
+
 
       LinkList<int> link;
 

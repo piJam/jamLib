@@ -1,62 +1,45 @@
 /*  20190401 16:24  */
 #ifndef SMARTPOINT_H
 #define SMARTPOINT_H
-#include "Object.h"
+#include "Pointer.h"
 
 namespace jamLib{
 
 template<typename T>
-class SmartPoint : public Object
+class SmartPoint : public Pointer<T>
 {
-private:
-    T* m_point;
+//protected:
+//    T* m_point;  //使用父类Pointer的m_pointer
 public:
-    SmartPoint(T* point = NULL)
+    SmartPoint(T* point = NULL) : Pointer<T>(point)
     {
-        this->m_point = point;
+
     }
 
     SmartPoint(const SmartPoint<T>& obj)
     {
-        this->m_point = obj.m_point;
-        const_cast< SmartPoint<T>& >(obj).m_point = NULL;
+        this->m_pointer = obj.m_pointer;
+        const_cast<SmartPoint<T>& >(obj).m_pointer = NULL;
     }
 
     SmartPoint<T>& operator =(const SmartPoint<T>& obj)
     {
         if(this != &obj)
         {
-            delete m_point;
-            this->m_point = obj.m_point;
-            const_cast< SmartPoint<T>& >(obj).m_point = NULL;
+            T* p = this->m_pointer;
+            this->m_pointer = obj.m_pointer;
+            const_cast< SmartPoint<T>& >(obj).m_pointer = NULL;
+            delete p;
         }
 
         return *this;
     }
 
-    T* operator ->()
-    {
-        return m_point;
-    }
 
-    T& operator *()
-    {
-        return *m_point;
-    }
-
-    T* get()
-    {
-        return m_point;
-    }
-
-    bool isNull()
-    {
-        return (m_point == NULL) ;
-    }
 
     ~SmartPoint()
     {
-        delete m_point;
+        delete this-> m_pointer;
     }
 };
 
