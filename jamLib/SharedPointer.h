@@ -17,7 +17,8 @@ protected:
         this->m_pointer = obj.m_pointer;
         if(this->m_ref)
         {
-            *(this->m_ref)++;
+            (*this->m_ref)++;
+
         }
     }
 
@@ -37,7 +38,7 @@ public:
             }
         }
     }
-    SharedPointer(const SharedPointer<T>& obj)
+    SharedPointer(const SharedPointer<T>& obj) : Pointer<T>(NULL)
     {
        assign(obj);
     }
@@ -64,6 +65,7 @@ public:
         if(ref)
         {
             (*ref)--;
+
             if(*ref == 0)
             {
                 free(ref);
@@ -75,8 +77,23 @@ public:
     {
         clear();
     }
+
+    bool operator == (const SharedPointer<T>& obj)
+    {
+        return (this->get() == obj.get());
+    }
+
+    bool operator != (const SharedPointer<T>& obj)
+    {
+        return !(*this == obj);
+    }
 };
 
+//template<typename T>
+//bool operator == (const SharedPointer<T>& obj1,const SharedPointer<T>& obj2)
+//{
+//    return (*obj1 == *obj2);
+//}
 }
 
 

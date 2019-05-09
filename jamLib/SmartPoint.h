@@ -16,7 +16,7 @@ public:
 
     }
 
-    SmartPoint(const SmartPoint<T>& obj)
+    SmartPoint(const SmartPoint<T>& obj) : Pointer<T>(NULL)
     {
         this->m_pointer = obj.m_pointer;
         const_cast<SmartPoint<T>&>(obj).m_pointer = NULL;
