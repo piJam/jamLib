@@ -42,3 +42,4 @@ Makefile.Release
 jamLib/jamLib.pro.user
 jamLib/jamLib.pro.user.*
 /build-jamLib-Desktop_Qt_5_12_3_clang_64bit-Debug/
+*.user
