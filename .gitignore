@@ -32,9 +32,10 @@
 *.app
 
 # 忽略.DS_Store文件
+.DS_Store
 *.autosave
 .qmake.stash
-.DS_Store
+
 Makefile
 Makefile.Debug
 Makefile.Release
