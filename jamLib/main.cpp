@@ -34,8 +34,6 @@ int main()
     cout << (te3 != te2) << endl;
 
 
-
-
     return 0;
 }
 
