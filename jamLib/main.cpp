@@ -22,6 +22,7 @@ public:
 
 int main()
 {
+
     SharedPointer<Test> te1 = new Test(1);
     SharedPointer<Test> te2 = te1;
     cout<< te1->m_value << endl;

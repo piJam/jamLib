@@ -138,11 +138,11 @@ public:
         return ret;
     }
 
-    int length() const
+   int length() const
     {
          return m_length;
     }
-    void clear()
+   void clear()
     {
         while(m_header.next)
         {
@@ -154,7 +154,7 @@ public:
 
     }
 
-    int find(const T& obj) const
+   int find(const T& obj) const
     {
         int ret = -1;
         Node* node = m_header.next;
