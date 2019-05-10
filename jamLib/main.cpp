@@ -5,6 +5,7 @@
 #include "DynamicArray.h"
 #include "LinkList.h"
 #include "SharedPointer.h"
+#include "CircleList.h"
 
 using namespace std;
 using namespace jamLib;
@@ -23,16 +24,7 @@ public:
 int main()
 {
 
-    SharedPointer<Test> te1 = new Test(1);
-    SharedPointer<Test> te2 = te1;
-    cout<< te1->m_value << endl;
-    cout<< te2->m_value << endl;
-    SharedPointer<Test> te3 = new Test(3);
-    cout << te3->m_value << endl;
-    te3 = te2;
-    cout << te3->m_value << endl;
-
-    cout << (te3 != te2) << endl;
+    CircleList<int> cl;
 
 
     return 0;

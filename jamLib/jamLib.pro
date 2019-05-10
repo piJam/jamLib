@@ -7,6 +7,7 @@ SOURCES += \
     Object.cpp \
     main.cpp
 HEADERS += \
+    CircleList.h \
     Exception.h \
     SeqList.h \
     Object.h \
