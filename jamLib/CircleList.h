@@ -19,6 +19,17 @@ protected:
         last()->next = this->m_header.next;
     }
 public:
+    bool insert(const T& e)
+    {
+        return this->insert(this->m_length,e);
+    }
+    bool insert(int i, const T& e)
+    {
+        bool ret = true;
+
+
+        return ret;
+    }
 
 };
 
