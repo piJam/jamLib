@@ -25,7 +25,7 @@ int main()
 {
 
     CircleList<int> cl;
-
+    cout << cl.length()<< endl;
 
     return 0;
 }

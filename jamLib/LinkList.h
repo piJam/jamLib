@@ -47,6 +47,7 @@ protected:
     {
         delete pn;
     }
+
 public:
     LinkList()
     {

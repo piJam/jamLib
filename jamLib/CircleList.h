@@ -18,6 +18,11 @@ protected:
     {
         last()->next = this->m_header.next;
     }
+
+    int mod(int i)
+    {
+        return (this->m_length = 0) ? 0 : (i/this->m_length);
+    }
 public:
     bool insert(const T& e)
     {
@@ -26,7 +31,8 @@ public:
     bool insert(int i, const T& e)
     {
         bool ret = true;
-
+        i = i / this->m_length + 1;
+        ret = LinkList<T>::insert(i,e);
 
         return ret;
     }
