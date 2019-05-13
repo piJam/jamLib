@@ -36,6 +36,7 @@ public:
         i = mod(i);
         ret = LinkList<T>::insert(i,e);
 
+        last_to_first();
         return ret;
     }
 
