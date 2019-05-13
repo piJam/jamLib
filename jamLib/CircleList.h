@@ -1,5 +1,6 @@
 #ifndef CIRCLELIST_H
 #define CIRCLELIST_H
+#include <iostream>
 #include "LinkList.h"
 
 namespace jamLib
@@ -31,12 +32,17 @@ public:
     bool insert(int i, const T& e)
     {
         bool ret = true;
-        i = i / this->m_length + 1;
+       // i = i / this->m_length + 1;
+        i = mod(i);
         ret = LinkList<T>::insert(i,e);
 
         return ret;
     }
 
+    ~CircleList()
+    {
+        std::cout<< "++++++++++++++++++" << std::endl;
+    }
 };
 
 }

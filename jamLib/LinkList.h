@@ -57,7 +57,7 @@ public:
         this->m_current = NULL;
     }
 
-    bool insert(int i,const T& e)
+  virtual  bool insert(int i,const T& e)
     {
 
         bool ret = (0 <= i) && (i <= m_length);
@@ -81,11 +81,11 @@ public:
         return ret;
     }
 
-    bool insert(const T& e)
+  virtual  bool insert(const T& e)
     {
         return insert(m_length,e);
     }
-    bool remove(int i)
+  virtual bool remove(int i)
     {
         bool ret = (0 <= i)&&( i < m_length);
         if(ret)
@@ -105,7 +105,7 @@ public:
         return 0;
     }
 
-    T get(int i) const
+   virtual T get(int i) const
     {
         T ret;
         if(get(i,ret))
@@ -117,7 +117,7 @@ public:
         }
     }
 
-    bool get(int i,T& e) const
+   virtual bool get(int i,T& e) const
     {
         bool ret = (0 <= i)&&(i < m_length);
         if(ret)
@@ -127,7 +127,7 @@ public:
         }
         return ret;
     }
-    bool set(int i,const T& e)
+   virtual bool set(int i,const T& e)
     {
         bool ret = (0 <= i)&&(i < m_length);
         if(ret)
@@ -139,11 +139,11 @@ public:
         return ret;
     }
 
-   int length() const
+  virtual int length() const
     {
          return m_length;
     }
-   void clear()
+  virtual void clear()
     {
         while(m_header.next)
         {
@@ -155,7 +155,7 @@ public:
 
     }
 
-   int find(const T& obj) const
+  virtual int find(const T& obj) const
     {
         int ret = -1;
         Node* node = m_header.next;
@@ -175,7 +175,7 @@ public:
         return ret;
     }
 
-   bool move(int i ,int step = 1)
+  virtual bool move(int i ,int step = 1)
    {
         bool ret = (0 <= i) && (i < m_length) && ( step > 0);
         if(ret)
@@ -187,12 +187,12 @@ public:
         return ret;
    }
 
-   bool end()
+  virtual bool end()
    {
        return (m_current == NULL);
    }
 
-   bool next()
+  virtual bool next()
    {
        int i = 0;
        while ( (i < m_step) && !end() )
@@ -203,7 +203,7 @@ public:
        return i == m_step;
    }
 
-   T current()
+  virtual T current()
    {
        if(!end())
        {
@@ -217,6 +217,7 @@ public:
    }
     ~LinkList()
     {
+        std::cout << "----------------------" << std::endl;
         clear();
     }
 };

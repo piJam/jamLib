@@ -21,11 +21,12 @@ public:
     }
 };
 
+
+
 int main()
 {
 
-    CircleList<int> cl;
-    cout << cl.length()<< endl;
+    LinkList<int>* cl = new CircleList<int>();
 
     return 0;
 }
