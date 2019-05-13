@@ -41,7 +41,7 @@ public:
 
     ~CircleList()
     {
-        std::cout<< "++++++++++++++++++" << std::endl;
+
     }
 };
 

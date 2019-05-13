@@ -217,7 +217,6 @@ public:
    }
     ~LinkList()
     {
-        std::cout << "----------------------" << std::endl;
         clear();
     }
 };
