@@ -35,11 +35,19 @@ public:
        // i = i / this->m_length + 1;
         i = mod(i);
         ret = LinkList<T>::insert(i,e);
-
-        last_to_first();
+        if(i==0 && ret)
+        {
+            last_to_first();
+        }
         return ret;
     }
 
+    bool remove(int i)
+    {
+        bool ret = true;
+
+        return ret;
+    }
     ~CircleList()
     {
 
