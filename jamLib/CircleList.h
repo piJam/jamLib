@@ -25,11 +25,20 @@ protected:
         return (this->m_length == 0) ? 0 : (i % this->m_length);
     }
 public:
-
+    bool insert(const T& e)
+    {
+        return this->insert(this->m_length,e);
+    }
     bool insert(int i, const T& e)
     {
         bool ret = true;
-//        i = mod(i);
+//        if(this->m_length == i )
+//        {
+//            i = i %( this->m_length + 1);
+//        }else
+//        {
+//            i = mod(i);
+//        }
         i = i %( this->m_length + 1);
         ret = LinkList<T>::insert(i,e);
         if(i==0 && ret)
@@ -39,10 +48,7 @@ public:
         return ret;
     }
 
-    bool insert(const T& e)
-    {
-        return this->insert(this->m_length,e);
-    }
+
 
     bool remove(int i)
     {

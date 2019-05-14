@@ -42,7 +42,18 @@ void jose(int n,int s,int m)
 int main()
 {
 
-    jose(41,1,3);
+   CircleList<int> cl;
+   for(int i = 0; i < 5; i++)
+   {
+       cl.insert(i);
+   }
+
+   cl.insert(6,10);
+
+   for(int i = 0; i < cl.length(); i++)
+   {
+       cout << cl.get(i)<< endl;
+   }
     return 0;
 }
 
