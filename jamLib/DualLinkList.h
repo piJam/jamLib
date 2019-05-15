@@ -100,6 +100,8 @@ public:
     {
         return insert(m_length,e);
     }
+
+    //-------------------------------------------
   virtual bool remove(int i)
     {
         bool ret = (0 <= i)&&( i < m_length);
@@ -109,7 +111,8 @@ public:
             Node* del = current->next;
             if(m_current == del)
             {
-               m_current = del->next;
+                m_current = del->next;
+
             }
 
             current->next = del->next;
