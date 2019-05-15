@@ -230,7 +230,7 @@ public:
        }
 
    }
-    ~LinkList()
+    ~DualLinkList()
     {
         clear();
     }
