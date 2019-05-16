@@ -56,7 +56,7 @@ public:
         this->m_current = NULL;
     }
 
-  virtual  bool insert(int i,const T& e)
+    virtual  bool insert(int i,const T& e)
     {
         bool ret = (0 <= i) && (i <= m_length);
         if(ret)
@@ -95,12 +95,12 @@ public:
         return ret;
     }
 
-  virtual  bool insert(const T& e)
+    virtual  bool insert(const T& e)
     {
         return insert(m_length,e);
     }
 
-  virtual bool remove(int i)
+    virtual bool remove(int i)
     {
         bool ret = (0 <= i)&&( i < m_length);
         if(ret)
@@ -124,7 +124,7 @@ public:
         return 0;
     }
 
-   virtual T get(int i) const
+    virtual T get(int i) const
     {
         T ret;
         if(get(i,ret))
@@ -136,7 +136,7 @@ public:
         }
     }
 
-   virtual bool get(int i,T& e) const
+    virtual bool get(int i,T& e) const
     {
         bool ret = (0 <= i)&&(i < m_length);
         if(ret)
@@ -147,7 +147,7 @@ public:
         return ret;
     }
 
-   virtual bool set(int i,const T& e)
+    virtual bool set(int i,const T& e)
     {
         bool ret = (0 <= i)&&(i < m_length);
         if(ret)
@@ -159,12 +159,12 @@ public:
         return ret;
     }
 
-  virtual int length() const
+    virtual int length() const
     {
          return m_length;
     }
 
-  virtual void clear()
+    virtual void clear()
     {
         while(m_length > 0)
         {
@@ -173,7 +173,7 @@ public:
 
     }
 
-  virtual int find(const T& obj) const
+    virtual int find(const T& obj) const
     {
         int ret = -1;
         Node* node = m_header.next;
@@ -193,7 +193,7 @@ public:
         return ret;
     }
 
-  virtual bool move(int i ,int step = 1)
+    virtual bool move(int i ,int step = 1)
    {
         bool ret = (0 <= i) && (i < m_length) && ( step > 0);
         if(ret)
@@ -208,12 +208,12 @@ public:
         return ret;
    }
 
-  virtual bool end()
+    virtual bool end()
    {
        return (m_current == NULL);
    }
 
-  virtual bool next()
+    virtual bool next()
    {
        int i = 0;
        while ( (i < m_step) && !end() )
@@ -223,7 +223,7 @@ public:
        }
        return i == m_step;
    }
-  virtual bool pre()
+    virtual bool pre()
    {
         int i = 0;
         while ( (i < m_step) && !end() )
@@ -234,7 +234,7 @@ public:
         return i == m_step;
    }
 
-  virtual T current()
+    virtual T current()
    {
        if(!end())
        {
@@ -246,12 +246,11 @@ public:
        }
 
    }
+
     ~DualLinkList()
     {
         clear();
     }
-
-
 };
 
 }
