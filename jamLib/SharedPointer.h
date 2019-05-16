@@ -38,6 +38,7 @@ public:
             }
         }
     }
+
     SharedPointer(const SharedPointer<T>& obj) : Pointer<T>(NULL)
     {
        assign(obj);
@@ -73,6 +74,7 @@ public:
             }
         }
     }
+
     ~SharedPointer()
     {
         clear();
@@ -88,7 +90,7 @@ public:
         return !(*this == obj);
     }
 };
-
+//全局共享指针比较
 //template<typename T>
 //bool operator == (const SharedPointer<T>& obj1,const SharedPointer<T>& obj2)
 //{
