@@ -29,6 +29,7 @@ public:
     {
         return this->insert(this->m_length,e);
     }
+
     bool insert(int i, const T& e)
     {
         bool ret = true;
@@ -47,8 +48,6 @@ public:
         }
         return ret;
     }
-
-
 
     bool remove(int i)
     {
