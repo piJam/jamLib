@@ -5,57 +5,36 @@
 #include "DynamicArray.h"
 #include "LinkList.h"
 #include "SharedPointer.h"
-#include "CircleList.h"
+#include "DualLinkList.h"
 
 using namespace std;
 using namespace jamLib;
 
-class Test
-{
-public:
-    int m_value;
-public:
-    Test(int value = 0)
-    {
-        this->m_value = value;
-    }
-};
-
-void jose(int n,int s,int m)
-{
-    CircleList<int> cl;
-    for(int i =1;i <= n;i++)
-    {
-        cl.insert(i);
-    }
-
-    cout<< cl.get(0) <<endl;
-    cl.move(s-1,m-1);
-    while(cl.length() > 0)
-    {
-       cl.next();
-       cout << cl.current() << endl;
-       cl.remove(cl.find(cl.current()));
-    }
-}
 
 int main()
 {
+    DualLinkList<int> dual;
+    for(int i = 0; i < 10; i++)
+    {
+        dual.insert(i);
+    }
 
-   CircleList<int> cl;
-   for(int i = 0; i < 5; i++)
-   {
-       cl.insert(i);
-   }
-
-   cl.insert(6,10);
-
-   for(int i = 0; i < cl.length(); i++)
-   {
-       cout << cl.get(i)<< endl;
-   }
-
-
+    for(int i = 0; i < 10;i++)
+    {
+        cout<<  dual.get(i) << endl;
+    }
+    cout<< endl;
+     dual.remove(1);
+    for(dual.move(0,1); !dual.end();dual.next() )
+    {
+        cout<< dual.current() << endl;
+    }
+    cout << endl;
+    dual.clear();
+    for(dual.move(0,1); !dual.end(); dual.pre())
+    {
+        cout << dual.current() << endl;
+    }
     return 0;
 }
 

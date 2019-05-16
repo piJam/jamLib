@@ -1,5 +1,6 @@
 #ifndef DUALLINKLIST_H
 #define DUALLINKLIST_H
+#include "Exception.h"
 namespace jamLib {
 template<typename T>
 class DualLinkList : List<T>
@@ -57,7 +58,6 @@ public:
 
   virtual  bool insert(int i,const T& e)
     {
-
         bool ret = (0 <= i) && (i <= m_length);
         if(ret)
         {
@@ -92,7 +92,6 @@ public:
                 THROW_EXCEPTION(NoEnoughMemoryException,"no memory to new Elements...");
             }
         }
-
         return ret;
     }
 
@@ -101,7 +100,6 @@ public:
         return insert(m_length,e);
     }
 
-    //-------------------------------------------
   virtual bool remove(int i)
     {
         bool ret = (0 <= i)&&( i < m_length);
@@ -109,14 +107,17 @@ public:
         {
             Node* current = position(i);
             Node* del = current->next;
+            Node* next = del->next;
             if(m_current == del)
             {
-                m_current = del->next;
-
+                m_current = next;
             }
+            current->next = next;
 
-            current->next = del->next;
-
+            if(next != NULL)
+            {
+                next->pre = current;
+            }
             m_length--;
             destroy(del);
         }
@@ -145,6 +146,7 @@ public:
         }
         return ret;
     }
+
    virtual bool set(int i,const T& e)
     {
         bool ret = (0 <= i)&&(i < m_length);
@@ -161,14 +163,12 @@ public:
     {
          return m_length;
     }
+
   virtual void clear()
     {
-        while(m_header.next)
+        while(m_length > 0)
         {
-            Node* toDel = m_header.next;
-            m_header.next = toDel->next;
-            m_length--;
-            destroy(toDel);
+            remove(0);
         }
 
     }
@@ -200,6 +200,9 @@ public:
         {
             m_current = position(i)->next;
             m_step = step;
+        }else
+        {
+             THROW_EXCEPTION(IndexOutOfBoundsException,"index out if bounds...");
         }
 
         return ret;
@@ -219,6 +222,16 @@ public:
             i++;
        }
        return i == m_step;
+   }
+  virtual bool pre()
+   {
+        int i = 0;
+        while ( (i < m_step) && !end() )
+        {
+            m_current = m_current->pre;
+            i++;
+        }
+        return i == m_step;
    }
 
   virtual T current()
