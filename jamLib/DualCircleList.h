@@ -185,7 +185,7 @@ public:
 
      }
 
-    bool move(int i, int step = 0)
+    bool move(int i, int step = 1)
     {
         bool ret = ( step > 0 );
 
