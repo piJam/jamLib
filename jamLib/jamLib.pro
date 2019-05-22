@@ -22,5 +22,6 @@ HEADERS += \
     Pointer.h \
     SmartPoint.h \
     SharedPointer.h \
-    DualLinkList.h
+    DualLinkList.h \
+    LinuxList.h
 

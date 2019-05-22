@@ -24,7 +24,7 @@ protected:
 
     virtual Node* createNode()
     {
-       SNode* ret = NULL;
+        SNode* ret = NULL;
         for(int i = 0;i < N; i++)
         {
             if( !m_index[i] )
