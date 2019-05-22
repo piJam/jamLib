@@ -6,34 +6,30 @@
 #include "LinkList.h"
 #include "SharedPointer.h"
 #include "DualLinkList.h"
+#include "DualCircleList.h"
 
 using namespace std;
 using namespace jamLib;
-#ifndef offset
-#define offset(type,member)  (size_t)&(((type*) 0)-> member)
-#endif
 
-#ifndef container_of
-#define  container_of(ptr,type,member) ({                \
-         const typeof(((type*)0)->member)*  m_ptr = (ptr);\
-         (type*)((char*)m_ptr - offset(type,member));    \
-                                       })
-#endif
-
-struct list_head
-{
-    list_head* next;
-    list_head* pre;
-};
-struct Node
-{
-    list_head list;
-    int value;
-};
 
 
 int main()
 {
+     //DualLinkList<int> list;
+    DualCircleList<int> list;
+
+    for(int i = 0; i < 10; i++)
+    {
+        list.insert(i);
+    }
+    list.remove(2);
+
+    int i = 0;
+    for(list.move(0,1);(i < list.length() && !list.end()); i++,list.next())
+    {
+        cout << list.current() << endl;
+
+    }
 
 
 

@@ -1,9 +1,10 @@
 #ifndef DUALLINKLIST_H
 #define DUALLINKLIST_H
+#include "List.h"
 #include "Exception.h"
 namespace jamLib {
 template<typename T>
-class DualLinkList : List<T>
+class DualLinkList :public List<T>
 {
 protected:
     struct Node : public Object
