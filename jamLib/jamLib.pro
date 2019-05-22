@@ -23,5 +23,6 @@ HEADERS += \
     SmartPoint.h \
     SharedPointer.h \
     DualLinkList.h \
-    LinuxList.h
+    LinuxList.h \
+    DualCircleList.h
 

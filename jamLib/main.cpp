@@ -31,16 +31,10 @@ struct Node
     int value;
 };
 
+
 int main()
 {
 
-    Node node;
-    list_head* head = &node.list;
-
-    Node* node1 = reinterpret_cast<Node*>(head);
-    Node* node2 = container_of(head, Node, list);
-
-    printf("node1 = %p, node2 = %p",node1, node2);
 
 
     return 0;
