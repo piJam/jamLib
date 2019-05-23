@@ -11,6 +11,19 @@
 using namespace std;
 using namespace jamLib;
 
+#define check(Type,MEMBER) Type* value = (Type*)MEMBER;
+
+struct node
+{
+    int m_value;
+    char age;
+};
+
+struct node_m
+{
+   char age;
+   int m_value;
+};
 
 
 int main()
@@ -30,8 +43,9 @@ int main()
         cout << list.current() << endl;
 
     }
-
-
+    node_m s_node = {0};
+    //node* s = (node*)&s_node;
+    check(node,s_node);
 
     return 0;
 }
