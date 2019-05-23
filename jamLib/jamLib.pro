@@ -24,6 +24,10 @@ HEADERS += \
     SharedPointer.h \
     DualLinkList.h \
     LinuxList.h \
+<<<<<<< HEAD
     DualCircleList.h \
     Stack.h
+=======
+    DualCircleList.h
+>>>>>>> parent of 7619dcc... 1
 

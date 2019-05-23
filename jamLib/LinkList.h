@@ -66,9 +66,8 @@ public:
             Node* node = createNode();
             if(node)
             {
-                Node* current = position(i);
+                Node* current = position(i)->next;
                 node->value = e;
-
                 node->next = current->next;
                 current->next = node;
                 m_length++;
@@ -91,7 +90,7 @@ public:
         bool ret = (0 <= i)&&( i < m_length);
         if(ret)
         {
-            Node* current = position(i);
+            Node* current = position(i)->next;
             Node* del = current->next;
             if(m_current == del)
             {
@@ -123,7 +122,7 @@ public:
         bool ret = (0 <= i)&&(i < m_length);
         if(ret)
         {
-            Node* current = position(i);
+            Node* current = position(i)->next;
             e = current->next->value;
         }
         return ret;
@@ -133,7 +132,7 @@ public:
         bool ret = (0 <= i)&&(i < m_length);
         if(ret)
         {
-            Node* current = position(i);
+            Node* current = position(i)->next;
 
             current->next->value = e;
         }
