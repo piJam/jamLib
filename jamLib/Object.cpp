@@ -8,13 +8,11 @@ void* Object::operator new(size_t size) throw()
 }
 void Object::operator delete(void* p)
 {
-    std::cout<< "void Object::operator delete(void* p)" << std::endl;
-     free(p);
+    free(p);
 }
 
 bool Object::operator ==(const Object& obj)
 {
-    std::cout <<"this :" << this <<"-&obj:"<< &obj << std::endl;
     return (this == &obj);
 }
 bool Object::operator !=(const Object& obj)
