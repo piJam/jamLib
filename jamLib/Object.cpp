@@ -8,6 +8,7 @@ void* Object::operator new(size_t size) throw()
 }
 void Object::operator delete(void* p)
 {
+    std::cout<< "void Object::operator delete(void* p)" << std::endl;
      free(p);
 }
 
