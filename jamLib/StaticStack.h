@@ -6,7 +6,7 @@
 namespace jamLib {
 
 template < typename T, int N>
-class StaticStack : public Stack
+class StaticStack : public Stack<T>
 {
 protected:
     T m_space[N];
