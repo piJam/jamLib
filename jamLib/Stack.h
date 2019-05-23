@@ -1,6 +1,5 @@
 #ifndef STACK_H
 #define STACK_H
-#include "Object.h"
 
 namespace jamLib {
 template <typename T>
