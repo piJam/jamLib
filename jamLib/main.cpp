@@ -9,16 +9,12 @@
 
 using namespace std;
 using namespace jamLib;
-#ifndef offset
-#define offset(type,member)  (size_t)&(((type*) 0)-> member)
-#endif
 
-#ifndef container_of
-#define  container_of(ptr,type,member) ({                \
-         const typeof(((type*)0)->member)*  m_ptr = (ptr);\
-         (type*)((char*)m_ptr - offset(type,member));    \
-                                       })
-#endif
+#define offset_of(TYPE, MEMBER)  (void*)(&((TYPE*)0->MEMBER))
+
+#define container_of(PTR, TYPE, MEMBER) ({\
+const typeof( (TYPE*)0 ->MEMBER )* _mPTR = PTR;\
+(TYPE*)( (void *)_mPTR - offset_of(TYPE, MEMBER); ) })
 
 struct list_head
 {
