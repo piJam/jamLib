@@ -12,11 +12,13 @@
 
 using namespace std;
 using namespace jamLib;
-
-
-
 int main()
 {
+
+
+
+
+
 
     return 0;
 }

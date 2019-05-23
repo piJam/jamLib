@@ -13,7 +13,6 @@ void Object::operator delete(void* p)
 
 bool Object::operator ==(const Object& obj)
 {
-    std::cout <<"this :" << this <<"-&obj:"<< &obj << std::endl;
     return (this == &obj);
 }
 bool Object::operator !=(const Object& obj)
