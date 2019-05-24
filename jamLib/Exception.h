@@ -18,10 +18,12 @@ private:
 #ifdef __APPLE__
 
     void itoa(int line,char* str,int num);
+
     char getCharCode(int num);
 
 #endif
     void init(const char* message,const char* file,int line);
+
 public:
     Exception(const char* message);
 
