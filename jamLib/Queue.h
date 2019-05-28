@@ -1,0 +1,20 @@
+#ifndef QUEUE_H
+#define QUEUE_H
+#include "Object.h"
+
+namespace jamLib
+{
+template <typename T>
+class Queue :  public Object
+{
+public:
+    virtual void add(T& e) = 0;
+    virtual void remove() = 0;
+    virtual void clear() = 0;
+    virtual T front() const = 0;
+    virtual int lenght() = 0;
+};
+}
+
+
+#endif // QUEUE_H
