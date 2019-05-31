@@ -31,5 +31,6 @@ HEADERS += \
     Queue.h \
     StaticQueue.h \
     LinkQueue.h \
-    CheckOperator.h
+    CheckOperator.h \
+    Statck_Queue_Convert.h
 
