@@ -30,9 +30,6 @@ HEADERS += \
     LinkStack.h \
     Queue.h \
     StaticQueue.h \
-<<<<<<< HEAD
-    LinkQueue.h
-=======
+    LinkQueue.h \
     CheckOperator.h
->>>>>>> 10b900135709dd59d9b544d7a449af801d837c32
 
