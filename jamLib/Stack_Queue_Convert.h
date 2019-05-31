@@ -12,14 +12,14 @@ template < typename T >
 class StackToQueue : public Queue<T>
 {
 protected:
-    LinkStack<T> m_stack_in;
-    LinkStack<T> m_stack_out;
+ mutable  LinkStack<T> m_stack_in;
+ mutable  LinkStack<T> m_stack_out;
 
     void move() const
     {
-        if (m_stack_in.size() == 0)
+        if (m_stack_out.size() == 0)
         {
-           while( m_stack_in > 0)
+           while( m_stack_in.size() > 0)
            {
                m_stack_out.push(m_stack_in.top());
                m_stack_in.pop();
@@ -29,7 +29,7 @@ protected:
     }
 
 public:
-    void add(T& e)
+    void add(const T& e)
     {
         m_stack_in.push(e);
     }
@@ -38,7 +38,7 @@ public:
     {
         move();
 
-        if( m_stack_out > 0)
+        if( m_stack_out.size() > 0)
         {
             m_stack_out.pop();
         }
@@ -50,16 +50,19 @@ public:
 
     void clear()
     {
+
         m_stack_in.clear();
         m_stack_out.clear();
+
+
     }
 
     T front() const
     {
         move();
-        if( m_stack_out > 0)
+        if( m_stack_out.size() > 0)
         {
-           return m_stack_out.top;
+           return m_stack_out.top();
         }
         else
         {
@@ -67,7 +70,7 @@ public:
         }
     }
 
-    int lenght()
+    int lenght() const
     {
         return m_stack_in.size() + m_stack_out.size();
     }
@@ -84,13 +87,16 @@ protected:
     LinkQueue<T>* m_linkQueue_in;
     LinkQueue<T>* m_linkQueue_out;
 
-    void move()
+    void move() const
     {
         if( m_linkQueue_out->lenght() == 0)
         {
-            while( m_linkQueue_in->lenght() > 1 )
+            int n = m_linkQueue_in->lenght() - 1;
+            for( int i = 0; i < n ; i++ )
             {
-                m_linkQueue_out->add(m_linkQueue_in->front());
+                T temp = m_linkQueue_in->front();
+
+                m_linkQueue_out->add( temp );
                 m_linkQueue_in->remove();
             }
         }

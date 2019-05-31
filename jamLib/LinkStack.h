@@ -44,14 +44,7 @@ public:
     }
     void clear()
     {
-        if(m_stack.length() > 0)
-        {
-            return m_stack.clear();
-        }
-        else
-        {
-            THROW_EXCEPTION(InvalidOperationException,"No element in stack...");
-        }
+          m_stack.clear();
     }
 
     int size() const

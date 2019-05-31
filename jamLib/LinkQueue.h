@@ -25,7 +25,7 @@ public:
         m_lengh = 0;
         INIT_LIST_HEAD(&m_head);
     }
-    void add(T& e)
+    void add(const T& e)
     {
         Node* node = new Node();
         node->value = e;
@@ -73,7 +73,7 @@ public:
 
     }
 
-    int lenght()
+    int lenght() const
     {
         return m_lengh;
     }

@@ -19,7 +19,7 @@ public:
         m_length = 0;
     }
 
-    void add(T& e)
+    void add(const T& e)
     {
         if( m_length < N)
         {
@@ -68,7 +68,7 @@ public:
 
     }
 
-    int lenght()
+    int lenght() const
     {
         return m_length;
     }
