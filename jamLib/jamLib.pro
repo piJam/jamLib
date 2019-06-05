@@ -5,7 +5,8 @@ CONFIG -= qt
 SOURCES += \
     Exception.cpp \
     Object.cpp \
-    main.cpp
+    main.cpp \
+    JString.cpp
 HEADERS += \
     CircleList.h \
     Exception.h \
@@ -32,5 +33,6 @@ HEADERS += \
     StaticQueue.h \
     LinkQueue.h \
     CheckOperator.h \
-    Stack_Queue_Convert.h
+    Stack_Queue_Convert.h \
+    JString.h
 
