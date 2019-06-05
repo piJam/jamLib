@@ -48,9 +48,85 @@ const char* JString::str() const
     return m_str;
 }
 
+bool JString::operator == (const char* s) const
+{
+    return ( strcmp(m_str, s ? s : "") == 0 );
+}
 
+bool JString::operator == (const JString& s) const
+{
+    return ( strcmp(m_str, s.m_str) == 0);
+}
 
+bool JString::operator != (const char* s) const
+{
+    return !( *this == s );
+}
+bool JString::operator != (const JString& s) const
+{
+    return !( *this == s.m_str );
+}
+bool JString::operator > (const char* s) const
+{
+   return ( strcmp(m_str, s ? s : "") > 0 );
+}
+bool JString::operator > (const JString& s) const
+{
+    return ( strcmp(m_str, s.m_str) > 0 );
+}
 
+bool JString::operator < (const char* s) const
+{
+    return ( strcmp(m_str, s ? s : "") > 0 );
+}
+bool JString::operator < (const JString& s) const
+{
+    return ( strcmp(m_str, s.m_str) > 0 );
+}
+bool JString::operator >= (const char* s) const
+{
+    return ( strcmp(m_str, s ? s : "") >= 0 );
+}
+bool JString::operator >= (const JString& s) const
+{
+    return ( strcmp(m_str, s.m_str) >= 0 );
+}
+
+bool JString::operator <= (const char* s) const
+{
+    return ( strcmp(m_str, s ? s : "") <= 0 );
+}
+bool JString::operator <= (const JString& s) const
+{
+    return ( strcmp(m_str, s.m_str) <= 0 );
+}
+JString JString::operator + (const char* s) const
+{
+    JString ret;
+
+    int len = m_length + strlen( s ? s : "");
+    char* str_p = reinterpret_cast<char*> ( malloc( len + 1 ) );
+    if(str_p)
+    {
+        strcpy(str_p, m_str);
+        strcat(str_p, s ? s : "");
+
+        free(ret.m_str);
+
+        ret.m_str = str_p;
+        ret.m_length = len;
+    }
+    else
+    {
+        THROW_EXCEPTION(NoEnoughMemoryException,"no memory to create JString object... ");
+    }
+    return ret;
+}
+
+JString JString::operator + (const JString* s) const  // waring if suecc
+{
+    return *this + s->m_str;
+}
 JString::~JString()
 {
     free(m_str);

@@ -19,6 +19,31 @@ public:
     int lenght() const;
     const char* str() const;
 
+    bool operator == (const char* s) const;
+    bool operator == (const JString& s) const;
+
+    bool operator != (const char* s) const;
+    bool operator != (const JString& s) const;
+
+    bool operator > (const char* s) const;
+    bool operator > (const JString& s) const;
+
+    bool operator < (const char* s) const;
+    bool operator < (const JString& s) const;
+
+    bool operator >= (const char* s) const;
+    bool operator >= (const JString& s) const;
+
+    bool operator <= (const char* s) const;
+    bool operator <= (const JString& s) const;
+
+    JString operator + (const char* s) const;
+    JString operator + (const JString* s) const;
+
+    JString operator += (const char* s) const;
+    JString operator += (const JString* s) const;
+
+
 
 
     ~JString();
