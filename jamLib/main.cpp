@@ -10,6 +10,9 @@ using namespace jamLib;
 int main()
 {
 
+    char* str = "\4";
+
+    cout<< str << endl;
     return 0;
 }
 

@@ -38,10 +38,14 @@ public:
     bool operator <= (const JString& s) const;
 
     JString operator + (const char* s) const;
-    JString operator + (const JString* s) const;
+    JString operator + (const JString& s) const;
 
-    JString operator += (const char* s) const;
-    JString operator += (const JString* s) const;
+    JString& operator += (const char* s);
+    JString& operator += (const JString& s);
+
+    JString& operator = (const char* s);
+    JString& operator = (const JString& s);
+    JString& operator = (const char s);
 
 
 

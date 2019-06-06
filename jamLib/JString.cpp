@@ -6,15 +6,14 @@ namespace jamLib
 void JString::init(const char *s)
 {
     m_str = strdup(s);
-
-        if(m_str)
-        {
-             m_length = strlen(s);
-        }
-        else
-        {
-            THROW_EXCEPTION(NoEnoughMemoryException,"no memory to create JString object... ");
-        }
+    if(m_str)
+    {
+         m_length = strlen(s);
+    }
+    else
+    {
+        THROW_EXCEPTION(NoEnoughMemoryException,"no memory to create JString object... ");
+    }
 }
 
 JString::JString()
@@ -103,7 +102,6 @@ bool JString::operator <= (const JString& s) const
 JString JString::operator + (const char* s) const
 {
     JString ret;
-
     int len = m_length + strlen( s ? s : "");
     char* str_p = reinterpret_cast<char*> ( malloc( len + 1 ) );
     if(str_p)
@@ -123,10 +121,51 @@ JString JString::operator + (const char* s) const
     return ret;
 }
 
-JString JString::operator + (const JString* s) const  // waring if suecc
+JString JString::operator + (const JString& s) const  // waring if suecc
 {
-    return *this + s->m_str;
+    return *this + s.m_str;
 }
+
+JString& JString::operator += (const char* s)
+{
+    return ( *this = *this + s );
+}
+JString& JString::operator += (const JString& s)
+{
+    return ( *this = *this + s.m_str );
+}
+
+JString& JString::operator = (const char* s)
+{
+    if( m_str != s)
+    {
+        char* str = strdup( s ? s : "");
+        if( str )
+        {
+            free( m_str );
+            m_length = strlen(str);
+            m_str = str;
+        }
+        else
+        {
+            THROW_EXCEPTION(NoEnoughMemoryException, "no memory to str...");
+        }
+
+    }
+
+    return *this;
+}
+
+JString& JString::operator = (const JString& s)
+{
+    return ( *this = s.m_str );
+}
+
+ JString& JString::operator = (const char s)
+ {
+     char str[] = {s,'\0'};
+     return (*this = str);
+ }
 JString::~JString()
 {
     free(m_str);
