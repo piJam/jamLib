@@ -16,6 +16,18 @@ void JString::init(const char *s)
     }
 }
 
+bool JString::equal(const char* l, const char* r, int len) const
+{
+    bool ret = true;
+
+    for(int i=0; i<len && ret; i++)
+    {
+        ret = ret && (l[i] == r[i]); // ret =  (l[i] == r[i]);
+    }
+
+    return ret;
+}
+
 JString::JString()
 {
     init("");
@@ -67,7 +79,7 @@ bool JString::operator != (const JString& s) const
 }
 bool JString::operator > (const char* s) const
 {
-   return ( strcmp(m_str, s ? s : "") > 0 );
+    return ( strcmp(m_str, s ? s : "") > 0 );
 }
 bool JString::operator > (const JString& s) const
 {
@@ -161,11 +173,53 @@ JString& JString::operator = (const JString& s)
     return ( *this = s.m_str );
 }
 
- JString& JString::operator = (const char s)
- {
-     char str[] = {s,'\0'};
-     return (*this = str);
- }
+JString& JString::operator = (const char s)
+{
+    char str[] = {s,'\0'};
+    return (*this = str);
+}
+
+char& JString::operator[](int index)
+{
+    if( (0 <= index) && (index < m_length) )
+    {
+        return *( m_str + index ) ;
+    }
+    else
+    {
+        THROW_EXCEPTION(InvalidOperationException, "Ivalid index...");
+    }
+
+}
+
+char JString::operator [](int index) const
+{
+    return (const_cast<JString&>(*this))[index];
+}
+
+bool JString::startWith(const char* s) const
+{
+    bool ret = 1;
+    ret = (s != NULL);
+    if(ret)
+    {
+        int len = strlen(s);
+        // ret = (len < m_length) && equal(m_str, s, len); dephi tang 实现如果是S是空字符串不能得到正确结果
+        ret = (len < m_length) && (len > 0) && equal(m_str, s, len);
+
+    }
+    else
+    {
+        THROW_EXCEPTION(InvalidParameterException, " parameter S is NULL...");
+    }
+    return ret;
+}
+
+bool JString::startWith(const JString& s) const
+{
+    return startWith(s.m_str);
+}
+
 JString::~JString()
 {
     free(m_str);
