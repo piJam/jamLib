@@ -58,6 +58,9 @@ public:
     bool endOf(const char* s) const;
     bool endOf(const JString& s) const;
 
+    JString& insert(int i,const char* s);
+    JString& insert(int i,const JString& s);
+
 
 
 

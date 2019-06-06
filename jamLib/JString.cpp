@@ -220,6 +220,65 @@ bool JString::startWith(const JString& s) const
     return startWith(s.m_str);
 }
 
+
+bool JString::endOf(const char* s) const
+{
+    bool ret = true;
+
+    ret = (s != NULL);
+    if(ret)
+    {
+        int len = strlen(s);
+        char* str = m_str + m_length - len;
+        ret = (len < m_length) && (len > 0) && equal(str, s, len);
+    }
+    else
+    {
+        THROW_EXCEPTION(InvalidParameterException, " parameter is null ...");
+    }
+    return ret;
+}
+bool JString::endOf(const JString& s) const
+{
+    return endOf(s.m_str);
+}
+
+JString& JString::insert(int i,const char* s)
+{
+   if( (0 <= i) && ( i<= m_length))
+   {
+       if( (s != NULL) && ( s[0] != '\0') )
+       {
+          char* str = reinterpret_cast<char*>( malloc( m_length + strlen(s) +1 ) );
+          if(str)
+          {
+              strncpy(str, m_str, i);
+              strncpy(str + i, s, strlen(s));
+              strncpy(str + i + strlen(s), m_str + i, m_length - i);
+              // == str[m_length + strlen(s)] = '\0';
+              *(str + m_length + strlen(s) + 1) = '\0';
+
+              free(m_str);
+              m_str = str;
+              m_length = m_length + strlen(s);
+          }
+          else
+          {
+              THROW_EXCEPTION(NoEnoughMemoryException, "no memory to create...");
+          }
+       }
+   }
+   else
+   {
+       THROW_EXCEPTION(InvalidParameterException, "parament is invalid...");
+   }
+
+    return *this;
+}
+JString& JString::insert(int i,const JString& s)
+{
+    return insert(i, s.m_str);
+}
 JString::~JString()
 {
     free(m_str);

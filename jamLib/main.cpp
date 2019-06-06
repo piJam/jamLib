@@ -9,10 +9,10 @@ using namespace jamLib;
 
 int main()
 {
-   const JString str("ABCGDYE\0JR");
-   char* s = NULL;
-   JString st = s;
-   cout<< str.startWith(st) << endl;
+    JString str = "1234567890";
+
+    cout << str.insert(8,"ABCDFG").str() << endl;
+
 
 
 
