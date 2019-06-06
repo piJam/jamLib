@@ -9,7 +9,7 @@ using namespace jamLib;
 
 int main()
 {
-    JString str = "1234567890";
+    JString str = "1234567890++";
 
     cout << str.insert(8,"ABCDFG").str() << endl;
 

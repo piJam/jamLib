@@ -256,7 +256,7 @@ JString& JString::insert(int i,const char* s)
               strncpy(str + i, s, strlen(s));
               strncpy(str + i + strlen(s), m_str + i, m_length - i);
               // == str[m_length + strlen(s)] = '\0';
-              *(str + m_length + strlen(s) + 1) = '\0';
+              *(str + m_length + strlen(s)) = '\0';
 
               free(m_str);
               m_str = str;
