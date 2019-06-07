@@ -9,9 +9,10 @@ using namespace jamLib;
 
 int main()
 {
-    JString str = "1234567890++";
-
-    cout << str.insert(8,"ABCDFG").str() << endl;
+    JString str = " BCGD  EFR**90_--";
+    cout<< str.lenght() << endl;
+    cout << str.trim().str() << endl;
+    cout << str.lenght() << endl;
 
 
 

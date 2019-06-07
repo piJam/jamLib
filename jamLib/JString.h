@@ -61,7 +61,7 @@ public:
     JString& insert(int i,const char* s);
     JString& insert(int i,const JString& s);
 
-
+    JString& trim();
 
 
     ~JString();

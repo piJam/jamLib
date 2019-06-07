@@ -279,6 +279,53 @@ JString& JString::insert(int i,const JString& s)
 {
     return insert(i, s.m_str);
 }
+
+JString& JString::trim()
+{
+    int font = 0;
+    int end = m_length - 1;
+
+    while( *(m_str + font) == ' ' ) font++;
+    while( *(m_str + end)  == ' ' ) end--;
+/*
+    if(font > 0)
+    {
+        for(int i=0; i<(m_length - font); i++)
+        {
+            m_str[i] = m_str[i + font];
+        }
+
+        m_length = m_length - font;
+        end = end - font;
+    }
+
+    if(end < m_length - 1)
+    {
+        m_str[end + 1] = '\0';
+
+        m_length = strlen(m_str);
+    }
+*/
+    if(font == 0)
+    {
+        m_str[end + 1] = '\0';
+        m_length = end + 1;
+    }
+    else
+    {
+        for(int i=0, j=font; j<=end; i++, j++)
+        {
+            m_str[i] = m_str[j];
+        }
+
+        m_str[end - font + 1] = '\0';
+        m_length = end - font + 1 ;
+    }
+
+
+    return *this;
+}
+
 JString::~JString()
 {
     free(m_str);
