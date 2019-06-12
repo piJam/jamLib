@@ -28,19 +28,54 @@ int* make_pmt(const char* p)
     return ret;
 }
 
+int kmp(const char* str, const char* pStr )
+{
+    int ret = -1;
+    int slen = strlen(str);
+    int plen = strlen(pStr);
+
+    int* pmt = make_pmt(pStr);
+
+    if( (pmt != NULL) && (slen >= plen) && (plen > 0) )
+    {
+        for(int i=0, j=0; i<slen; i++)
+        {
+            while( str[i] != pStr[j] && (j > 0))
+            {
+                j = pmt[j - 1];
+            }
+
+            if(str[i] == pStr[j] )
+            {
+                j++;
+            }
+
+            if( j == plen )
+            {
+                ret = i + 1 - plen;
+                break;
+            }
+        }
+
+    }
+    return ret;
+}
 
 int main()
 {
 
 
-    char* p = "ABABDABA";
+    char* p = "ABCDABD";
 
     int* ret = make_pmt(p);
 
-    for(int i = 0; i< strlen("ABABDABA"); i++)
+    for(int i = 0; i< strlen("ABCDABD"); i++)
     {
         cout<< i << ":" << ret[i] << endl;
     }
+
+    char* str = "cdsABCDABDeewew";
+    cout<< kmp(str,p) << endl;
     return 0;
 }
 
