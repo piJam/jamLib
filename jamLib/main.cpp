@@ -58,6 +58,8 @@ int kmp(const char* str, const char* pStr )
         }
 
     }
+
+    free(pmt);
     return ret;
 }
 
