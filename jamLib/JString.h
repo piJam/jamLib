@@ -12,6 +12,8 @@ protected:
 
     void init(const char* s);
     bool equal(const char* l, const char* r, int len) const;
+    static int* make_pmt(const char* p);
+    static int kmp(const char* str, const char* pStr );
 public:
     JString();
     JString(const char* s);
@@ -42,8 +44,14 @@ public:
     JString operator + (const char* s) const;
     JString operator + (const JString& s) const;
 
+    JString operator - (const char* s) const;
+    JString operator - (const JString& s) const;
+
     JString& operator += (const char* s);
     JString& operator += (const JString& s);
+
+    JString& operator -= (const char* s);
+    JString& operator -= (const JString& s);
 
     JString& operator = (const char* s);
     JString& operator = (const JString& s);
@@ -62,6 +70,20 @@ public:
     JString& insert(int i,const JString& s);
 
     JString& trim();
+
+    int indexOf(const char* s) const;
+    int indexOf(const JString& s) const;
+
+    JString& remove(int index,int len);
+    JString& remove(const char* s);
+    JString& remove(const JString& s);
+
+    JString& replace(const char* t, const char* s);
+    JString& replace(const char* t, const JString& s);
+    JString& replace(const JString& t, const JString& s);
+    JString& replace(const JString& t, const char* s);
+
+    JString sub(int index, int len) const;
 
 
     ~JString();

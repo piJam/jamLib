@@ -3,6 +3,65 @@
 #include <cstdlib>
 namespace jamLib
 {
+
+int* JString::make_pmt(const char* p)
+{
+    int len = strlen(p);
+    int* ret = static_cast<int*>(malloc(sizeof(int) * len));
+    int longestLength = 0;
+    ret[0] = 0;
+
+    for(int i = 1; i<len ; i++)
+    {
+        while( longestLength > 0 && p[longestLength] != p[i] )
+        {
+            longestLength = ret[ longestLength - 1];
+        }
+
+        if(p[longestLength] == p[i])
+        {
+            longestLength++;
+        }
+        ret[i] = longestLength;
+    }
+    return ret;
+}
+
+int JString::kmp(const char* str, const char* pStr )
+{
+    int ret = -1;
+    int slen = strlen(str);
+    int plen = strlen(pStr);
+
+    int* pmt = make_pmt(pStr);
+
+    if( (pmt != NULL) && (slen >= plen) && (plen > 0) )
+    {
+        for(int i=0, j=0; i<slen; i++)
+        {
+            while( str[i] != pStr[j] && (j > 0))
+            {
+                j = pmt[j - 1];
+            }
+
+            if(str[i] == pStr[j] )
+            {
+                j++;
+            }
+
+            if( j == plen )
+            {
+                ret = i + 1 - plen;
+                break;
+            }
+        }
+
+    }
+
+    free(pmt);
+    return ret;
+}
+
 void JString::init(const char *s)
 {
     m_str = strdup(s);
@@ -138,6 +197,16 @@ JString JString::operator + (const JString& s) const  // waring if suecc
     return *this + s.m_str;
 }
 
+JString JString::operator - (const char* s) const
+{
+    return JString(*this).remove(s);
+}
+
+JString JString::operator - (const JString& s) const
+{
+    return JString(*this).remove(s);
+}
+
 JString& JString::operator += (const char* s)
 {
     return ( *this = *this + s );
@@ -145,6 +214,16 @@ JString& JString::operator += (const char* s)
 JString& JString::operator += (const JString& s)
 {
     return ( *this = *this + s.m_str );
+}
+
+JString& JString::operator -= (const char* s)
+{
+    return remove(s);
+}
+
+JString& JString::operator -= (const JString& s)
+{
+    return remove(s);
 }
 
 JString& JString::operator = (const char* s)
@@ -326,6 +405,85 @@ JString& JString::trim()
     return *this;
 }
 
+int JString::indexOf(const char* s) const
+{
+    return kmp(m_str, s ? s : "");
+}
+int JString::indexOf(const JString& s) const
+{
+    return kmp(m_str, s.str() );
+}
+
+JString& JString::remove(int index,int len)
+{
+    if( (0<=index) && (index<m_length) )
+    {
+        int n = index;
+        int m = index + len;
+        while((n < m) && (m < m_length))
+        {
+            m_str[n++] = m_str[m++];
+        }
+
+        m_str[n] = '\0';
+        m_length = n;
+    }
+    return *this;
+}
+JString& JString::remove(const char* s)
+{
+    return remove(indexOf(s), s ? strlen(s) : 0);
+}
+JString& JString::remove(const JString& s)
+{
+    return remove(indexOf(s.m_str), s.lenght());
+}
+
+JString& JString::replace(const char* t, const char* s)
+{
+    int index = indexOf(t);
+    if( index >= 0)
+    {
+        remove(t);
+        insert(index, s);
+    }
+    return *this;
+}
+JString& JString::replace(const char* t, const JString& s)
+{
+    return replace(t, s.m_str);
+}
+JString& JString::replace(const JString& t, const JString& s)
+{
+    return replace(t.m_str, s.m_str);
+}
+JString& JString::replace(const JString& t, const char* s)
+{
+    return replace(t.m_str, s);
+}
+
+JString JString::sub(int index, int len) const
+{
+    JString ret;
+
+    if( (index < m_length) && (index >= 0) )
+    {
+        if( len < 0 ) len = 0;
+        if( len + index > m_length ) len = m_length - index;
+        char* temp = reinterpret_cast<char*>( malloc( len + 1) );
+        strncpy(temp, m_str + index, len);
+
+        temp[len] = '\0';
+        ret.m_str = temp;
+        ret.m_length = len;
+    }
+    else
+    {
+        THROW_EXCEPTION(IndexOutOfBoundsException,"index is invalid...");
+    }
+
+    return ret;
+}
 JString::~JString()
 {
     free(m_str);
