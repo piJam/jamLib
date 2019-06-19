@@ -6,7 +6,7 @@ namespace jamLib
 
 int* JString::make_pmt(const char* p)
 {
-    int len = strlen(p);
+    int len = static_cast<int>(strlen(p));
     int* ret = static_cast<int*>(malloc(sizeof(int) * len));
     int longestLength = 0;
     ret[0] = 0;
@@ -30,8 +30,8 @@ int* JString::make_pmt(const char* p)
 int JString::kmp(const char* str, const char* pStr )
 {
     int ret = -1;
-    int slen = strlen(str);
-    int plen = strlen(pStr);
+    int slen = static_cast<int>(strlen(str));
+    int plen = static_cast<int>(strlen(pStr));
 
     int* pmt = make_pmt(pStr);
 
@@ -67,7 +67,7 @@ void JString::init(const char *s)
     m_str = strdup(s);
     if(m_str)
     {
-         m_length = strlen(s);
+         m_length = static_cast<int>(strlen(s)) ;
     }
     else
     {

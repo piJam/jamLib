@@ -5,11 +5,24 @@
 using namespace std;
 using namespace jamLib;
 
+int sum(int num)
+{
+
+    if( num == 1)
+    {
+       num = 1;
+    }else
+    {
+       num += sum(num - 1);
+    }
+    return num;
+}
+
 int main()
 {
     JString s = "absdhasdwerwerwerwer";
 
-    cout<< s.remove(4,8).str()<< endl;
+    cout<< sum(1000) << endl;
 
     return 0;
 }
