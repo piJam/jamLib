@@ -89,14 +89,59 @@ int sum(int num)
     return num;
 }
 
-int main()
+Node* merge(Node* list1, Node* list2)
+{
+    if( list1 == NULL)
+    {
+        return list2;
+    }
+    else if(list2 == NULL)
+    {
+        return list1;
+    }
+    else if( list1->m_value < list2->m_value)
+    {
+//        Node* list1_ = list1->next;
+//        Node* list = merge(list1_, list2);
+
+//        list1->next = list;
+//        return list1;
+        return (list1->next = merge(list1->next, list2), list1);
+    }
+    else
+    {
+        Node* list2_ = list2->next;
+        Node* list = merge(list1, list2_);
+
+        list2->next = list;
+        return list2;
+    }
+}
+
+void hannoTower(int n, char a,char b, char c)
+{
+    if(n==1)
+    {
+        cout<< a << "=>" << c << endl;
+    }else
+    {
+        hannoTower(n-1, a, c, b);
+        hannoTower(1, a, b, c);
+        hannoTower(n-1, b, a, c);
+    }
+
+}
+
+void permutation(char* s, char* e)
 {
 
-    Node* node = create_list(0, 10);
-    print_list(node);
+}
 
-    print_list(reverse(node));
-    delete_list(node);
+int main()
+{
+    hannoTower(3, 'a', 'b', 'c');
+
+
     return 0;
 }
 
