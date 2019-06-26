@@ -47,6 +47,18 @@ void print_list(Node* list)
     cout << "NULL" << endl;
 }
 
+void r_print_enent(Node* list)
+{
+    if(list != NULL)
+    {
+        r_print_enent(list->next);
+
+        if(list->m_value % 2 == 0)
+            cout<< list->m_value << endl;
+    }
+
+}
+
 void delete_list(Node* list)
 {
     while(list)
@@ -73,9 +85,8 @@ Node* reverse(Node* list)
         list->next = NULL;
         return ret;
     }
-
-
 }
+
 int sum(int num)
 {
 
@@ -134,12 +145,25 @@ void hannoTower(int n, char a,char b, char c)
 
 void permutation(char* s, char* e)
 {
-
+    if(*s == '\0')
+    {
+        cout << e << endl;
+    }
+    else
+    {
+        for (int i = 0;i< strlen(s); i++)
+        {
+            swap(s[0], s[i]);
+            permutation(s+1, e);
+            swap(s[0], s[i]);
+        }
+    }
 }
 
 int main()
 {
-    hannoTower(3, 'a', 'b', 'c');
+    Node* list = create_list(1,10);
+    r_print_enent(list);
 
 
     return 0;
