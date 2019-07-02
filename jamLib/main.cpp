@@ -217,7 +217,7 @@ class Test : public Object
 {
     int m_index;
 public:
-    Test(){ m_index = 1000; cout<< "Test()" << endl;}
+    Test(){ m_index = 1000; cout<< "Test():this"<< this << endl;}
     Test(int a):m_index(a)
     {
         cout<< "Test(int a)" << endl;
@@ -231,21 +231,31 @@ public:
     {
         return m_index;
     }
-    ~Test(){}
+    ~Test(){
+        cout << "~Test() : this:"<< this  << endl;
+    }
 
 };
 
 Test& create(int index)
 {
     Test* te = new Test(index);
+    cout << te << endl;
     return *te;
 }
 
 int main()
 {
     LinkList<Test> ls;
-    ls.insert(create(300));
-    cout << ls.get(0).get_index() << endl;
+
+    ls.insert(create(1900));
+
+
+    Test test = ls.get(0);
+
+
+
+    cout << test.get_index() << endl;
 
 
     return 0;
