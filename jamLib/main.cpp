@@ -250,13 +250,9 @@ int main()
 
     ls.insert(create(1900));
 
+    cout << (ls.get(0)).get_index() << endl;
 
-    Test test = ls.get(0);
-
-
-
-    cout << test.get_index() << endl;
-
+    // ¸´Ï°º¯Êı·µ»ØÖµ
 
     return 0;
 }
