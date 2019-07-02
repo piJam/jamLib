@@ -212,9 +212,40 @@ protected:
     }
 
 };
+
+class Test : public Object
+{
+    int m_index;
+public:
+    Test(){ m_index = 1000; cout<< "Test()" << endl;}
+    Test(int a):m_index(a)
+    {
+        cout<< "Test(int a)" << endl;
+    }
+    Test(const Test& test)
+    {
+        m_index = test.m_index;
+        cout<< "Test(const Test& test)" << endl;
+    }
+    int get_index()
+    {
+        return m_index;
+    }
+    ~Test(){}
+
+};
+
+Test& create(int index)
+{
+    Test* te = new Test(index);
+    return *te;
+}
+
 int main()
 {
-
+    LinkList<Test> ls;
+    ls.insert(create(300));
+    cout << ls.get(0).get_index() << endl;
 
 
     return 0;

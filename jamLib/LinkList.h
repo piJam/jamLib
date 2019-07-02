@@ -106,7 +106,7 @@ public:
         return 0;
     }
 
-   virtual T get(int i) const
+   virtual T& get(int i) const   checck
     {
         T ret;
         if(get(i,ret))
