@@ -247,10 +247,10 @@ Test& create(int index)
 int main()
 {
     LinkList<Test> ls;
+    create(1900);
+    //ls.insert(create(1900));
 
-    ls.insert(create(1900));
-
-    cout << (ls.get(0)).get_index() << endl;
+    //cout << (ls.get(0)).get_index() << endl;
 
     // ¸´Ï°º¯Êı·µ»ØÖµ
 
