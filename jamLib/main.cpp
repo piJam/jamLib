@@ -2,6 +2,7 @@
 #include <cstring>
 #include <cstdlib>
 #include "JString.h"
+#include "LinkList.h"
 using namespace std;
 using namespace jamLib;
 
@@ -160,10 +161,48 @@ void permutation(char* s, char* e)
     }
 }
 
+
+template<int size>
+class QueenPosition : public Object
+{
+protected:
+    enum { N = size + 2};
+    struct Pos : public Object
+    {
+        int x;
+        int y;
+        Pos(int px, int py):x(px), y(py){}
+    };
+
+    int m_checkerboard[N][N];
+    int m_direction[3];
+    int count;
+
+    LinkList<Pos> point;
+
+    void init()
+    {
+        for (int i=0; i<N; i+=(N-1))
+        {
+            for(int j=0; j<N; j++)
+            {
+                m_checkerboard[i][j] = 2;
+                m_checkerboard[j][i] = 2;
+            }
+        }
+        for(int i=1; i<=size; i++)
+        {
+            for (int j=1; j<=size; j++) {
+                m_checkerboard[i][j] = 0;
+            }
+
+        }
+    }
+
+};
 int main()
 {
-    Node* list = create_list(1,10);
-    r_print_enent(list);
+
 
 
     return 0;
