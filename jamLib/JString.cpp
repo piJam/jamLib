@@ -1,6 +1,7 @@
 #include "JString.h"
 #include <cstring>
 #include <cstdlib>
+
 namespace jamLib
 {
 

@@ -34,5 +34,6 @@ HEADERS += \
     LinkQueue.h \
     CheckOperator.h \
     Stack_Queue_Convert.h \
-    JString.h
+    JString.h \
+    QueenPosition.h
 
