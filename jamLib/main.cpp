@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "JString.h"
 #include "LinkList.h"
+#include "Sort.h"
 #include "QueenPosition.h"
 using namespace std;
 using namespace jamLib;
@@ -11,9 +12,12 @@ using namespace jamLib;
 
 int main()
 {
-    QueenPosition<10> qp;
-    qp.run();
-
+    int i[] = {23,1,32,4,56,76};
+    Sort::Select(i, 6, false);
+    for(int j=0; j<6; j++)
+    {
+        cout<< i[j] <<endl;
+    }
     return 0;
 }
 
