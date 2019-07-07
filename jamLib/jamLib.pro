@@ -35,5 +35,6 @@ HEADERS += \
     CheckOperator.h \
     Stack_Queue_Convert.h \
     JString.h \
-    QueenPosition.h
+    QueenPosition.h \
+    Sort.h
 
