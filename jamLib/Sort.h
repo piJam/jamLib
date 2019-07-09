@@ -76,9 +76,53 @@ public:
     }
 
     template<typename T>
-    static void Shell(T array[], int len, bool minToMax = true)
+    static void Shell_insert(T array[], int len, bool minToMax = true)
     {
+        int d = len;
+        do
+        {
+            d = d / 3 + 1;
+            for (int i=d; i<len; i+=d)
+            {
+                T e = array[i];
+                int k = i;
+                for ( int j=i-d; j>=0 && (minToMax ? (array[j] > e) : (array[j] < e)); j-=d )
+                {
+                    k = j;
+                    array[j+d] = array[j];
+                }
 
+                if(k != i)
+                    array[k] = e;
+            }
+        } while (d > 1);
+
+    }
+
+    template<typename T>
+    static void Shell_bubble(T array[], int len, bool minToMax = true)
+    {
+        int d =len;
+        do
+        {
+            d = d / 3 + 1;
+            bool exchang = true;
+
+            for(int i=d; i<len; i+=d)
+            {
+                exchang = false;
+                for (int j = len-1; j>=i; j-=d )
+                {
+                    if((minToMax ? (array[j] < array[j-d]) : (array[j] > array[j-d])))
+                    {
+                         Swap(array[j],array[j-d]);
+                         exchang = true;
+                    }
+
+                }
+
+            }
+        }while(d > 1);
     }
 };
 }

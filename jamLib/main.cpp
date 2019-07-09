@@ -13,7 +13,7 @@ using namespace jamLib;
 int main()
 {
     int i[] = {23,1,32,4,56,76};
-    Sort::Bubble(i, 6, false);
+    Sort::Shell_bubble(i, 6, false);
     for(int j=0; j<6; j++)
     {
         cout<< i[j] <<endl;
