@@ -74,6 +74,12 @@ public:
             }
         }
     }
+
+    template<typename T>
+    static void Shell(T array[], int len, bool minToMax = true)
+    {
+
+    }
 };
 }
 
