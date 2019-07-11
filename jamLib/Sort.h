@@ -16,6 +16,50 @@ private:
         t1 = t2;
         t2 = c;
     }
+
+    template<typename T>
+    static void Merge( T src[], T temp[], int begin, int middle, int end, bool minTomax = true)
+    {
+        int i = begin;
+        int j = middle + 1;
+        int k = begin;
+
+        while( (i <= middle) && (j <= end) )
+        {
+            if(src[i] > src[j])
+            {
+                temp[k++] = src[j++];
+            }
+            else
+            {
+                temp[k++] = src[i++];
+            }
+        }
+
+        while(i <= middle)
+            temp[k++] = src[i++];
+
+        while(j <= end)
+            temp[k++] = src[j++];
+
+        for(i=begin; i<=end; i++)
+            src[i] = temp[i];
+    }
+
+    template<typename T>
+    static void Merge( T src[], T temp[], int begin, int end, bool minTomax = true)
+    {
+        if(begin < end)
+        {
+            int middle = ( begin + end ) / 2;
+
+            Merge(src, temp, begin, middle, minTomax);
+            Merge(src, temp, middle+1, end, minTomax);
+
+            Merge(src, temp, begin, middle, end, minTomax);
+        }
+
+    }
 public:
     template<typename T>
     static void Select(T array[], int len, bool minToMax = true)
@@ -124,6 +168,19 @@ public:
             }
         }while(d > 1);
     }
+
+    template<typename T>
+    static void Merge(T array[], int len, bool minToMax = true)
+    {
+        T* temp = new T[len];
+        if(temp != NULL)
+        {
+            Merge(array, temp, 0, len, minToMax);
+        }
+
+        delete[] temp;
+    }
+
 };
 }
 

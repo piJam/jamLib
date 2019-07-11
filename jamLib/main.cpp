@@ -12,12 +12,13 @@ using namespace jamLib;
 
 int main()
 {
-    int i[] = {23,1,32,4,56,76};
-    Sort::Shell_bubble(i, 6, false);
-    for(int j=0; j<6; j++)
+    int i[] = {23,1,32,4,56,76,2,6,18,9};
+    Sort::Merge(i, 10, false);
+    for(int j=0; j<10; j++)
     {
         cout<< i[j] <<endl;
     }
+
 
     return 0;
 }
