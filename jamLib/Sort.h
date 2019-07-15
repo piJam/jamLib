@@ -1,6 +1,7 @@
 #ifndef SORT_H
 #define SORT_H
 #include "Object.h"
+#include "Array.h"
 namespace jamLib
 {
 class Sort : public Object
@@ -60,6 +61,77 @@ private:
         }
 
     }
+
+    template<typename T>
+    static int Partition(T array[], int begin, int end, bool minTomax)
+    {
+//        T point = array[begin];
+//        int falg = true;
+//        while(begin != end)
+//        {
+//            if(falg)
+//            {
+//                if(array[end] > point)
+//                {
+//                    end--;
+//                    falg = true;
+//                }
+//                else
+//                {
+//                    Swap(array[begin], array[end]);
+//                    falg = false;
+//                }
+//            }
+//            else
+//            {
+//                if(array[begin] <= point)
+//                {
+//                    begin++;
+//                    falg = false;
+//                }
+//                else
+//                {
+//                    Swap(array[begin], array[end]);
+//                    falg = true;
+//                }
+//            }
+//        }
+
+        T pv = array[begin];
+        while(begin < end)
+        {
+            while( (begin < end) && (minTomax ? (array[end] > pv) : (array[end] < pv) ) )
+            {
+                end--;
+            }
+
+            Swap(array[begin], array[end]);
+
+            while( (begin < end) && (minTomax ? (array[begin] < pv) : (array[begin] > pv) ) )
+            {
+                begin++;
+            }
+
+            Swap(array[begin], array[end]);
+        }
+
+         array[begin] = pv; //目前没有找到该句的意义
+        return begin;
+    }
+
+
+    template<typename T>
+    static void Quick(T array[], int begin, int end, bool minTomax = true)
+    {
+        if(begin < end)
+        {
+            int pv = Partition(array, begin, end, minTomax);
+
+            Quick(array, begin, pv-1, minTomax);
+            Quick(array, pv+1, end, minTomax);
+        }
+    }
+
 public:
     template<typename T>
     static void Select(T array[], int len, bool minToMax = true)
@@ -181,6 +253,47 @@ public:
         delete[] temp;
     }
 
+    template<typename T>
+    static void Quick(T array[], int len, bool minTomax = true)
+    {
+         Quick(array, 0, len-1, minTomax);
+    }
+
+    template<typename T>
+    static void Select(Array<T>& array, bool minTomax = true)
+    {
+        Select(array.array(), array.length(), minTomax);
+    }
+
+    template<typename T>
+    static void Insert(Array<T>& array, bool minToMax = true)
+    {
+        Insert(array.array(), array.length(), minToMax);
+    }
+
+    template<typename T>
+    static void Bubble(Array<T>& array, bool minToMax = true)
+    {
+        Bubble(array.array(), array.length(), minToMax);
+    }
+
+    template<typename T>
+    static void Shell_insert(Array<T>& array, bool minToMax = true)
+    {
+        Shell_bubble(array.array(), array.length(), minToMax);
+    }
+
+    template<typename T>
+    static void Merge(Array<T>& array, bool minToMax = true)
+    {
+        Merge(array.array(), array.length(), minToMax);
+    }
+
+    template<typename T>
+    static void Quick(Array<T>& array, bool minTomax = true)
+    {
+        Quick(array, array.length(), minTomax);
+    }
 };
 }
 
