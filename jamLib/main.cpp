@@ -1,25 +1,20 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
+#include <ctime>
 #include "JString.h"
 #include "LinkList.h"
 #include "Sort.h"
 #include "QueenPosition.h"
+#include "Proxy.h"
 using namespace std;
 using namespace jamLib;
 
 
-
 int main()
 {
-    int i[] = {23,1,32,4,56,76,2,6,18,9};
-    Sort::Quick(i, 10, true);
-    for(int j=0; j<10; j++)
-    {
-        cout<< i[j] <<endl;
-    }
 
-
+    proxyTest();
     return 0;
 }
 

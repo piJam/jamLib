@@ -36,5 +36,8 @@ HEADERS += \
     Stack_Queue_Convert.h \
     JString.h \
     QueenPosition.h \
-    Sort.h
+    Sort.h \
+    Proxy.h \
+    TreeNode.h \
+    Tree.h
 

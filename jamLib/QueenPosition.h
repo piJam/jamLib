@@ -1,5 +1,6 @@
 #ifndef QUEENPOSITION_H
 #define QUEENPOSITION_H
+#include<cstring>
 #include "LinkList.h"
 using namespace std;
 
@@ -285,7 +286,7 @@ void permutation(char* s, char* e)
     }
     else
     {
-        for (int i = 0;i< strlen(s); i++)
+        for (int i = 0; i<static_cast<int>(strlen(s)); i++)
         {
             swap(s[0], s[i]);
             permutation(s+1, e);
