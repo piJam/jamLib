@@ -95,7 +95,7 @@ public:
         }
         else
         {
-            THROW_EXCEPTION(NoEnoughMemoryException, "no memory for gn...")
+            THROW_EXCEPTION(NoEnoughMemoryException, "no memory for gn...");
         }
 
         return ret;
