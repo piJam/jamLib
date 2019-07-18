@@ -68,7 +68,7 @@ public:
                 GTreeNode<T>* np = find(node->parent);
                 if( np != NULL)
                 {
-                    np->child.insert(node);
+                    np->child.insert( dynamic_cast< GTreeNode<T>* >(node));
                 }
                 else
                 {
