@@ -1,7 +1,9 @@
 #ifndef GTREE_H
 #define GTREE_H
+#include "TreeNode.h"
 #include "GTreeNode.h"
 #include "Tree.h"
+#include "Exception.h"
 
 
 namespace jamLib
@@ -55,12 +57,34 @@ public:
     bool insert(TreeNode<T>* node)
     {
         bool ret = true;
+        if(node != NULL)
+        {
+            if(this->m_root == NULL)
+            {
+                this->m_root = node;
+            }
+            else
+            {
+                GTreeNode<T>* np = find(node->parent);
+                if( np != NULL)
+                {
+
+                }
+                else
+                {
+                    THROW_EXCEPTION(InvalidParameterException, "parent is null in this tree...");
+                }
+            }
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "node cannot be null...");
+        }
 
         return ret;
     }
     bool insert(const T& value, TreeNode<T>* parent)
     {
-
         bool ret = true;
 
         return ret;
