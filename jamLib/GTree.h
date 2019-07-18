@@ -2,11 +2,55 @@
 #define GTREE_H
 #include "GTreeNode.h"
 #include "Tree.h"
+
+
 namespace jamLib
 {
 template<typename T>
 class GTree : public Tree<T>
 {
+protected:
+    GTreeNode<T>* find(GTreeNode<T>* node, const T value) const
+    {
+        GTreeNode<T>* ret = NULL;
+
+        if( node != NULL)
+        {
+            if(node->value == value)
+            {
+                return node;
+            }else
+            {
+                for ( node->child.move(0); !node->child.end() && (ret == NULL); node->child.next())
+                {
+                    ret = find(node->child.current(), value);
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    GTreeNode<T>* find(GTreeNode<T>* node, GTreeNode<T>* obj) const
+    {
+        GTreeNode<T>* ret = NULL;
+
+        if(node == obj)
+        {
+            return node;
+        }
+        else
+        {
+            if(node != NULL)
+            {
+                for (node->child.move(0); !node->child.end() && (ret == NULL); node->child.next())
+                {
+                    ret = find(node->child.current(), obj);
+                }
+            }
+        }
+        return ret;
+    }
 public:
     bool insert(TreeNode<T>* node)
     {
@@ -33,11 +77,11 @@ public:
 
     GTreeNode<T>* find(const T& value) const
     {
-        return NULL;
+        return find(this->root(), value);
     }
     GTreeNode<T>* find(TreeNode<T> * node) const
     {
-        return NULL;
+        return find(this->root(), dynamic_cast<GTreeNode<T>*>(node));
     }
 
     GTreeNode<T>* root() const

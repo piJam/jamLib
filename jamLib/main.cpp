@@ -15,8 +15,11 @@ using namespace jamLib;
 
 int main()
 {
+    GTree<int> st;
     GTreeNode<int> gn;
-    GTree<int> gt;
+
+    st.find(12);
+    st.find(&gn);
     return 0;
 }
 
