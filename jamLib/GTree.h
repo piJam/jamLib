@@ -68,7 +68,7 @@ public:
                 GTreeNode<T>* np = find(node->parent);
                 if( np != NULL)
                 {
-
+                    np->child.insert(node);
                 }
                 else
                 {
@@ -86,6 +86,17 @@ public:
     bool insert(const T& value, TreeNode<T>* parent)
     {
         bool ret = true;
+        GTreeNode<T>* gn = new GTreeNode<T>();
+        if(gn != NULL)
+        {
+            gn->parent = parent;
+            gn->value = value;
+            insert(gn);
+        }
+        else
+        {
+            THROW_EXCEPTION(NoEnoughMemoryException, "no memory for gn...")
+        }
 
         return ret;
     }
