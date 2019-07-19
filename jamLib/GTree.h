@@ -53,14 +53,16 @@ protected:
         }
         return ret;
     }
+
 public:
     bool insert(TreeNode<T>* node)
     {
         bool ret = true;
         if(node != NULL)
         {
-            if(this->m_root == NULL)
+            if(this->m_root == NULL) //等于null为首节点
             {
+                node->parent = NULL;
                 this->m_root = node;
             }
             else
@@ -68,11 +70,16 @@ public:
                 GTreeNode<T>* np = find(node->parent);
                 if( np != NULL)
                 {
-                    np->child.insert( dynamic_cast< GTreeNode<T>* >(node));
+                    GTreeNode<T>* n = dynamic_cast< GTreeNode<T>* >(node);
+
+                    if(np->child.find(n) < 0) //查找该节点下子节点重不重复
+                    {
+                        np->child.insert( n );
+                    }
                 }
                 else
                 {
-                    THROW_EXCEPTION(InvalidParameterException, "parent is null in this tree...");
+                    THROW_EXCEPTION(InvalidOperationException, "parent is null in this tree...");
                 }
             }
         }
@@ -83,10 +90,12 @@ public:
 
         return ret;
     }
+
     bool insert(const T& value, TreeNode<T>* parent)
     {
         bool ret = true;
         GTreeNode<T>* gn = new GTreeNode<T>();
+
         if(gn != NULL)
         {
             gn->parent = parent;
