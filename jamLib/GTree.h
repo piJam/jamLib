@@ -54,6 +54,22 @@ protected:
         return ret;
     }
 
+    void free(GTreeNode<T>* node)
+    {
+        if( node != NULL)
+        {
+            for( node->child.move(0); !node->child.end(); node->child.next())
+            {
+                free(node->child.current());
+            }
+
+            if(node->flag())
+            {
+                delete node;
+            }
+
+        }
+    }
 public:
     bool insert(TreeNode<T>* node)
     {
@@ -94,7 +110,7 @@ public:
     bool insert(const T& value, TreeNode<T>* parent)
     {
         bool ret = true;
-        GTreeNode<T>* gn = new GTreeNode<T>();
+        GTreeNode<T>* gn = GTreeNode<T>::newNode();
 
         if(gn != NULL)
         {
@@ -147,7 +163,13 @@ public:
     }
     void clear()
     {
+        this->free(root());
+        this->m_root = NULL;
+    }
 
+    ~GTree()
+    {
+        clear();
     }
 
 };
