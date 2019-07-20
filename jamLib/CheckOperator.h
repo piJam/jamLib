@@ -1,6 +1,7 @@
 #ifndef CHECKOPERATOR_H
 #define CHECKOPERATOR_H
-
+namespace jamLib
+{
 
 bool left_id(char c)
 {
@@ -65,5 +66,8 @@ bool scan(const char* str)
      }
     return ( lslist.size() == 0 ) && ret;
 }
+
+}
+
 
 #endif // CHECKOPERATOR_H

@@ -242,7 +242,6 @@ JString& JString::operator = (const char* s)
         {
             THROW_EXCEPTION(NoEnoughMemoryException, "no memory to str...");
         }
-
     }
 
     return *this;
