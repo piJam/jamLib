@@ -9,9 +9,9 @@
 #include "Proxy.h"
 #include "GTreeNode.h"
 #include "GTree.h"
+
 using namespace std;
 using namespace jamLib;
-
 
 int main()
 {
@@ -41,8 +41,6 @@ int main()
         gg = gg->parent;
     }
     cout << endl;
-
-
 
 
 

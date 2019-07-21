@@ -21,6 +21,7 @@ public:
 
     const T* operator ->() const
     {
+        cout<< "00000000000"<< endl;
         return m_pointer;
     }
 
