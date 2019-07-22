@@ -70,6 +70,33 @@ protected:
 
         }
     }
+
+    void remove(GTreeNode<T>* node, GTree<T>*& ret) //GTree<T>*& 指针类型的别名（引用）
+    {
+        ret = new GTree<T>();
+        if(ret != NULL)
+        {
+            if(node == root())
+            {
+                this->m_root = NULL;
+            }
+            else
+            {
+
+                LinkList<GTreeNode<T>*>& childs = dynamic_cast<GTreeNode<T>*>(node->parent)->child;
+
+                childs.remove(childs.find(node));
+
+                node->parent = NULL;
+            }
+
+            ret->m_root = node;
+        }
+        else
+        {
+            THROW_EXCEPTION(NoEnoughMemoryException, "no memory create new Tree...");
+        }
+    }
 public:
     bool insert(TreeNode<T>* node)
     {
@@ -126,13 +153,40 @@ public:
         return ret;
     }
 
-    SharedPointer< Tree<T> > remover(const T& value)
+    SharedPointer< Tree<T> > remove(const T& value)
     {
-        return NULL;
+        GTree<T>* ret = NULL;
+
+        GTreeNode<T>* node = this->find(value);
+
+        if(node != NULL)
+        {
+            remove(node, ret);
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "this value is invalid...");
+        }
+
+        return ret;
     }
-    SharedPointer< Tree<T> > remover(TreeNode<T>* node)
+    SharedPointer< Tree<T> > remove(TreeNode<T>* node)
     {
-        return NULL;
+
+        GTree<T>* ret = NULL;
+
+        node = this->find(node);
+
+        if(node != NULL)
+        {
+            remove(dynamic_cast<GTreeNode<T>*>(node), ret);
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "this value is invalid...");
+        }
+
+        return ret;
     }
 
     GTreeNode<T>* find(const T& value) const
