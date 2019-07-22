@@ -75,6 +75,11 @@ public:
         }
     }
 
+    void getAssign() //20190722 add function
+    {
+        cout<<"m_ref is " <<*(this->m_ref)<< endl;
+    }
+
     ~SharedPointer()
     {
         clear();
