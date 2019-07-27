@@ -43,7 +43,7 @@ int main()
     cout << endl;
 
     cout<< gt.count() << endl;
-
+    cout<< gt.degree()<<endl;
     return 0;
 }
 

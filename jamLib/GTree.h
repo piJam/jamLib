@@ -112,6 +112,48 @@ protected:
         return ret;
     }
 
+    int height(GTreeNode<T>* node) const
+    {
+        int ret = 0;
+        if(node != NULL)
+        {
+            for(node->child.move(0); !node->child.end(); node->child.next())
+            {
+                int h = height(node->child.current());
+
+                if(ret < h)
+                {
+                    ret = h;
+                }
+            }
+
+            ret = ret + 1;
+        }
+        return ret;
+    }
+
+    int degree(GTreeNode<T>* node) const
+    {
+        int ret = 0;
+        if(node != NULL)
+        {
+            ret = node->child.length();
+
+            for(node->child.move(0); !node->child.end(); node->child.next())
+            {
+                int d = degree(node->child.current());
+
+                if(ret < d)
+                {
+                    ret = d;
+                }
+
+            }
+
+        }
+
+        return ret;
+    }
 public:
     bool insert(TreeNode<T>* node)
     {
@@ -220,16 +262,17 @@ public:
 
     int degree() const
     {
-        return 0;
+        return degree(root());
     }
 
     int count() const
     {
         return count(root());
     }
+
     int height() const
     {
-        return 0;
+        return height(root());
     }
     void clear()
     {
