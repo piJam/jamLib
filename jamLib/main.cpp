@@ -42,7 +42,7 @@ int main()
     }
     cout << endl;
 
-
+    cout<< gt.count() << endl;
 
     return 0;
 }

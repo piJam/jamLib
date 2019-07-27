@@ -97,6 +97,21 @@ protected:
             THROW_EXCEPTION(NoEnoughMemoryException, "no memory create new Tree...");
         }
     }
+
+    int count(GTreeNode<T>* node) const
+    {
+        int ret = 0;
+        if(node != NULL)
+        {
+            ret = 1;
+            for(node->child.move(0); !node->child.end(); node->child.next() )
+            {
+                ret += count(node->child.current());
+            }
+        }
+        return ret;
+    }
+
 public:
     bool insert(TreeNode<T>* node)
     {
@@ -207,9 +222,10 @@ public:
     {
         return 0;
     }
+
     int count() const
     {
-        return 0;
+        return count(root());
     }
     int height() const
     {
