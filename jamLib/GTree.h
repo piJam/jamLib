@@ -4,6 +4,7 @@
 #include "GTreeNode.h"
 #include "Tree.h"
 #include "Exception.h"
+#include "LinkQueue.h"
 
 
 namespace jamLib
@@ -12,6 +13,11 @@ template<typename T>
 class GTree : public Tree<T>
 {
 protected:
+    LinkQueue<GTreeNode<T>*> m_queue;
+
+    GTree<T>(const GTree<T>&);
+    GTree<T>& operator =(const GTree<T>&);
+
     GTreeNode<T>* find(GTreeNode<T>* node, const T value) const
     {
         GTreeNode<T>* ret = NULL;
@@ -155,6 +161,8 @@ protected:
         return ret;
     }
 public:
+    GTree<T>(){}
+
     bool insert(TreeNode<T>* node)
     {
         bool ret = true;
@@ -212,6 +220,8 @@ public:
 
     SharedPointer< Tree<T> > remove(const T& value)
     {
+
+
         GTree<T>* ret = NULL;
 
         GTreeNode<T>* node = this->find(value);
@@ -219,6 +229,7 @@ public:
         if(node != NULL)
         {
             remove(node, ret);
+            m_queue.clear();
         }
         else
         {
@@ -227,9 +238,9 @@ public:
 
         return ret;
     }
+
     SharedPointer< Tree<T> > remove(TreeNode<T>* node)
     {
-
         GTree<T>* ret = NULL;
 
         node = this->find(node);
@@ -237,6 +248,7 @@ public:
         if(node != NULL)
         {
             remove(dynamic_cast<GTreeNode<T>*>(node), ret);
+            m_queue.clear();
         }
         else
         {
@@ -278,6 +290,56 @@ public:
     {
         this->free(root());
         this->m_root = NULL;
+
+        m_queue.clear();
+    }
+
+    bool begin()
+    {
+        bool ret = root();
+
+        if(ret)
+        {
+            m_queue.clear();
+            m_queue.add(root());
+        }
+        return ret;
+    }
+
+    bool end()
+    {
+        return (m_queue.lenght() == 0);
+    }
+
+    bool next()
+    {
+        bool ret = (m_queue.lenght() > 0);
+
+        if(ret)
+        {
+            GTreeNode<T>* node = m_queue.front();
+
+            m_queue.remove();
+
+            for(node->child.move(0); !node->child.end(); node->child.next())
+            {
+                m_queue.add(node->child.current());
+            }
+        }
+
+        return ret;
+    }
+
+    T current()
+    {
+        if(!end())
+        {
+            return m_queue.front()->value;
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidOperationException, "queue no elements...");
+        }
     }
 
     ~GTree()

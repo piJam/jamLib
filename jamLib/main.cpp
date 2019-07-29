@@ -16,6 +16,7 @@ using namespace jamLib;
 int main()
 {
     GTree<int> gt;
+    GTreeNode<int> l;
 
     GTreeNode<int>* gn = NULL;
 
@@ -34,16 +35,13 @@ int main()
     gn = gt.find(5);
     gt.insert(11, gn);
 
-    TreeNode<int>* gg =  gt.find(11);
-    while( gg != NULL)
-    {
-        cout<< gg->value << "->";
-        gg = gg->parent;
-    }
-    cout << endl;
+    gt.remove(2);
+    cout<< "-------------" << endl;
 
-    cout<< gt.count() << endl;
-    cout<< gt.degree()<<endl;
+    for(gt.begin(); !gt.end(); gt.next())
+    {
+        cout<< gt.current() << endl;
+    }
     return 0;
 }
 
