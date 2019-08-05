@@ -153,9 +153,7 @@ protected:
                 {
                     ret = d;
                 }
-
             }
-
         }
 
         return ret;
