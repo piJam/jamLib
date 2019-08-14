@@ -8,27 +8,11 @@ namespace jamLib
 template< typename T>
 class GTreeNode : public TreeNode<T>
 {
-protected:
-    bool m_flag;
-    GTreeNode<T>(const GTreeNode<T>&);
-    GTreeNode<T>& operator=(const GTreeNode<T>&);
 
-    void* operator new(size_t size) throw()
-    {
-        return Object::operator new(size);
-    }
 public:
     LinkList< GTreeNode<T>* > child;
 
-    GTreeNode()
-    {
-        this->m_flag = false;
-    }
 
-    bool flag()
-    {
-        return this->m_flag;
-    }
 
     static GTreeNode<T>* newNode()
     {
