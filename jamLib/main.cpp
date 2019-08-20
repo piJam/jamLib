@@ -13,6 +13,7 @@
 using namespace std;
 using namespace jamLib;
 
+
 int main()
 {
     GTree<int> gt;
@@ -42,6 +43,7 @@ int main()
     {
         cout<< gt.current() << endl;
     }
+
     return 0;
 }
 

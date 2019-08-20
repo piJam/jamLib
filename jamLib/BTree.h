@@ -1,5 +1,6 @@
 #ifndef BTREE_H
 #define BTREE_H
+#include "BTreeNode.h"
 
 #include "Tree.h"
 
@@ -8,6 +9,61 @@ namespace jamLib {
 template<typename T>
 class BTree : public Tree<T>
 {
+protected:
+    virtual BTreeNode<T>* find(BTreeNode<T>* node, T& value) const
+    {
+        BTreeNode<T>* ret = NULL;
+
+        if(node != NULL)
+        {
+            if(node->value == value)
+            {
+                ret = node;
+            }
+            else
+            {
+                if(ret == NULL)
+                {
+                    ret = find(node->m_left, value);
+                }
+
+                if( ret == NULL)
+                {
+                      ret = find(node->m_right, value);
+                }
+            }
+
+        }
+        return ret;
+    }
+
+    virtual BTreeNode<T>* find( BTreeNode<T>* node, BTreeNode<T>* obj) const
+    {
+         BTreeNode<T>* ret = NULL;
+
+         if(node == obj)
+         {
+            ret = node;
+         }
+         else
+         {
+             if(node != NULL)
+             {
+                 if(ret == NULL)
+                 {
+                     ret =  find(node->m_left, obj);
+                 }
+
+                 if(ret == NULL)
+                 {
+                     ret = find(node->m_right, obj);
+                 }
+             }
+         }
+
+         return ret;
+    }
+
 public:
 
     bool insert(TreeNode<T>* node)
@@ -34,11 +90,11 @@ public:
 
     BTreeNode<T>* find(const T& value) const
     {
-        return NULL;
+        return find(this->root(), value);
     }
     BTreeNode<T>* find(TreeNode<T> * node) const
     {
-        return NULL;
+        return find(this->root(), dynamic_cast<BTreeNode<T>*>(node));
     }
 
     BTreeNode<T>* root() const
