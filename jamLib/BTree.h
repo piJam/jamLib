@@ -1,9 +1,8 @@
 #ifndef BTREE_H
 #define BTREE_H
 #include "BTreeNode.h"
-
 #include "Tree.h"
-
+#include "Exception.h"
 namespace jamLib {
 
 template<typename T>
@@ -64,7 +63,7 @@ protected:
          return ret;
     }
 
-    virtual Bool insert( BTreeNode<T>* n, BTreeNode<T>* np, BTNodePos pos)
+    virtual bool insert( BTreeNode<T>* n, BTreeNode<T>* np, BTNodePos pos)
     {
         Bool ret = true;
 
@@ -115,15 +114,49 @@ protected:
     }
 public:
 
-    bool insert(TreeNode<T>* node)
+    virtual bool insert(TreeNode<T>* node, BTNodePos pos)
     {
         bool ret = true;
+        if( node != NULL)
+        {
+            if( root() != NULL)
+            {
+                node->parent = NULL;
+                this->m_root = node;
+            }
+            else
+            {
+                BTreeNode<T>* np = this->find(node->parent);
+                if( np != NULL)
+                {
+                    ret = insert( dynamic_cast<BTreeNode<T>*>(node), np, pos);
+                }
+                else
+                {
+                    THROW_EXCEPTION( InvalidParameterException, "invalid parent tree node ...");
+                }
+            }
+        }
+        else
+        {
+            THROW_EXCEPTION( InvalidParameterException ," This paramter is NULL ...");
+        }
 
+
+
+        return ret;
+    }
+
+    bool insert(TreeNode<T>* node)
+    {
         return ret;
     }
     bool insert(const T& value, TreeNode<T>* parent)
     {
         bool ret = true;
+
+
+
 
         return ret;
     }
