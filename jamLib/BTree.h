@@ -64,6 +64,55 @@ protected:
          return ret;
     }
 
+    virtual Bool insert( BTreeNode<T>* n, BTreeNode<T>* np, BTNodePos pos)
+    {
+        Bool ret = true;
+
+        if( pos == ANY )
+        {
+            if( np->m_left == NULL)
+            {
+                np->m_left = n;
+            }
+            else if( np->m_right == NULL)
+            {
+                np->m_right = n;
+            }
+            else
+            {
+                ret = false;
+            }
+
+        }
+        else if( pos == LEFT)
+        {
+            if(np->m_left == NULL)
+            {
+                np->m_left = n;
+            }
+            else
+            {
+                ret = false;
+            }
+        }
+        else if( pos == RIGHT)
+        {
+            if( np->m_right = NULL)
+            {
+                np->m_right = n;
+            }
+            else
+            {
+                ret = false;
+            }
+
+        }else
+        {
+            ret = false;
+        }
+
+        return ret;
+    }
 public:
 
     bool insert(TreeNode<T>* node)
