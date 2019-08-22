@@ -141,30 +141,49 @@ public:
         {
             THROW_EXCEPTION( InvalidParameterException ," This paramter is NULL ...");
         }
-
-
-
         return ret;
     }
+
+    virtual  bool insert(const T& value, TreeNode<T>* parent, BTNodePos pos)
+    {
+          bool ret = true;
+          BTreeNode<T>* node = BTreeNode::NewNode();
+
+          if( node != NULL)
+          {
+              node->parent = dynamic_cast<BTreeNode<T>*>(parent);
+              node->value = value;
+
+              ret = insert(node, pos);
+
+              if( !ret )
+              {
+                  delete node; //插入不成功要删除，否则会引起内存泄漏！
+              }
+          }
+          else
+          {
+              THROW_EXCEPTION(NoEnoughMemoryException, "no enought memory for BTreeNode...");
+          }
+
+          return ret;
+     }
 
     bool insert(TreeNode<T>* node)
     {
-        return ret;
+        return insert(node, ANY);
     }
+
     bool insert(const T& value, TreeNode<T>* parent)
     {
-        bool ret = true;
-
-
-
-
-        return ret;
+        return insert( value, parent, ANY );
     }
 
     SharedPointer< Tree<T> > remove(const T& value)
     {
         return NULL;
     }
+
     SharedPointer< Tree<T> > remove(TreeNode<T>* node)
     {
         return NULL;
