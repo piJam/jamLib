@@ -286,14 +286,17 @@ public:
     {
         return 0;
     }
+
     int count() const
     {
         return 0;
     }
+
     int height() const
     {
         return 0;
     }
+
     void clear()
     {
         free(root());
