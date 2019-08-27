@@ -169,14 +169,16 @@ public:
         bool ret = true;
         if( node != NULL)
         {
-            if( root() != NULL)
+            if( root() == NULL)
             {
                 node->parent = NULL;
                 this->m_root = node;
             }
             else
             {
+
                 BTreeNode<T>* np = this->find(node->parent);
+
                 if( np != NULL)
                 {
                     ret = insert( dynamic_cast<BTreeNode<T>*>(node), np, pos);

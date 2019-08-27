@@ -19,9 +19,14 @@ int main()
 
     BTree<int> bt;
 
-    BTreeNode<int> node;
+    BTreeNode<int>* node = NULL;
 
-    bt.find(1);
+    bt.insert(1, NULL);
+
+    bt.insert(2, bt.find(1));
+    bt.insert(3, bt.find(1));
+
+     bt.insert(4, NULL);
 
 
     return 0;
