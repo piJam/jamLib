@@ -13,6 +13,10 @@
 using namespace std;
 using namespace jamLib;
 
+void show(BTree<int>* bt)
+{
+    SharedPointer< Tree<int> > sp = bt->remove(6);
+}
 
 int main()
 {
@@ -43,6 +47,7 @@ int main()
     bt.insert(11,node);
 
     int index[] = {4, 5, 8, 9, 10, 11};
+
     for(int i=0; i<6; i++)
     {
         TreeNode<int>* node = bt.find(index[i]);
@@ -54,8 +59,19 @@ int main()
         cout << endl;
     }
 
+    show(&bt);
 
 
+    for(int i=0; i<6; i++)
+    {
+        TreeNode<int>* node = bt.find(index[i]);
+        while(node)
+        {
+            cout<< node->value << " ";
+            node = node->parent;
+        }
+        cout << endl;
+    }
     return 0;
 }
 
