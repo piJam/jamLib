@@ -8,7 +8,6 @@ void* Object::operator new(size_t size) throw()
 }
 void Object::operator delete(void* p)
 {
-    cout << "delete value is "<< ((GTreeNode<int>*)p)->value << endl;
     free(p);
 }
 

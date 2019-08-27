@@ -263,7 +263,6 @@ public:
             THROW_EXCEPTION(InvalidParameterException, " parameter node is invalid...");
         }
 
-
         return ret;
     }
 
