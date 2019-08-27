@@ -26,7 +26,34 @@ int main()
     bt.insert(2, bt.find(1));
     bt.insert(3, bt.find(1));
 
-     bt.insert(4, NULL);
+    node = bt.find(2);
+    bt.insert(4,node);
+    bt.insert(5,node);
+
+    node = bt.find(3);
+    bt.insert(6,node);
+    bt.insert(7,node);
+
+    node = bt.find(6);
+    bt.insert(8,node);
+    bt.insert(9,node);
+
+    node = bt.find(7);
+    bt.insert(10,node);
+    bt.insert(11,node);
+
+    int index[] = {4, 5, 8, 9, 10, 11};
+    for(int i=0; i<6; i++)
+    {
+        TreeNode<int>* node = bt.find(index[i]);
+        while(node)
+        {
+            cout<< node->value << " ";
+            node = node->parent;
+        }
+        cout << endl;
+    }
+
 
 
     return 0;
