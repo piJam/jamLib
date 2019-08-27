@@ -9,7 +9,7 @@ template<typename T>
 class BTree : public Tree<T>
 {
 protected:
-    virtual BTreeNode<T>* find(BTreeNode<T>* node, T& value) const
+    virtual BTreeNode<T>* find(BTreeNode<T>* node, const T& value) const
     {
         BTreeNode<T>* ret = NULL;
 
@@ -65,7 +65,7 @@ protected:
 
     virtual bool insert( BTreeNode<T>* n, BTreeNode<T>* np, BTNodePos pos)
     {
-        Bool ret = true;
+        bool ret = true;
 
         if( pos == ANY )
         {
@@ -112,6 +112,56 @@ protected:
 
         return ret;
     }
+
+    virtual void remove( BTreeNode<T>* node, BTree<T>*& ret)
+    {
+        ret = new BTree<T>();
+
+        if( ret != NULL)
+        {
+            if( node == this->root() )
+            {
+                this->m_root = NULL;
+            }
+            else
+            {
+                BTreeNode<T>* parent = dynamic_cast<BTreeNode<T>*>(node->parent);
+
+                if(parent->m_left == node)
+                {
+                    parent->m_left = NULL;
+                }
+                else if(parent->m_right == node)
+                {
+                    parent->m_right = NULL;
+                }
+
+                node->parent = NULL;
+            }
+
+            ret->m_root = node; //作为子树返回
+        }
+        else
+        {
+            THROW_EXCEPTION(NoEnoughMemoryException, " no memory create ret...");
+        }
+
+    }
+
+    virtual void free( BTreeNode<T>* node)
+    {
+        if( node != NULL)
+        {
+            free(node->m_left);
+            free(node->m_right);
+
+            if( node->flag() )
+            {
+                delete node;
+            }
+
+        }
+    }
 public:
 
     virtual bool insert(TreeNode<T>* node, BTNodePos pos)
@@ -147,7 +197,7 @@ public:
     virtual  bool insert(const T& value, TreeNode<T>* parent, BTNodePos pos)
     {
           bool ret = true;
-          BTreeNode<T>* node = BTreeNode::NewNode();
+          BTreeNode<T>* node = BTreeNode<T>::NewNode();
 
           if( node != NULL)
           {
@@ -181,21 +231,48 @@ public:
 
     SharedPointer< Tree<T> > remove(const T& value)
     {
-        return NULL;
+        BTree<T>* ret = NULL;
+
+        BTreeNode<T>* node = find(value);
+
+        if( node != NULL)
+        {
+            remove(node, ret);
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, " paramter value is invalid..." );
+        }
+        return ret;
     }
 
     SharedPointer< Tree<T> > remove(TreeNode<T>* node)
     {
-        return NULL;
+        BTree<T>* ret = NULL;
+
+        node = this->find(node);
+
+        if( node != NULL)
+        {
+            remove(dynamic_cast<BTreeNode<T>*>(node), ret);
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, " parameter node is invalid...");
+        }
+
+
+        return ret;
     }
 
     BTreeNode<T>* find(const T& value) const
     {
-        return find(this->root(), value);
+        return find(root(), value);
     }
+
     BTreeNode<T>* find(TreeNode<T> * node) const
     {
-        return find(this->root(), dynamic_cast<BTreeNode<T>*>(node));
+        return find(root(), dynamic_cast<BTreeNode<T>*>(node));
     }
 
     BTreeNode<T>* root() const
@@ -217,6 +294,7 @@ public:
     }
     void clear()
     {
+        free(root());
         this->m_root = NULL;
     }
 

@@ -94,7 +94,7 @@ protected:
                 node->parent = NULL;
             }
 
-            ret->m_root = node;
+            ret->m_root = node;//作为子树返回
         }
         else
         {
