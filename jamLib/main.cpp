@@ -42,6 +42,9 @@ int main()
     bt.insert(10,node);
     bt.insert(11,node);
 
+    node = bt.find(10);
+    bt.insert(12, node);
+
     int index[] = {4, 5, 8, 9, 10, 11};
 
     for(int i=0; i<6; i++)
@@ -75,6 +78,8 @@ int main()
         cout << endl;
     }
        cout<< "bt count is "<< bt.count() << endl;
+       cout<< "bt height is "<< bt.height() << endl;
+       cout<< "bt degree is "<< bt.degree() << endl;
     return 0;
 }
 

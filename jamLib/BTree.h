@@ -163,7 +163,7 @@ protected:
         }
     }
 
-    virtual int count( BTreeNode<T>* node ) const
+    int count( BTreeNode<T>* node ) const
     {
         int ret = 0;
 
@@ -175,14 +175,42 @@ protected:
         return ret;
     }
 
-    virtual int height( BTreeNode<T>* node ) const
+    int height( BTreeNode<T>* node ) const
     {
-        int height = 0;
+        int ret = 0;
         if(node != NULL)
         {
-            height(node->m_left)
+            int lh = height(node->m_left);
+            int rh = height(node->m_right);
+
+            ret = ((lh > rh)? lh : rh) + 1;
         }
-        return 0;
+
+        return ret;
+    }
+
+    int degree( BTreeNode<T>* node) const
+    {
+        int ret = 0;
+
+        if( node != NULL)
+        {
+           int ld = degree(node->m_left);
+           int rd = degree(node->m_right);
+
+           ret = (!!node->m_left + !!node->m_right);
+
+           if( ld > ret )
+           {
+               ret = ld;
+           }
+
+           if( rd > ret )
+           {
+               ret = rd;
+           }
+        }
+        return ret;
     }
 public:
 
@@ -305,7 +333,8 @@ public:
 
     int degree() const
     {
-        return 0;
+
+        return degree(root());
     }
 
     int count() const
