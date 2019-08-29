@@ -55,6 +55,7 @@ int main()
         cout << endl;
     }
 
+    cout<< "bt count is "<< bt.count() << endl;
 
     SharedPointer< Tree<int> > sp = bt.remove(6);
 
@@ -73,6 +74,7 @@ int main()
 
         cout << endl;
     }
+       cout<< "bt count is "<< bt.count() << endl;
     return 0;
 }
 

@@ -162,6 +162,18 @@ protected:
 
         }
     }
+
+    virtual int count( BTreeNode<T>* node ) const
+    {
+        int ret = 0;
+
+        if(node != NULL)
+        {
+           ret = count(node->m_left) + count(node->m_right) + 1;
+        }
+
+        return ret;
+    }
 public:
 
     virtual bool insert(TreeNode<T>* node, BTNodePos pos)
@@ -288,7 +300,8 @@ public:
 
     int count() const
     {
-        return 0;
+
+        return count(root());
     }
 
     int height() const
