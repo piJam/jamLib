@@ -174,6 +174,16 @@ protected:
 
         return ret;
     }
+
+    virtual int height( BTreeNode<T>* node ) const
+    {
+        int height = 0;
+        if(node != NULL)
+        {
+            height(node->m_left)
+        }
+        return 0;
+    }
 public:
 
     virtual bool insert(TreeNode<T>* node, BTNodePos pos)
@@ -306,7 +316,7 @@ public:
 
     int height() const
     {
-        return 0;
+        return height(root());
     }
 
     void clear()
