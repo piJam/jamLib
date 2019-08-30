@@ -195,7 +195,23 @@ protected:
 
         if( node != NULL)
         {
-           int ld = degree(node->m_left);
+            BTreeNode<T>* child[] = {node->m_left, node->m_right};
+
+            ret = (!!node->m_left) + (!!node->m_right);
+
+            for(int i=0; (i<2) && (ret<2); i++)
+            {
+                int d = degree( child[i] );
+
+                if(d > ret)
+                {
+                    ret = d;
+                }
+            }
+
+          /*
+           * ²»¹»¸ßÐ§
+           * int ld = degree(node->m_left);
            int rd = degree(node->m_right);
 
            ret = (!!node->m_left + !!node->m_right);
@@ -208,7 +224,7 @@ protected:
            if( rd > ret )
            {
                ret = rd;
-           }
+           }*/
         }
         return ret;
     }
