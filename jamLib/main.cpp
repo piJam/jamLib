@@ -45,9 +45,9 @@ int main()
     node = bt.find(10);
     bt.insert(12, node);
 
-    int index[] = {4, 5, 8, 9, 10, 11};
+    int index[] = {4, 5, 8, 9, 10, 11, 12};
 
-    for(int i=0; i<6; i++)
+    for(int i=0; i<7; i++)
     {
         TreeNode<int>* node = bt.find(index[i]);
         while(node)
@@ -59,7 +59,7 @@ int main()
     }
 
     cout<< "bt count is "<< bt.count() << endl;
-
+/*
     SharedPointer< Tree<int> > sp = bt.remove(6);
 
     cout << endl;
@@ -80,6 +80,13 @@ int main()
        cout<< "bt count is "<< bt.count() << endl;
        cout<< "bt height is "<< bt.height() << endl;
        cout<< "bt degree is "<< bt.degree() << endl;
+*/
+       for(bt.begin(); !bt.end(); bt.next())
+       {
+           cout<< bt.current() << " ";
+       }
+
+       cout << endl;
     return 0;
 }
 

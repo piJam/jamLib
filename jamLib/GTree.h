@@ -8,13 +8,13 @@
 
 
 namespace jamLib
+
 {
 template<typename T>
 class GTree : public Tree<T>
 {
 protected:
-    LinkQueue<GTreeNode<T>*> m_queue;
-
+    LinkQueue< GTreeNode<T>* > m_queue;
 
     GTreeNode<T>* find(GTreeNode<T>* node, const T value) const
     {
@@ -285,9 +285,11 @@ public:
     void clear()
     {
         this->free(root());
+        m_queue.clear();
+
         this->m_root = NULL;
 
-        m_queue.clear();
+
     }
 
     bool begin()

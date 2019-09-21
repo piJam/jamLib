@@ -3,12 +3,15 @@
 #include "BTreeNode.h"
 #include "Tree.h"
 #include "Exception.h"
+#include "LinkQueue.h"
 namespace jamLib {
 
 template<typename T>
 class BTree : public Tree<T>
 {
 protected:
+    LinkQueue< BTreeNode<T>* > m_queue;
+
     virtual BTreeNode<T>* find(BTreeNode<T>* node, const T& value) const
     {
         BTreeNode<T>* ret = NULL;
@@ -306,6 +309,7 @@ public:
         if( node != NULL)
         {
             remove(node, ret);
+            m_queue.clear();
         }
         else
         {
@@ -323,6 +327,7 @@ public:
         if( node != NULL)
         {
             remove(dynamic_cast<BTreeNode<T>*>(node), ret);
+             m_queue.clear();
         }
         else
         {
@@ -367,9 +372,66 @@ public:
     void clear()
     {
         free(root());
+        m_queue.clear();
+
         this->m_root = NULL;
+
+
     }
 
+    bool begin()
+    {
+        bool ret = root();
+
+        if(ret)
+        {
+            m_queue.clear();
+            m_queue.add(root());
+        }
+        return ret;
+    }
+
+    bool end()
+    {
+        return (m_queue.lenght() == 0);
+    }
+
+    bool next()
+    {
+        bool ret = (m_queue.lenght() > 0);
+
+        if(ret)
+        {
+            BTreeNode<T>* node = m_queue.front();
+
+            m_queue.remove();
+
+            if(node->m_left != NULL)
+            {
+                m_queue.add(node->m_left);
+            }
+
+            if(node->m_right != NULL)
+            {
+                m_queue.add(node->m_right);
+            }
+
+        }
+
+        return ret;
+    }
+
+    T current()
+    {
+        if(!end())
+        {
+            return m_queue.front()->value;
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidOperationException, "queue no elements...");
+        }
+    }
     ~BTree()
     {
         clear();
