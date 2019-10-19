@@ -18,11 +18,14 @@ protected:
     };
 
    // mutable Node m_header; //const方法中要修改变量的值，要加mutable修饰
-    mutable struct : public Object
-    {
-        char reserved [sizeof(T)];
-        Node* next;
-    } m_header;
+//    mutable struct : public Object
+//    {
+//        char reserved [sizeof(T)];
+//        Node* next;
+//    } m_header;
+
+
+    mutable Node m_header;
 
     int m_length;
     int m_step;
