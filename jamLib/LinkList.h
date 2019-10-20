@@ -17,7 +17,7 @@ protected:
         Node* next;
     };
 
-   // mutable Node m_header; //const方法中要修改变量的值，要加mutable修饰
+//    mutable Node m_header; //const方法中要修改变量的值，要加mutable修饰
 //    mutable struct : public Object
 //    {
 //        char reserved [sizeof(T)];

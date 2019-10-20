@@ -17,7 +17,7 @@ using namespace jamLib;
 int main()
 {
     LinkList<int> lk;
-    for(int i=0; i<100; i++)
+    for(int i=0; i<1010; i++)
     {
          lk.insert(i);
     }
