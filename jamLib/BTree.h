@@ -421,6 +421,20 @@ public:
         return ret;
     }
 
+    void showBTree()
+    {
+        showBTree(root());
+    }
+    void showBTree(BTreeNode<T>* bn)
+    {
+        if(bn != NULL)
+        {
+            cout<< bn->value << endl;
+            showBTree(bn->m_left);
+            showBTree(bn->m_right);
+        }
+    }
+
     T current()
     {
         if(!end())

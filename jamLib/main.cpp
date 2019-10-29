@@ -16,16 +16,26 @@ using namespace jamLib;
 
 int main()
 {
-    LinkList<int> lk;
-    for(int i=0; i<1010; i++)
-    {
-         lk.insert(i);
-    }
+    BTree<int> bt;
+    BTreeNode<int>* node = NULL;
 
-    for(lk.move(1); !lk.end(); lk.next())
-    {
-        cout << lk.current() << endl;
-    }
+    bt.insert(1, NULL);
+    node = bt.find(1);
+
+    bt.insert(2, node);
+    bt.insert(3, node);
+
+    node = bt.find(2);
+    bt.insert(4, node);
+    bt.insert(5, node);
+
+    node = bt.find(3);
+    bt.insert(6,node);
+    bt.insert(7,node);
+
+    node = bt.find(4);
+    bt.insert(8, node);
+    bt.showBTree();
 
     return 0;
 }
