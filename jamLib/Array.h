@@ -51,6 +51,8 @@ public:
     }
 
     T* array() const{ return m_array;}
+
+    //纯虚函数的定义，决定了这个类是抽象类，如果类中全为纯虚函数，那么这个类为接口类
     virtual int length() const = 0;
 
 };
