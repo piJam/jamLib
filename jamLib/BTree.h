@@ -4,7 +4,17 @@
 #include "Tree.h"
 #include "Exception.h"
 #include "LinkQueue.h"
+#include "Array.h"
+#include "DynamicArray.h"
+
 namespace jamLib {
+
+enum BTtraversal
+{
+    preOrder,
+    InOrder,
+    postOrder
+};
 
 template<typename T>
 class BTree : public Tree<T>
@@ -231,6 +241,36 @@ protected:
         }
         return ret;
     }
+
+    void preOrderTraversal(BTreeNode<T>* node, LinkQueue< BTreeNode<T>* >& queue)
+    {
+        if(node != NULL)
+        {
+            queue.add(node);
+            preOrderTraversal(node->m_left, queue);
+            preOrderTraversal(node->m_right,queue);
+        }
+    }
+
+    void inOrderTraversal(BTreeNode<T>* node, LinkQueue< BTreeNode<T>* >& queue)
+    {
+        if(node != NULL)
+        {
+            inOrderTraversal(node->m_left, queue);
+            queue.add(node);
+            inOrderTraversal(node->m_right, queue);
+        }
+    }
+
+    void postOrderTraversal(BTreeNode<T>* node, LinkQueue< BTreeNode<T>* >& queue)
+    {
+        if(node != NULL)
+        {
+            postOrderTraversal(node->m_left,queue);
+            postOrderTraversal(node->m_right,queue);
+            queue.add(node);
+        }
+    }
 public:
 
     virtual bool insert(TreeNode<T>* node, BTNodePos pos)
@@ -421,18 +461,44 @@ public:
         return ret;
     }
 
-    void showBTree()
+    SharedPointer< Array<T> > traversal(BTtraversal order)
     {
-        showBTree(root());
-    }
-    void showBTree(BTreeNode<T>* bn)
-    {
-        if(bn != NULL)
-        {
-            cout<< bn->value << endl;
-            showBTree(bn->m_left);
-            showBTree(bn->m_right);
+        SharedPointer< Array<T> > ret = NULL;
+        LinkQueue< BTreeNode<T>* > queue;
+
+        switch (order) {
+            case preOrder:
+                preOrderTraversal(root(), queue);
+                break;
+
+            case InOrder:
+                inOrderTraversal(root(), queue);
+                break;
+
+            case postOrder:
+                postOrderTraversal(root(), queue);
+                break;
+
+            default:
+                THROW_EXCEPTION(InvalidParameterException,"paramter is invalid...");
+                break;
         }
+
+        ret = new DynamicArray<T>(queue.lenght());
+
+        if(ret != NULL)
+        {
+            for(int i=0; i<ret->length(); i++, queue.remove())
+            {
+                ret->set(i, queue.front()->value);
+            }
+            cout<<endl;
+        }else
+        {
+            THROW_EXCEPTION(NoEnoughMemoryException,"no memory create to DynamicArray...");
+        }
+        cout << "return front" << endl;
+        return ret;
     }
 
     T current()

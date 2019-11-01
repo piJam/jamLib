@@ -25,6 +25,7 @@ protected:
 public:
     SharedPointer(T* t = NULL) : m_ref(NULL)
     {
+        cout << "create" << endl;
         if(t)
         {
             this->m_ref = static_cast<int*>(malloc(sizeof(int)));
@@ -41,11 +42,13 @@ public:
 
     SharedPointer(const SharedPointer<T>& obj) : Pointer<T>(NULL)
     {
-       assign(obj);
+       cout << "copy" << endl;
+        assign(obj);
     }
 
     SharedPointer<T>& operator =(const SharedPointer<T>& obj)
     {
+        cout << "operator =" << endl;
         if(this != &obj)
         {
             clear();
@@ -82,6 +85,7 @@ public:
 
     ~SharedPointer()
     {
+        cout << "destroy" << endl;
         clear();
     }
 

@@ -35,7 +35,22 @@ int main()
 
     node = bt.find(4);
     bt.insert(8, node);
-    bt.showBTree();
+    bt.insert(9, node);
+
+    node = bt.find(5);
+    bt.insert(10, node);
+
+    for(bt.begin(); !bt.end();bt.next())
+    {
+        cout << bt.current() << ",";
+    }
+    cout<< endl;
+
+    SharedPointer< Array<int> > sa = bt.traversal(postOrder);
+    for(int i=0; i<(*sa).length(); i++)
+    {
+        cout << (*sa)[i] << endl;
+    }
 
     return 0;
 }
