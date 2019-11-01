@@ -9,6 +9,7 @@
 #include "Proxy.h"
 #include "BTreeNode.h"
 #include "BTree.h"
+#include "Array.h"
 
 using namespace std;
 using namespace jamLib;
@@ -16,7 +17,7 @@ using namespace jamLib;
 
 int main()
 {
-    BTree<int> bt;
+   /* BTree<int> bt;
     BTreeNode<int>* node = NULL;
 
     bt.insert(1, NULL);
@@ -35,6 +36,7 @@ int main()
 
     node = bt.find(4);
     bt.insert(8, node);
+<<<<<<< HEAD
     bt.insert(9, node);
 
     node = bt.find(5);
@@ -51,6 +53,12 @@ int main()
     {
         cout << (*sa)[i] << endl;
     }
+=======
+    bt.showBTree();*/
+
+
+
+>>>>>>> 10ce27cf5a8bb21c80d72a0e572f643c848ece10
 
     return 0;
 }
