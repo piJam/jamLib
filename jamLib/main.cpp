@@ -17,7 +17,7 @@ using namespace jamLib;
 
 int main()
 {
-    BTree<int> bt;
+   /* BTree<int> bt;
     BTreeNode<int>* node = NULL;
 
     bt.insert(1, NULL);
@@ -48,10 +48,22 @@ int main()
     cout<< endl;
 
     SharedPointer< Array<int> > sa = bt.traversal(postOrder);
+
     for(int i=0; i<(*sa).length(); i++)
     {
         cout << (*sa)[i] << endl;
-    }
+
+    }*/
+
+     int a = 16706;
+     char* b = (char*)&a;
+     char c[2] = {'A','B'};
+     char* d = "AB";
+     cout << b << endl;
+     printf("%c\n",c[1]);
+     printf("%s",c);
+
+
 
     return 0;
 }
