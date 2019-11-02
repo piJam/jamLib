@@ -498,8 +498,6 @@ public:
             THROW_EXCEPTION(NoEnoughMemoryException,"no memory create to DynamicArray...");
         }
 
-        cout << "return front" << endl;
-
         return ret;
     }
 
