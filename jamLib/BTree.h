@@ -305,15 +305,23 @@ protected:
         return ret;
     }
 
-    bool equel(BTreeNode<T>* lh, BTreeNode<T>* rh)
+    bool equal(BTreeNode<T>* lh, BTreeNode<T>* rh)
     {
 
-        if( lh != NULL )
+        if( lh == rh)
         {
+            return true;
 
+        }else if( ( lh != NULL ) && ( rh != NULL ) )
+        {
+            return lh->value == rh->value && equal(lh->m_left, rh->m_left) && equal(lh->m_right, rh->m_right);
+
+        }else
+        {
+            return false;
         }
 
-        return true;
+
     }
 
 public:
