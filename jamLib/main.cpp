@@ -10,6 +10,7 @@
 #include "BTreeNode.h"
 #include "BTree.h"
 #include "Array.h"
+#include "TreeNode.h"
 
 using namespace std;
 using namespace jamLib;
@@ -17,6 +18,8 @@ using namespace jamLib;
 
 int main()
 {
+
+
     BTree<int> bt;
     BTreeNode<int>* node = NULL;
 

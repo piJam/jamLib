@@ -271,6 +271,51 @@ protected:
             queue.add(node);
         }
     }
+
+    BTreeNode<T>* clone(BTreeNode<T>* node)
+    {
+        BTreeNode<T>* ret =  NULL;
+        if( node != NULL)
+        {
+            ret =BTreeNode<T>::NewNode();
+
+            if( ret != NULL)
+            {
+                ret->value = node->value;
+
+                ret->m_left = clone(node->m_left);
+                ret->m_right = clone(node->m_right);
+
+                if( ret->m_left != NULL)
+                {
+                    ret->m_left->parent = ret;
+                }
+
+                if(ret->m_right != NULL)
+                {
+                    ret->m_right->parent = ret;
+                }
+
+            }else
+            {
+                THROW_EXCEPTION(NoEnoughMemoryException,"no enough memory create BTreeNode...");
+            }
+        }
+
+        return ret;
+    }
+
+    bool equel(BTreeNode<T>* lh, BTreeNode<T>* rh)
+    {
+
+        if( lh != NULL )
+        {
+
+        }
+
+        return true;
+    }
+
 public:
 
     virtual bool insert(TreeNode<T>* node, BTNodePos pos)
@@ -499,6 +544,34 @@ public:
         }
 
         return ret;
+    }
+
+    SharedPointer< BTree<T> > clone()
+    {
+        BTree<T>* ret = new BTree<T>();
+
+        if( ret != NULL)
+        {
+            ret->m_root = clone(root());
+
+        }else{
+
+            THROW_EXCEPTION(NoEnoughMemoryException,"no memory create tree...");
+
+        }
+
+
+        return ret;
+    }
+
+    bool operator != (const BTree<T>& tree)
+    {
+        return true;
+    }
+
+    bool operator ==(const BTree<T>& tree)
+    {
+        return *this == tree;
     }
 
     T current()
