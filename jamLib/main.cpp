@@ -50,13 +50,16 @@ int main()
     }
     cout<< endl;
 
-    SharedPointer< Array<int> > sa = bt.traversal(postOrder);
 
-    for(int i=0; i<(*sa).length(); i++)
+
+    SharedPointer< BTree<int> > sp = bt.clone();
+
+    for((*sp).begin(); !(*sp).end(); (*sp).next())
     {
-        cout << (*sa)[i] << endl;
-
+        cout << (*sp).current() << ",";
     }
+    cout<< endl;
+
 
     return 0;
 }
