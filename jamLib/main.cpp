@@ -44,21 +44,54 @@ int main()
     node = bt.find(5);
     bt.insert(10, node);
 
-    for(bt.begin(); !bt.end();bt.next())
+    SharedPointer<Array<int>> btsp = bt.traversal(preOrder);
+    for(int i=0; i<(*btsp).length(); i++)
     {
-        cout << bt.current() << ",";
+        cout << (*btsp)[i] <<" ";
+    }
+    cout<< endl;
+
+
+    BTree<int> bs;
+    bs.insert(10, NULL);
+
+    node = bs.find(10);
+    bs.insert(9 ,node);
+    bs.insert(8, node);
+
+    node = bs.find(9);
+    bs.insert(7, node);
+
+    node = bs.find(8);
+    bs.insert(6, node);
+
+    SharedPointer< BTree<int> > ss = bs.clone();
+    SharedPointer<Array<int>> ssp = (*ss).traversal(preOrder);
+    for(int i=0; i<(*ssp).length(); i++)
+    {
+        cout << (*ssp)[i] <<" ";
     }
     cout<< endl;
 
 
 
-    SharedPointer< BTree<int> > sp = bt.clone();
-
-    for((*sp).begin(); !(*sp).end(); (*sp).next())
+    SharedPointer<Array<int>> bssp = bs.traversal(preOrder);
+    for(int i=0; i<(*bssp).length(); i++)
     {
-        cout << (*sp).current() << ",";
+        cout << (*bssp)[i] <<" ";
     }
     cout<< endl;
+
+    SharedPointer< BTree<int> > bb = bs.add(*ss);
+
+    //---add 加法有问题
+    SharedPointer<Array<int>> bbsp = (*bb).traversal(preOrder);
+    for(int i=0; i<(*bbsp).length(); i++)
+    {
+        cout << (*bbsp)[i] <<" ";
+    }
+    cout<< endl;
+
 
 
     return 0;

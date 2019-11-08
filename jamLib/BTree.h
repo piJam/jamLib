@@ -272,7 +272,7 @@ protected:
         }
     }
 
-    BTreeNode<T>* clone(BTreeNode<T>* node)
+    BTreeNode<T>* clone(BTreeNode<T>* node) const
     {
         BTreeNode<T>* ret =  NULL;
         if( node != NULL)
@@ -305,7 +305,7 @@ protected:
         return ret;
     }
 
-    bool equal(BTreeNode<T>* lh, BTreeNode<T>* rh)
+    bool equal(BTreeNode<T>* lh, BTreeNode<T>* rh) const
     {
 
         if( lh == rh)
@@ -320,8 +320,46 @@ protected:
         {
             return false;
         }
+    }
 
+    BTreeNode<T>* add( BTreeNode<T>* lh,  BTreeNode<T>* rh) const
+    {
+        BTreeNode<T>* ret = NULL;
 
+        if( (lh != NULL) && (rh == NULL) )
+        {
+            ret = clone(lh);
+
+        }else if ( (lh == NULL) && (rh != NULL) ){
+
+            ret = clone(rh);
+
+        }else if( (lh != NULL) || (rh != NULL) )
+        {
+            ret =  BTreeNode<T>::NewNode();
+
+            if( ret != NULL)
+            {
+                ret->value = ( lh->value) + ( rh->value );
+                cout << "vaule = "<< ret->value << "-------" << ( lh->value) << "+" << ( rh->value ) << endl;
+                ret->m_left = add(lh->m_left, rh->m_right);
+                ret->m_right = add(lh->m_right, rh->m_right);
+
+                if(ret->m_left != NULL)
+                {
+                    ret->m_left->parent = ret;
+                }
+                if(ret->m_right != NULL)
+                {
+                    ret->m_right->parent = ret;
+                }
+             }else{
+
+                THROW_EXCEPTION(NoEnoughMemoryException, "no enough memory ....");
+            }
+
+        }
+        return ret;
     }
 
 public:
@@ -572,14 +610,27 @@ public:
         return ret;
     }
 
-    bool operator != (const BTree<T>& tree)
+    SharedPointer< BTree<T> > add(const BTree<T>& btree) const
     {
-        return true;
+        BTree<T>* ret = new BTree<T>();
+        if( ret != NULL )
+        {
+            ret->m_root = add(root(), btree.root());
+        }else {
+            THROW_EXCEPTION(NoEnoughMemoryException,"no enough memory...");
+        }
+        return ret;
     }
 
-    bool operator ==(const BTree<T>& tree)
+    bool operator == (const BTree<T>& tree)
     {
-        return *this == tree;
+
+        return  equal(this->root(), tree.root());
+    }
+
+    bool operator != (const BTree<T>& tree)
+    {
+        return !( *this == tree );
     }
 
     T current()
