@@ -24,8 +24,8 @@ int main()
     BTreeNode<int>* node = NULL;
 
     bt.insert(1, NULL);
-    node = bt.find(1);
 
+    node = bt.find(1);
     bt.insert(2, node);
     bt.insert(3, node);
 
@@ -34,8 +34,8 @@ int main()
     bt.insert(5, node);
 
     node = bt.find(3);
-    bt.insert(6,node);
-    bt.insert(7,node);
+    bt.insert(6, node);
+    bt.insert(7, node);
 
     node = bt.find(4);
     bt.insert(8, node);
@@ -44,55 +44,42 @@ int main()
     node = bt.find(5);
     bt.insert(10, node);
 
-    SharedPointer<Array<int>> btsp = bt.traversal(preOrder);
-    for(int i=0; i<(*btsp).length(); i++)
+    cout << "print bt" << endl;
+    SharedPointer<Array<int>> btp = bt.traversal(preOrder);
+    for(int i=0; i<(*btp).length(); i++)
     {
-        cout << (*btsp)[i] <<" ";
+        cout << (*btp)[i] << " ";
     }
-    cout<< endl;
+    cout << endl;
 
+    BTree<int> bt1;
+    bt1.insert(0, NULL);
 
-    BTree<int> bs;
-    bs.insert(10, NULL);
+    node = bt1.find(0);
+    bt1.insert(6, node);
+    bt1.insert(2, node);
 
-    node = bs.find(10);
-    bs.insert(9 ,node);
-    bs.insert(8, node);
+    node = bt1.find(2);
+    bt1.insert(7, node);
+    bt1.insert(8, node);
 
-    node = bs.find(9);
-    bs.insert(7, node);
-
-    node = bs.find(8);
-    bs.insert(6, node);
-
-    SharedPointer< BTree<int> > ss = bs.clone();
-    SharedPointer<Array<int>> ssp = (*ss).traversal(preOrder);
-    for(int i=0; i<(*ssp).length(); i++)
+    cout << "print bt1" << endl;
+    SharedPointer<Array<int>> btp1 = bt1.traversal(preOrder);
+    for(int i=0; i<(*btp1).length(); i++)
     {
-        cout << (*ssp)[i] <<" ";
+        cout << (*btp1)[i] << " ";
     }
-    cout<< endl;
+    cout << endl;
 
+    SharedPointer<BTree<int>> nTree = bt.add(bt1);
 
-
-    SharedPointer<Array<int>> bssp = bs.traversal(preOrder);
-    for(int i=0; i<(*bssp).length(); i++)
+    cout << "print nTree" << endl;
+    SharedPointer<Array<int>> nTreep = (*nTree).traversal(preOrder);
+    for(int i=0; i<(*nTreep).length(); i++)
     {
-        cout << (*bssp)[i] <<" ";
+        cout << (*nTreep)[i] << " ";
     }
-    cout<< endl;
-
-    SharedPointer< BTree<int> > bb = bs.add(*ss);
-
-    //---add 加法有问题
-    SharedPointer<Array<int>> bbsp = (*bb).traversal(preOrder);
-    for(int i=0; i<(*bbsp).length(); i++)
-    {
-        cout << (*bbsp)[i] <<" ";
-    }
-    cout<< endl;
-
-
+    cout << endl;
 
     return 0;
 }

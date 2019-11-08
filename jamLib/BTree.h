@@ -334,15 +334,15 @@ protected:
 
             ret = clone(rh);
 
-        }else if( (lh != NULL) || (rh != NULL) )
+        }else if( (lh != NULL) && (rh != NULL) )
         {
             ret =  BTreeNode<T>::NewNode();
 
             if( ret != NULL)
             {
                 ret->value = ( lh->value) + ( rh->value );
-                cout << "vaule = "<< ret->value << "-------" << ( lh->value) << "+" << ( rh->value ) << endl;
-                ret->m_left = add(lh->m_left, rh->m_right);
+
+                ret->m_left = add(lh->m_left, rh->m_left);
                 ret->m_right = add(lh->m_right, rh->m_right);
 
                 if(ret->m_left != NULL)
