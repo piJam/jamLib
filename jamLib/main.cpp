@@ -45,7 +45,7 @@ int main()
     bt.insert(10, node);
 
     cout << "print bt" << endl;
-    SharedPointer<Array<int>> btp = bt.traversal(preOrder);
+    SharedPointer<Array<int>> btp = bt.traversal(LevelOrder);
     for(int i=0; i<(*btp).length(); i++)
     {
         cout << (*btp)[i] << " ";
@@ -64,7 +64,7 @@ int main()
     bt1.insert(8, node);
 
     cout << "print bt1" << endl;
-    SharedPointer<Array<int>> btp1 = bt1.traversal(preOrder);
+    SharedPointer<Array<int>> btp1 = bt1.traversal(PreOrder);
     for(int i=0; i<(*btp1).length(); i++)
     {
         cout << (*btp1)[i] << " ";
@@ -74,13 +74,34 @@ int main()
     SharedPointer<BTree<int>> nTree = bt.add(bt1);
 
     cout << "print nTree" << endl;
-    SharedPointer<Array<int>> nTreep = (*nTree).traversal(preOrder);
+    SharedPointer<Array<int>> nTreep = (*nTree).traversal(LevelOrder);
     for(int i=0; i<(*nTreep).length(); i++)
     {
         cout << (*nTreep)[i] << " ";
     }
     cout << endl;
 
+    BTreeNode<int>* br = bt.thread(LevelOrder);
+
+    while(br->m_right != NULL)
+    {
+        cout << br->value << " ";
+
+        br = br->m_right;
+
+        if(br->m_right == NULL)
+        {
+             cout << br->value << " ";
+        }
+
+    }
+     cout << endl;
+    while( br != NULL)
+    {
+        cout << br->value << " ";
+        br = br->m_left;
+    }
+    cout<< endl;
     return 0;
 }
 

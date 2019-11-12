@@ -11,9 +11,10 @@ namespace jamLib {
 
 enum BTtraversal
 {
-    preOrder,
+    PreOrder,
     InOrder,
-    postOrder
+    PostOrder,
+    LevelOrder
 };
 
 template<typename T>
@@ -272,6 +273,34 @@ protected:
         }
     }
 
+    void levelOrderTraversal(BTreeNode<T>* node, LinkQueue< BTreeNode<T>* >& queue)
+    {
+        if(node != NULL)
+        {
+            LinkQueue<BTreeNode<T>*> temp;
+
+            temp.add(node);
+
+            while (temp.lenght() > 0)
+            {
+                BTreeNode<T>* n = temp.front();
+
+                if(n->m_left != NULL)
+                {
+                    temp.add(n->m_left);
+                }
+
+                if(n->m_right != NULL)
+                {
+                    temp.add(n->m_right);
+                }
+
+                temp.remove();
+                queue.add(n);
+            }
+        }
+    }
+
     BTreeNode<T>* clone(BTreeNode<T>* node) const
     {
         BTreeNode<T>* ret =  NULL;
@@ -362,6 +391,32 @@ protected:
         return ret;
     }
 
+    void traversal(BTtraversal order, LinkQueue< BTreeNode<T>* >& queue)
+    {
+
+        switch (order) {
+            case PreOrder:
+                preOrderTraversal(root(), queue);
+                break;
+
+            case InOrder:
+                inOrderTraversal(root(), queue);
+                break;
+
+            case PostOrder:
+                postOrderTraversal(root(), queue);
+                break;
+
+            case LevelOrder:
+                levelOrderTraversal(root(), queue);
+                break;
+
+            default:
+                THROW_EXCEPTION(InvalidParameterException,"paramter is invalid...");
+                break;
+        }
+
+    }
 public:
 
     virtual bool insert(TreeNode<T>* node, BTNodePos pos)
@@ -557,23 +612,7 @@ public:
         SharedPointer< Array<T> > ret = NULL;
         LinkQueue< BTreeNode<T>* > queue;
 
-        switch (order) {
-            case preOrder:
-                preOrderTraversal(root(), queue);
-                break;
-
-            case InOrder:
-                inOrderTraversal(root(), queue);
-                break;
-
-            case postOrder:
-                postOrderTraversal(root(), queue);
-                break;
-
-            default:
-                THROW_EXCEPTION(InvalidParameterException,"paramter is invalid...");
-                break;
-        }
+        traversal(order, queue);
 
         ret = new DynamicArray<T>(queue.lenght());
 
@@ -583,7 +622,7 @@ public:
             {
                 ret->set(i, queue.front()->value);
             }
-            cout<<endl;
+
         }else
         {
             THROW_EXCEPTION(NoEnoughMemoryException,"no memory create to DynamicArray...");
@@ -631,6 +670,49 @@ public:
     bool operator != (const BTree<T>& tree)
     {
         return !( *this == tree );
+    }
+
+    //将队列转换为双向链表
+    BTreeNode<T>* connect(LinkQueue<BTreeNode<T>*>& queue)
+    {
+
+        BTreeNode<T>* ret = NULL;
+        if( queue.lenght() > 0)
+        {
+            ret = queue.front();
+            BTreeNode<T>* slider = queue.front();
+            ret->m_left = NULL;
+            queue.remove();
+
+            while(queue.lenght() > 0)
+            {
+                slider->m_right = queue.front();
+
+                queue.front()->m_left = slider;
+
+                slider = queue.front();
+
+                queue.remove();
+            }
+            slider->m_right = NULL;
+
+        }
+        return ret;
+    }
+
+    //二叉树线索化
+    BTreeNode<T>* thread(BTtraversal Order)
+    {
+        BTreeNode<T>* ret = NULL;
+        LinkQueue<BTreeNode<T>*> queue;
+
+        traversal(Order, queue);   
+        ret = connect(queue);
+        this->m_root = NULL; //将二叉树置为空
+
+        queue.clear(); //  可不执行这一步，在connect函数中已经对每一个元素remove了
+
+       return ret;
     }
 
     T current()
