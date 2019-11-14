@@ -70,9 +70,6 @@ BTreeNode<T>* delNode(BTreeNode<T>* node)
 
                // BTreeNode<T>** parentChild = &(parent->m_left == node ? parent->m_left : parent->m_right);
                // *parentChild = nchild;
-
-
-
                 nchild->parent = parent;
 
             }else
