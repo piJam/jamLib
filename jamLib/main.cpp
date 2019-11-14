@@ -15,93 +15,109 @@
 using namespace std;
 using namespace jamLib;
 
+template< typename T >
+BTreeNode<T>* createBTree()
+{
+    static BTreeNode<int> bn[9];
+    for(int i=0; i<9; i++)
+    {
+        bn[i].value = i;
+        bn[i].parent = NULL;
+        bn[i].m_left = NULL;
+        bn[i].m_right = NULL;
+    }
+
+    bn[0].m_left = &bn[1];
+    bn[0].m_right = &bn[2];
+    bn[1].parent = &bn[0];
+    bn[2].parent = &bn[0];
+
+    bn[1].m_left = &bn[3];
+    bn[3].parent = &bn[1];
+
+    bn[2].m_left = &bn[4];
+    bn[2].m_right = &bn[5];
+    bn[4].parent = &bn[2];
+    bn[5].parent = &bn[2];
+
+    bn[3].m_right = &bn[6];
+    bn[6].parent = &bn[3];
+
+    bn[4].m_left = &bn[7];
+    bn[7].parent = &bn[4];
+
+    bn[5].m_left = &bn[8];
+    bn[8].parent = &bn[5];
+
+    return bn;
+}
+template< typename T >
+BTreeNode<T>* delNode(BTreeNode<T>* node)
+{
+    if(node != NULL)
+    {
+        if( ((node->m_left != NULL) && (node->m_right == NULL)) || ((node->m_left == NULL) && (node->m_right != NULL)) )
+        {
+
+            BTreeNode<T>* parent = dynamic_cast<BTreeNode<T>*>(node->parent);
+            BTreeNode<T>* nchild = (node->m_left != NULL) ? node->m_left : node->m_right ;
+
+            if( parent != NULL)
+            {
+
+               BTreeNode<T>*& parentChild = parent->m_left == node ? parent->m_left : parent->m_right; //这是使用指针的引用，相当于直接操作上一级节点的子节点
+               parentChild = nchild;
+
+               // BTreeNode<T>** parentChild = &(parent->m_left == node ? parent->m_left : parent->m_right);
+               // *parentChild = nchild;
+
+
+
+                nchild->parent = parent;
+
+            }else
+            {
+               nchild->parent = NULL;
+            }
+
+            if(node->flag())
+            {
+                delete node;
+            }
+
+            delNode(nchild);
+        }
+        else
+        {
+            delNode(node->m_left);
+            delNode(node->m_right);
+        }
+    }
+
+    return node;
+}
+
+template< typename T >
+void printInOrder(BTreeNode<T>* node)
+{
+    if(node != NULL)
+    {
+        printInOrder( node->m_left );
+        cout << node->value << " " ;
+        printInOrder( node->m_right );
+    }
+
+}
 
 int main()
 {
 
-
-    BTree<int> bt;
-    BTreeNode<int>* node = NULL;
-
-    bt.insert(1, NULL);
-
-    node = bt.find(1);
-    bt.insert(2, node);
-    bt.insert(3, node);
-
-    node = bt.find(2);
-    bt.insert(4, node);
-    bt.insert(5, node);
-
-    node = bt.find(3);
-    bt.insert(6, node);
-    bt.insert(7, node);
-
-    node = bt.find(4);
-    bt.insert(8, node);
-    bt.insert(9, node);
-
-    node = bt.find(5);
-    bt.insert(10, node);
-
-    cout << "print bt" << endl;
-    SharedPointer<Array<int>> btp = bt.traversal(LevelOrder);
-    for(int i=0; i<(*btp).length(); i++)
-    {
-        cout << (*btp)[i] << " ";
-    }
+    BTreeNode<int>* n = createBTree<int>();
+    printInOrder(n);
+    cout << endl;
+    printInOrder( delNode(n) );
     cout << endl;
 
-    BTree<int> bt1;
-    bt1.insert(0, NULL);
-
-    node = bt1.find(0);
-    bt1.insert(6, node);
-    bt1.insert(2, node);
-
-    node = bt1.find(2);
-    bt1.insert(7, node);
-    bt1.insert(8, node);
-
-    cout << "print bt1" << endl;
-    SharedPointer<Array<int>> btp1 = bt1.traversal(PreOrder);
-    for(int i=0; i<(*btp1).length(); i++)
-    {
-        cout << (*btp1)[i] << " ";
-    }
-    cout << endl;
-
-    SharedPointer<BTree<int>> nTree = bt.add(bt1);
-
-    cout << "print nTree" << endl;
-    SharedPointer<Array<int>> nTreep = (*nTree).traversal(LevelOrder);
-    for(int i=0; i<(*nTreep).length(); i++)
-    {
-        cout << (*nTreep)[i] << " ";
-    }
-    cout << endl;
-
-    BTreeNode<int>* br = bt.thread(LevelOrder);
-
-    while(br->m_right != NULL)
-    {
-        cout << br->value << " ";
-
-        br = br->m_right;
-
-        if(br->m_right == NULL)
-        {
-             cout << br->value << " ";
-        }
-
-    }
-     cout << endl;
-    while( br != NULL)
-    {
-        cout << br->value << " ";
-        br = br->m_left;
-    }
-    cout<< endl;
     return 0;
 }
 
