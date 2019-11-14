@@ -4,6 +4,7 @@
 #include "BTree.h"
 using namespace std;
 using namespace jamLib;
+
 template< typename T>
 class BTreeExample
 {
