@@ -33,7 +33,7 @@ HEADERS += \
     StaticQueue.h \
     LinkQueue.h \
     CheckOperator.h \
-    Stack_Queue_Convert.h \
+    Stack_Queue_ConvertExample.h \
     JString.h \
     QueenPosition.h \
     Sort.h \
