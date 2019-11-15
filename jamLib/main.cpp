@@ -19,11 +19,6 @@ using namespace std;
 int main()
 {
 
-    BTreeNode<int>* n = BTreeExample<int>::createBTree();
-    BTreeExample<int>::printInOrder(n);
-    cout << endl;
-    BTreeExample<int>::printInOrder( BTreeExample<int>::delNode(n) );
-    cout << endl;
 
     return 0;
 }
