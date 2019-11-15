@@ -9,6 +9,7 @@ template< typename T>
 class BTreeExample
 {
 public:
+    //创建一个树，在静态区
     static BTreeNode<T>* createBTree()
     {
         static BTreeNode<int> bn[9];
@@ -45,6 +46,7 @@ public:
         return bn;
     }
 
+    //删除度为1的节点
     static  BTreeNode<T>* delNode(BTreeNode<T>* node)
     {
         if(node != NULL)
@@ -87,6 +89,7 @@ public:
         return node;
     }
 
+    //中序遍历
     static  void printInOrder(BTreeNode<T>* node)
     {
         if(node != NULL)
