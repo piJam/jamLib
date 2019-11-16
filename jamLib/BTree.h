@@ -110,7 +110,7 @@ protected:
         }
         else if( pos == RIGHT)
         {
-            if( np->m_right = NULL)
+            if( np->m_right == NULL)
             {
                 np->m_right = n;
             }
