@@ -47,8 +47,9 @@ public:
     }
 
     //删除度为1的节点
-    static  BTreeNode<T>* delNode(BTreeNode<T>* node)
+    static  BTreeNode<T>* delNode(BTreeNode<T>*& node)
     {
+        cout << "node adr: "<< &node << endl;
         if(node != NULL)
         {
             if( ((node->m_left != NULL) && (node->m_right == NULL)) || ((node->m_left == NULL) && (node->m_right != NULL)) )
@@ -131,10 +132,15 @@ public:
     static void delBTreeNodeSingle()
     {
         BTreeNode<int>* n = BTreeExample<int>::createBTree();
+        cout << "n ard:" << &n << endl;
         BTreeExample<int>::printInOrder(n);
         cout << endl;
+        /*
         BTreeExample<int>::delNode2(n);
         BTreeExample<int>::printInOrder(n);
+        */
+
+        BTreeExample<int>::printInOrder(BTreeExample<int>::delNode(n));
         cout << endl;
 
     }
