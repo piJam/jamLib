@@ -89,6 +89,32 @@ public:
         return node;
     }
 
+    //删除度为1的节点，没有parent指针
+    static void delNode2(BTreeNode<T>*& node)
+    {
+        if(node != NULL)
+        {
+            if( ((node->m_left != NULL) && (node->m_right == NULL)) || ((node->m_left == NULL) && (node->m_right != NULL)) )
+            {
+                BTreeNode<T>* node_child = (node->m_left != NULL) ? (node->m_left) : (node->m_right);
+
+                if(node->flag())
+                {
+                    delete node;
+                }
+
+                node = node_child;
+
+                delNode2(node);
+
+
+            }else {
+                delNode2(node->m_left);
+                delNode2(node->m_right);
+            }
+        }
+    }
+
     //中序遍历
     static  void printInOrder(BTreeNode<T>* node)
     {
@@ -107,8 +133,10 @@ public:
         BTreeNode<int>* n = BTreeExample<int>::createBTree();
         BTreeExample<int>::printInOrder(n);
         cout << endl;
-        BTreeExample<int>::printInOrder( BTreeExample<int>::delNode(n) );
+        BTreeExample<int>::delNode2(n);
+        BTreeExample<int>::printInOrder(n);
         cout << endl;
+
     }
 
 

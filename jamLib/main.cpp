@@ -19,7 +19,7 @@ using namespace std;
 int main()
 {
 
-
+    BTreeExample<int>::delBTreeNodeSingle();
     return 0;
 }
 
