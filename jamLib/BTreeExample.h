@@ -49,7 +49,7 @@ public:
     //删除度为1的节点
     static  BTreeNode<T>* delNode(BTreeNode<T>*& node)
     {
-        cout << "node adr: "<< &node << endl;
+
         if(node != NULL)
         {
             if( ((node->m_left != NULL) && (node->m_right == NULL)) || ((node->m_left == NULL) && (node->m_right != NULL)) )
@@ -108,7 +108,6 @@ public:
 
                 delNode2(node);
 
-
             }else {
                 delNode2(node->m_left);
                 delNode2(node->m_right);
@@ -128,24 +127,69 @@ public:
 
     }
 
+    //打印双向链表
+    static void printDualLink(BTreeNode<T>* node)
+    {
+        while( node!= NULL )
+        {
+            cout << node->value << " ";
+            node = node->m_right;
+        }
+
+    }
+
     //test
     static void delBTreeNodeSingle()
     {
-        BTreeNode<int>* n = BTreeExample<int>::createBTree();
-        cout << "n ard:" << &n << endl;
-        BTreeExample<int>::printInOrder(n);
+        BTreeNode<int>* n = createBTree();
+
+        printInOrder(n);
         cout << endl;
         /*
         BTreeExample<int>::delNode2(n);
         BTreeExample<int>::printInOrder(n);
         */
 
-        BTreeExample<int>::printInOrder(BTreeExample<int>::delNode(n));
+        printInOrder( delNode(n) );
+
         cout << endl;
 
+        n = Thread(n);
+
+        printDualLink(n);
+
+        cout << endl;
     }
 
+   static BTreeNode<T>* Thread(BTreeNode<T>* node)
+    {
+        BTreeNode<T>* pre = NULL;
+        InOderThread(node, pre);
 
+        while( (node != NULL) && (node->m_left != NULL) )
+        {
+            node = node->m_left;
+        }
+        return node;
+    }
+
+   static void InOderThread(BTreeNode<T>* node, BTreeNode<T>*& pre)
+    {
+        if( node != NULL)
+        {
+            InOderThread(node->m_left, pre);
+            node->m_left = pre;
+
+            if(pre != NULL)
+            {
+                 pre->m_right = node;
+            }
+
+            pre = node;
+            InOderThread(node->m_right, pre);
+        }
+
+    }
 };
 
 #endif // BTREEEXAMPLE_H
