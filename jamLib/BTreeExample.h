@@ -192,17 +192,35 @@ public:
 
     }
 
-   static void InOderThread2(BTreeNode<T>* node, BTreeNode<T>* pre, BTreeNode<T>* tail)
+   static void InOderThread2(BTreeNode<T>* node, BTreeNode<T>*& head, BTreeNode<T>*& tail)
    {
-        InOderThread2(node->m_left, pre, tail);
+       if( node != nullptr )
+       {
+           BTreeNode<T>* h = nullptr;
+           BTreeNode<T>* t = nullptr;
 
-        pre->m_left = node;
-        tail->m_right = node;
+           InOderThread2(node->m_left, h , t);
 
-        InOderThread2(node->m_right, pre, tail);
+           node->m_left = t;
+           if( t != nullptr)
+           {
+                t->m_right = node;
+           }
 
+           head = (h != nullptr) ? h : node;
 
+           InOderThread2(node->m_right, h ,t);
+           node->m_right = h;
+           if( h!= nullptr )
+           {
+                h->m_left = node;
+           }
+
+            tail = (t != nullptr) ? t : node;
+       }
    }
+
+
 };
 
 #endif // BTREEEXAMPLE_H
