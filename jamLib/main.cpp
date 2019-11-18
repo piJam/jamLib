@@ -18,7 +18,10 @@ using namespace std;
 
 int main()
 {
-    BTreeExample<int>::delBTreeNodeSingle();
+    BTreeNode<int>* bn = BTreeExample<int>::createBTree();
+    BTreeExample<int>::printInOrder(bn);
+    cout << endl;
+    BTreeExample<int>::printDualLink(BTreeExample<int>::InOderThread2(bn));
     return 0;
 }
 
