@@ -146,8 +146,8 @@ public:
         printInOrder(n);
         cout << endl;
         /*
-        BTreeExample<int>::delNode2(n);
-        BTreeExample<int>::printInOrder(n);
+        delNode2(n);
+        printInOrder(n);
         */
 
         printInOrder( delNode(n) );
@@ -160,6 +160,7 @@ public:
 
         cout << endl;
     }
+
 
    static BTreeNode<T>* Thread(BTreeNode<T>* node)
     {
