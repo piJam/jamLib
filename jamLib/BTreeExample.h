@@ -191,6 +191,18 @@ public:
         }
 
     }
+
+   static void InOderThread2(BTreeNode<T>* node, BTreeNode<T>* pre, BTreeNode<T>* tail)
+   {
+        InOderThread2(node->m_left, pre, tail);
+
+        pre->m_left = node;
+        tail->m_right = node;
+
+        InOderThread2(node->m_right, pre, tail);
+
+
+   }
 };
 
 #endif // BTREEEXAMPLE_H
