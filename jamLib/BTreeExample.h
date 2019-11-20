@@ -200,14 +200,14 @@ public:
            BTreeNode<T>* t = nullptr;
 
            InOderThreads(node->m_left, h , t);
-
            node->m_left = t;
            if( t != nullptr)
            {
                 t->m_right = node;
            }
 
-           head = (h != nullptr) ? h : node;
+
+           head = (h != nullptr) ? h : node;          
 
            h = nullptr;
            t = nullptr;
@@ -219,7 +219,6 @@ public:
            {
                 h->m_left = node;
            }
-
            tail = (t != nullptr) ? t : node;
        }
    }
