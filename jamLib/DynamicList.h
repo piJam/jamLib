@@ -43,7 +43,7 @@ public:
                 array[i] = this-> m_array[i];
             }
 
-            T* temp = this ->m_array;
+            T* temp = this->m_array;
 
             this->m_length = length;
             this->m_capacity = capacity;
