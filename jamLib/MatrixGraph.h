@@ -11,6 +11,19 @@ protected:
     E* m_edges[N][N];
     int m_eCount;
 public:
+    MatrixGraph()
+    {
+        for(int i=0; i<N ; i++)
+        {
+            m_vertexes[i] = nullptr;
+            for(int j=0; j<N; j++)
+            {
+                m_edges[i][j] = nullptr;
+            }
+        }
+        m_eCount = 0;
+    }
+
     V getVertex(int i)
     {
         V* ret;
@@ -44,6 +57,18 @@ public:
     }
     virtual int OD(int i) = 0;  //获取顶点的出度
     virtual int ID(int i) = 0;  //获取顶点的入度
+
+    ~ MatrixGraph()
+    {
+        for(int i=0; i<N ; i++)
+        {
+            m_vertexes[i] = nullptr;
+            for(int j=0; j<N; j++)
+            {
+                m_edges[i][j] = nullptr;
+            }
+        }
+    }
 };
 
 #endif // MATRIXGRAPH_H
