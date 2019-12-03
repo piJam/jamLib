@@ -2,7 +2,10 @@
 #define MATRIXGRAPH_H
 #include "Graph.h"
 #include "DynamicArray.h"
+#include "Exception.h"
 
+namespace jamLib
+{
 template < int N, typename E, typename V >
 class MatrixGraph : public Graph<V, E>
 {
@@ -26,18 +29,61 @@ public:
 
     V getVertex(int i)
     {
-        V* ret;
-        bool i = ((0<=i) && (i < eCount()));
+        V ret;
 
-        if( i )
+        if( !getVertex(i, ret) )
         {
-            ret = m_vertexes[i];
+            THROW_EXCEPTION(InvalidOperationException, "index i is invalid ...");
         }
-        return *ret;
-    }
-    virtual bool getVertex(int i, V& value) = 0;
 
-    virtual bool getVertex(int i, const V& value) = 0; //设置顶点相关的元素值
+        return ret;
+    }
+
+    bool getVertex(int i, V& value)
+    {
+        bool ret =( (0<=i) && (i < vCount()) );
+
+        if(ret)
+        {
+            if(m_vertexes[i] != nullptr)
+            {
+                value = *(m_vertexes[i]);
+            }else
+            {
+                THROW_EXCEPTION(InvalidOperationException,"No value assigned to this vertex ...");
+            }
+        }
+
+        return ret;
+    }
+
+    bool setVertex(int i, const V& value)
+    {
+        bool ret = ( (0<=i) && (i<vCount()) );
+
+        if(ret)
+        {
+            V* temp = m_vertexes[i];
+
+            if(temp == nullptr)
+            {
+                temp = new V();
+
+                if(temp == nullptr)
+                {
+                    THROW_EXCEPTION(NoEnoughMemoryException, " no enought memory to new V");
+                }
+
+                *temp = value;
+
+                m_vertexes[i] = temp;
+            }
+
+        }
+
+        return ret;
+    }
+
     virtual SharePoint< Array<int> > getAdjacent(int i) = 0; //获取相连接顶点
 
     virtual E getEdge(int i, int j) = 0; //获取边相关的元素值
@@ -47,11 +93,11 @@ public:
     virtual bool removeEdge(int i, int j) = 0; //删除i到j的边
 
 
-    int vCount()
+    int vCount()  //顶点数
     {
         return N;
     }
-    virtual int eCount()
+    virtual int eCount() //边数
     {
         return m_eCount;
     }
@@ -70,5 +116,5 @@ public:
         }
     }
 };
-
+}
 #endif // MATRIXGRAPH_H

@@ -10,7 +10,7 @@ public:
     virtual V getVertex(int i) = 0;  //获取顶点相关的元素值
     virtual bool getVertex(int i, V& value) = 0;
 
-    virtual bool getVertex(int i, const V& value) = 0; //设置顶点相关的元素值
+    virtual bool setVertex(int i, const V& value) = 0; //设置顶点相关的元素值
     virtual SharePoint< Array<int> > getAdjacent(int i) = 0; //获取相连接顶点
 
     virtual E getEdge(int i, int j) = 0; //获取边相关的元素值
