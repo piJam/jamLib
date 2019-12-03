@@ -77,6 +77,7 @@ public:
                 *temp = value;
 
                 m_vertexes[i] = temp;
+
             }
 
         }
@@ -84,7 +85,7 @@ public:
         return ret;
     }
 
-    SharePoint< Array<int> > getAdjacent(int i)
+    SharedPointer< Array<int> > getAdjacent(int i)
     {
         Array<int>* ret = nullptr;
 
@@ -180,6 +181,9 @@ public:
 
             m_edges[i][j] = temp;
 
+            m_eCount++;
+
+
         }
         else
         {
@@ -200,6 +204,8 @@ public:
                 E* temp = m_edges[i][j];
 
                 m_edges[i][j] = nullptr;
+
+                m_eCount--;
 
                 delete temp;
             }
