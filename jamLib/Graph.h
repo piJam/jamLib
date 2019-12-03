@@ -11,11 +11,12 @@ public:
     virtual bool getVertex(int i, V& value) = 0;
 
     virtual bool setVertex(int i, const V& value) = 0; //设置顶点相关的元素值
-    virtual SharePoint< Array<int> > getAdjacent(int i) = 0; //获取相连接顶点
+    virtual SharePoint< Array<int> > getAdjacent(int i) = 0; //获取以i为起点，所有的终点
 
     virtual E getEdge(int i, int j) = 0; //获取边相关的元素值
     virtual bool getEdge(int i, int j, E& value) = 0;
-    virtual bool getEdge(int i, int j, const E& value) = 0;
+
+    virtual bool setEdge(int i, int j, const E& value) = 0; //设置一条边的权
 
     virtual bool removeEdge(int i, int j) = 0; //删除i到j的边
 

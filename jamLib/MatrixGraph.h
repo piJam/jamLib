@@ -84,13 +84,133 @@ public:
         return ret;
     }
 
-    virtual SharePoint< Array<int> > getAdjacent(int i) = 0; //获取相连接顶点
+    SharePoint< Array<int> > getAdjacent(int i)
+    {
+        Array<int>* ret = nullptr;
 
-    virtual E getEdge(int i, int j) = 0; //获取边相关的元素值
-    virtual bool getEdge(int i, int j, E& value) = 0;
-    virtual bool getEdge(int i, int j, const E& value) = 0;
+        if( (0<=i) && (i<vCount()) )
+        {
+            int index = 0;
+            for(int j=0; j<vCount(); j++)
+            {
+                if( m_edges[i][j] != nullptr )
+                {
+                    index++;
+                }
+            }
 
-    virtual bool removeEdge(int i, int j) = 0; //删除i到j的边
+            ret = new DynamicArray<int>(index);
+
+            if( ret != nullptr)
+            {
+                for(int j=0; j<vCount(); j++)
+                {
+                    if( m_edges[i][j] != nullptr )
+                    {
+                        ret->set(j, j);
+                    }
+                }
+
+            }
+            else
+            {
+                THROW_EXCEPTION(NoEnoughMemoryException, "no enought memory to DynamicArray ...");
+            }
+
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidOperationException, "this index not range ...");
+        }
+
+        return ret;
+    }
+
+    E getEdge(int i, int j)
+    {
+        E ret;
+
+        getEdge(i, j, ret);
+
+        return ret;
+    }
+
+    bool getEdge(int i, int j, E& value)
+    {
+        bool ret = ( (0<=i) && (i<vCount()) ) && ( (0<=j) && (j<vCount()) );
+
+        if(ret)
+        {
+            if( m_edges[i][j] != nullptr )
+            {
+                value = *m_edges[i][j];
+            }
+            else
+            {
+                THROW_EXCEPTION(InvalidOperationException, "this value is null ...");
+            }
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "this parament is invalid ...");
+        }
+
+        return ret;
+    }
+
+    bool setEdge(int i, int j, const E& value)
+    {
+        bool ret = ( (0<=i) && (i<vCount()) ) && ( (0<=j) && (j<vCount()) );
+
+        if(ret)
+        {
+            E* temp = nullptr;
+
+            if( m_edges[i][j] == nullptr )
+            {
+                temp = new E();
+            }
+
+            if( temp == nullptr)
+            {
+                THROW_EXCEPTION(NoEnoughMemoryException, "no enought memory for edge ...");
+            }
+
+            *temp = value;
+
+            m_edges[i][j] = temp;
+
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "this parament is invalid ...");
+        }
+
+        return ret;
+    }
+
+    bool removeEdge(int i, int j)
+    {
+        bool ret = ( (0<=i) && (i<vCount()) ) && ( (0<=j) && (j<vCount()) );
+
+        if(ret)
+        {
+            if( m_edges[i][j] != nullptr )
+            {
+                E* temp = m_edges[i][j];
+
+                m_edges[i][j] = nullptr;
+
+                delete temp;
+            }
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "this parament is invalid ...");
+        }
+
+        return ret;
+    }
 
 
     int vCount()  //顶点数
@@ -101,8 +221,44 @@ public:
     {
         return m_eCount;
     }
-    virtual int OD(int i) = 0;  //获取顶点的出度
-    virtual int ID(int i) = 0;  //获取顶点的入度
+
+    int OD(int i)
+    {
+        int ret = 0;
+
+        if( (0<=i) && (i<vCount()) )
+        {
+            for(int j=0; j<vCount(); j++)
+            {
+                if( m_edges[i][j] != nullptr)
+                {
+                    ret++;
+                }
+
+            }
+        }
+
+        return ret;
+    }
+
+    int ID(int i)
+    {
+        int ret = 0;
+
+        if( (0<=i) && (i<vCount()) )
+        {
+            for(int j=0; j<vCount(); j++)
+            {
+                if( m_edges[j][i] != nullptr)
+                {
+                    ret++;
+                }
+
+            }
+        }
+
+        return ret;
+    }
 
     ~ MatrixGraph()
     {
