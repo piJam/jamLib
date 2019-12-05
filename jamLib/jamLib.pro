@@ -46,6 +46,7 @@ HEADERS += \
     BTreeNode.h \
     BTreeExample.h \
     Graph.h \
-    MatrixGraph.h
+    MatrixGraph.h \
+    test.h
 	
 
