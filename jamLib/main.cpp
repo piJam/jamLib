@@ -30,6 +30,30 @@ int main()
     cout<< "ID(1):" << g.ID(1) << endl;
     cout<< "OD(1):" << g.OD(1) << endl;
     cout<< "TD(1):" << g.TD(1) << endl;
+
+    cout<< "W(0, 1):" << g.getEdge(0, 1) << endl;
+    cout<< "w(1, 0):" << g.getEdge(1, 0) << endl;
+    cout << "w(1, 2):" << g.getEdge(1, 2) << endl;
+
+    SharedPointer< Array<int> > aj = g.getAdjacent(2);
+
+    for(int i=0; i<aj->length(); i++)
+    {
+        cout << (*aj)[i] << " ";
+    }
+    cout << endl;
+
+    cout<< "delete Edge:" << endl;
+
+    g.removeEdge(0, 1);
+
+    cout<< "eCount:" << g.eCount() << endl;
+
+    g.setVertex(0, 100);
+
+    cout << "v(0)" << g.getVertex(0) << endl;
+
+    cout<< "W(0, 1):" << g.getEdge(0, 1) << endl;
     return 0;
 }
 
