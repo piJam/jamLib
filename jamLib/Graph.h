@@ -2,7 +2,39 @@
 #define GRAPH_H
 #include "SharedPointer.h"
 #include "Array.h"
+#include "Object.h"
 namespace jamLib {
+template<typename E>
+struct Edge : public Object
+{
+    int m_start;
+    int m_end;
+    E data;
+
+    Edge(int start, int end)
+    {
+        m_start = start;
+        m_end = end;
+    }
+
+    Edge(int start, int end, const E& value)
+    {
+        m_start = start;
+        m_end = end;
+        data = value;
+    }
+
+    bool operator == (const Edge<E>& obj)
+    {
+        return ( m_start == obj.m_start ) && ( m_end == obj.m_end ) ;
+    }
+
+    bool operator != (const Edge<E>& obj)
+    {
+        return !(*this == obj);
+    }
+};
+
 template <typename V, typename E>
 class Graph : public Object
 {

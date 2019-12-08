@@ -3,6 +3,9 @@
 #include <cstdlib>
 #include <ctime>
 #include "test.h"
+#include "LinkList.h"
+using namespace std;
+using namespace jamLib;
 
 
 int main()
