@@ -275,13 +275,82 @@ public:
     }
 
 
-    virtual int vCount()
+    int vCount()
     {
         return m_vertex.length();
     }
-    virtual int eCount() = 0;  //获取边的总数
-    virtual int OD(int i) = 0;  //获取顶点的出度
-    virtual int ID(int i) = 0;  //获取顶点的入度
+
+    int eCount()
+    {
+        int ret;
+
+        for( m_vertex_list.move(0); !m_vertex_list.end(); m_vertex_list.next() )
+        {
+            ret += m_vertex_list.current()->edge.length();
+        }
+
+        return ret;
+    }
+
+    int OD(int i)
+    {
+        int ret;
+
+        if( (0 <= i) && (i < vCount()) )
+        {
+            Vertex* vertex = m_vertex_list.get(i);
+            ret = vertex->edge.length();
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "parament i in invalid ...");
+        }
+
+
+        return ret;
+    }
+
+    int ID(int i)
+    {
+        int ret;
+
+        if( (0 <= i) && (i < vCount()) )
+        {
+            for( m_vertex_list.move(0); !m_vertex_list.end(); m_vertex_list.next() )
+            {
+                LinkList< Edge<E> >& edge = m_vertex_list.current()->edge; //变成引用不用在调用构造函数，节省性能
+
+                for( edge.move(0); !edge.end(); edge.next() )
+                {
+                    if(edge.current().m_end == i)
+                    {
+                        ret++;
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "parament i in invalid ...");
+        }
+
+
+        return ret;
+    }
+
+    ~LinkGraph()
+    {
+        while( vCount() > 0 )
+        {
+            Vertex* del = m_vertex_list.get(0);
+
+            m_vertex_list.remove(0);
+
+            delete del->data;
+            delete del;
+        }
+    }
 
 };
 
