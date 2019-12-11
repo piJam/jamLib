@@ -139,7 +139,6 @@ public:
     {
         if( m_vertex_list.length() > 0 )
         {
-
             int index = m_vertex_list.length() - 1;
             Vertex* del = m_vertex_list.get(index); //从链表获取要删除顶点
 
@@ -284,7 +283,7 @@ public:
 
     int eCount()
     {
-        int ret;
+        int ret = 0;
 
         for( m_vertex_list.move(0); !m_vertex_list.end(); m_vertex_list.next() )
         {
@@ -296,7 +295,7 @@ public:
 
     int OD(int i)
     {
-        int ret;
+        int ret = 0;
 
         if( (0 <= i) && (i < vCount()) )
         {
@@ -314,7 +313,7 @@ public:
 
     int ID(int i)
     {
-        int ret;
+        int ret = 0;
 
         if( (0 <= i) && (i < vCount()) )
         {
