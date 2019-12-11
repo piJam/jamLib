@@ -12,9 +12,14 @@ using namespace jamLib;
 
 int main()
 {
-    testLinkGarph();
+
 
     return 0;
 }
+
+
+
+
+
 
 
