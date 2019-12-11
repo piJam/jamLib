@@ -48,6 +48,7 @@ public:
             m_vertex_list.insert(vertex);
 
             ret = m_vertex_list.length() - 1;
+
         }
         else
         {
@@ -71,16 +72,16 @@ public:
 
     bool setVertex(int i, const V& value)
     {
-        bool ret = (0 <= i) && (i < m_vertex_list.length());
+        bool ret = (0 <= i) && (i < vCount());
 
-        if(i)
+        if(ret)
         {
             Vertex* vertex = m_vertex_list.get(i);
             V* data = vertex->data;
 
-            if( data == nullptr)
+            if( data == NULL)
             {
-                data = new V();  // ? dephi data != NULL
+                data = new V();
             }
 
             if( data != nullptr )

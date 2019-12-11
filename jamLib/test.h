@@ -55,11 +55,24 @@ void testMatrixGraph()
 
 void testLinkGarph()
 {
-    LinkGraph<char, int> g(4);
-    g.setVertex(0, 'A');
-    g.setVertex(1, 'B');
-    g.setVertex(2, 'C');
-    g.setVertex(3, 'D');
+//    LinkGraph<char, int> g(4);
+//    g.setVertex(0, 'A');
+//    g.setVertex(1, 'B');
+//    g.setVertex(2, 'C');
+//    g.setVertex(3, 'D');
+
+    LinkGraph<char, int> g;
+    g.addVertex('A');
+    g.addVertex('B');
+    g.addVertex('C');
+    g.addVertex('D');
+
+    g.removeVertex();
+
+    for( int i=0; i<g.vCount(); i++)
+    {
+        cout << "Vertex is" << g.getVertex(i) << endl;
+    }
 
 
 }
