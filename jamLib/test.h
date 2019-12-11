@@ -11,6 +11,7 @@
 #include "TreeNode.h"
 #include "BTreeExample.h"
 #include "MatrixGraph.h"
+#include "LinkGraph.h"
 using namespace std;
 
 void testMatrixGraph()
@@ -52,4 +53,14 @@ void testMatrixGraph()
     cout<< "W(0, 1):" << g.getEdge(0, 1) << endl; //边删除后，重新使用这条边会报错
 }
 
+void testLinkGarph()
+{
+    LinkGraph<char, int> g(4);
+    g.setVertex(0, 'A');
+    g.setVertex(1, 'B');
+    g.setVertex(2, 'C');
+    g.setVertex(3, 'D');
+
+
+}
 #endif // TEST_H

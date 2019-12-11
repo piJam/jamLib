@@ -1,0 +1,2 @@
+1、C++ 中临时变量不能作为，非const的引用参数
+在Array中，virtual bool set(int i, T& t) 中T 没有加 const，导致在LinkGraph 中使用 DynamicArray 不能直接用临时变量赋值，后改为virtual bool set(int i, const T& t)

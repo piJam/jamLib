@@ -11,6 +11,7 @@ struct Edge : public Object
     int m_end;
     E data;
 
+    Edge(){}
     Edge(int start, int end)
     {
         m_start = start;

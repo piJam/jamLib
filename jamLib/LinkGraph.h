@@ -71,11 +71,11 @@ public:
 
     bool setVertex(int i, const V& value)
     {
-        bool ret = (0 <= i) && (i < m_vertex.length());
+        bool ret = (0 <= i) && (i < m_vertex_list.length());
 
         if(i)
         {
-            Vertex* vertex = m_vertex.get(i);
+            Vertex* vertex = m_vertex_list.get(i);
             V* data = vertex->data;
 
             if( data == nullptr)
@@ -119,11 +119,11 @@ public:
 
         if(ret)
         {
-            Vertex* vertex = m_vertex.get(i);
+            Vertex* vertex = m_vertex_list.get(i);
 
             if( vertex->data != NULL)
             {
-                value =  *(vertex->data); //? value = vertex->data;
+                value =  *(vertex->data);
             }
             else
             {
@@ -169,15 +169,15 @@ public:
     {
         DynamicArray<int>* ret = NULL;
 
-        if( ( 0 <= i ) && ( i < vCount) )
+        if( ( 0 <= i ) && ( i < vCount()) )
         {
             Vertex* v = m_vertex_list.get(i);
 
-            ret = new DynamicArray(v->edge.length());
+            ret = new DynamicArray<int>(v->edge.length());
 
             if( ret != nullptr )
             {
-                for( int k =(v->edge.move(0),0); !v->edge.end(); k++,v->edge.next() )
+                for( int k =(v->edge.move(0), 0); !v->edge.end(); k++, v->edge.next() )
                 {
                     ret->set(k, v->edge.current().m_end);
                 }
@@ -252,6 +252,7 @@ public:
         return ret;
     }
 
+
     bool removeEdge(int i, int j)
     {
         bool ret = ( (0 <= i) && (i < vCount()) ) && ( (0 <= j) && (j < vCount()) );
@@ -277,7 +278,7 @@ public:
 
     int vCount()
     {
-        return m_vertex.length();
+        return m_vertex_list.length();
     }
 
     int eCount()
