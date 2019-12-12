@@ -64,6 +64,7 @@ public:
             THROW_EXCEPTION(InvalidOperationException,"No element in stack...");
         }
     }
+
     void clear()
     {
         m_top = -1;

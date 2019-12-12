@@ -12,10 +12,22 @@
 #include "BTreeExample.h"
 #include "MatrixGraph.h"
 #include "LinkGraph.h"
+#include "SmartPoint.h"
 using namespace std;
+
+void testSmartPoint()
+{
+    SmartPoint<int> sp = new int[10];
+
+    sp.operator ->()[0] = 1000;
+    (&(*sp))[1] = 99; // *sp  取到数组第一个值， &（*sp）则取到数组的首地址，然后[] 运算
+    cout << sp.operator ->() << " " << *sp << endl;
+    cout << sp.get()[0] << " " << (&(*sp))[1]  << endl;
+}
 
 void testMatrixGraph()
 {
+
     MatrixGraph<3, int, int> g;
 
     g.setEdge(0, 1, 1);

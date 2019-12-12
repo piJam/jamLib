@@ -1,5 +1,6 @@
 #ifndef LINKGRAPH_H
 #define LINKGRAPH_H
+
 #include "LinkList.h"
 #include "Object.h"
 #include "Graph.h"
