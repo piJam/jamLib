@@ -21,7 +21,7 @@ public:
         return ret;
     }
 
-    virtual bool set(int i,T& t)
+   virtual bool set(int i, const T& t)
     {
           bool ret = (i >= 0)&&(i < length());
           if(ret)

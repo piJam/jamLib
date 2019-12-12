@@ -48,6 +48,7 @@ public:
             m_vertex_list.insert(vertex);
 
             ret = m_vertex_list.length() - 1;
+
         }
         else
         {
@@ -71,16 +72,16 @@ public:
 
     bool setVertex(int i, const V& value)
     {
-        bool ret = (0 <= i) && (i < m_vertex.length());
+        bool ret = (0 <= i) && (i < vCount());
 
-        if(i)
+        if(ret)
         {
-            Vertex* vertex = m_vertex.get(i);
+            Vertex* vertex = m_vertex_list.get(i);
             V* data = vertex->data;
 
-            if( data == nullptr)
+            if( data == NULL)
             {
-                data = new V();  // ? dephi data != NULL
+                data = new V();
             }
 
             if( data != nullptr )
@@ -119,11 +120,11 @@ public:
 
         if(ret)
         {
-            Vertex* vertex = m_vertex.get(i);
+            Vertex* vertex = m_vertex_list.get(i);
 
             if( vertex->data != NULL)
             {
-                value =  *(vertex->data); //? value = vertex->data;
+                value =  *(vertex->data);
             }
             else
             {
@@ -138,7 +139,6 @@ public:
     {
         if( m_vertex_list.length() > 0 )
         {
-
             int index = m_vertex_list.length() - 1;
             Vertex* del = m_vertex_list.get(index); //从链表获取要删除顶点
 
@@ -169,15 +169,15 @@ public:
     {
         DynamicArray<int>* ret = NULL;
 
-        if( ( 0 <= i ) && ( i < vCount) )
+        if( ( 0 <= i ) && ( i < vCount()) )
         {
             Vertex* v = m_vertex_list.get(i);
 
-            ret = new DynamicArray(v->edge.length());
+            ret = new DynamicArray<int>(v->edge.length());
 
             if( ret != nullptr )
             {
-                for( int k =(v->edge.move(0),0); !v->edge.end(); k++,v->edge.next() )
+                for( int k =(v->edge.move(0), 0); !v->edge.end(); k++, v->edge.next() )
                 {
                     ret->set(k, v->edge.current().m_end);
                 }
@@ -252,6 +252,7 @@ public:
         return ret;
     }
 
+
     bool removeEdge(int i, int j)
     {
         bool ret = ( (0 <= i) && (i < vCount()) ) && ( (0 <= j) && (j < vCount()) );
@@ -275,13 +276,82 @@ public:
     }
 
 
-    virtual int vCount()
+    int vCount()
     {
-        return m_vertex.length();
+        return m_vertex_list.length();
     }
-    virtual int eCount() = 0;  //获取边的总数
-    virtual int OD(int i) = 0;  //获取顶点的出度
-    virtual int ID(int i) = 0;  //获取顶点的入度
+
+    int eCount()
+    {
+        int ret = 0;
+
+        for( m_vertex_list.move(0); !m_vertex_list.end(); m_vertex_list.next() )
+        {
+            ret += m_vertex_list.current()->edge.length();
+        }
+
+        return ret;
+    }
+
+    int OD(int i)
+    {
+        int ret = 0;
+
+        if( (0 <= i) && (i < vCount()) )
+        {
+            Vertex* vertex = m_vertex_list.get(i);
+            ret = vertex->edge.length();
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "parament i in invalid ...");
+        }
+
+
+        return ret;
+    }
+
+    int ID(int i)
+    {
+        int ret = 0;
+
+        if( (0 <= i) && (i < vCount()) )
+        {
+            for( m_vertex_list.move(0); !m_vertex_list.end(); m_vertex_list.next() )
+            {
+                LinkList< Edge<E> >& edge = m_vertex_list.current()->edge; //变成引用不用在调用构造函数，节省性能
+
+                for( edge.move(0); !edge.end(); edge.next() )
+                {
+                    if(edge.current().m_end == i)
+                    {
+                        ret++;
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "parament i in invalid ...");
+        }
+
+
+        return ret;
+    }
+
+    ~LinkGraph()
+    {
+        while( vCount() > 0 )
+        {
+            Vertex* del = m_vertex_list.get(0);
+
+            m_vertex_list.remove(0);
+
+            delete del->data;
+            delete del;
+        }
+    }
 
 };
 

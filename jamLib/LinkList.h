@@ -106,7 +106,7 @@ public:
             m_length--;
             destroy(del);
         }
-        return 0;
+        return ret;
     }
 
    virtual T get(int i) const
