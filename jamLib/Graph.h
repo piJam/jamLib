@@ -1,8 +1,12 @@
 #ifndef GRAPH_H
 #define GRAPH_H
+
 #include "SharedPointer.h"
 #include "Array.h"
+#include "DynamicArray.h"
 #include "Object.h"
+#include "LinkQueue.h"
+
 namespace jamLib {
 template<typename E>
 struct Edge : public Object
@@ -38,6 +42,26 @@ struct Edge : public Object
 template <typename V, typename E>
 class Graph : public Object
 {
+protected:
+    DynamicArray<int>* toArray(LinkQueue& lq)
+    {
+        DynamicArray<int>* ret = new DynamicArray<int>(lq.lenght());
+
+        if(ret)
+        {
+            for(int i=0; i<lq.lenght(); i++,lq.remove())
+            {
+                ret->set(i, lq.front());
+            }
+        }
+        else
+        {
+            THROW_EXCEPTION(NoEnoughMemoryException, "no enough memory to create DynamicArray ... ");
+        }
+
+        return ret;
+    }
+
 public:
     virtual V getVertex(int i) = 0;  //获取顶点相关的元素值
     virtual bool getVertex(int i, V& value) = 0;
@@ -61,6 +85,54 @@ public:
     virtual int TD(int i) //获取顶点的度
     {
         return OD(i) + ID(i);
+    }
+
+    SharedPointer< Array<int> > BFS(int index)
+    {
+        DynamicArray<int>* ret = NULL;
+
+        if( ( 0 <= index ) && ( index < vCount() ))
+        {
+            LinkQueue<int> q;
+            LinkQueue<int> r;
+
+            q.add(index);
+
+            DynamicArray<bool> markArray(vCount());
+
+            for(int i=0; i<markArray.length(); i++)
+            {
+                markArray[i] = false;
+            }
+
+            while( q.lenght() > 0 )
+            {
+                int i = q.front();
+                q.remove();
+
+                if( !markArray[i] )
+                {
+                    markArray[i] = true;
+                    r.add(i);
+
+                    SharedPointer< Array<int> > adjacent = getAdjacent(i);
+
+                    for(int j=0; j<adjacent->length(); j++)
+                    {
+                        q.add((*adjacent)[j]);
+                    }
+                }
+            }
+
+            ret = toArray(r);
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidOperationException, "index is valid ...");
+        }
+
+
+        return ret;
     }
 
 };
