@@ -85,7 +85,7 @@ public:
                 data = new V();
             }
 
-            if( data != nullptr )
+            if( data != NULL )
             {
                 *data = value;
                 vertex->data = data;

@@ -17,19 +17,18 @@ protected:
         Node* next;
     };
 
-//    mutable Node m_header; //const方法中要修改变量的值，要加mutable修饰
-//    mutable struct : public Object
-//    {
-//        char reserved [sizeof(T)];
-//        Node* next;
-//    } m_header;
 
+   mutable struct : public Object
+    {
+        char reserved [sizeof(T)];
+        Node* next;
 
-    mutable Node m_header;
+    } m_header;  //const方法中要修改变量的值，要加mutable修饰
 
     int m_length;
     int m_step;
     Node* m_current;
+
 
     Node* position(int i) const //获取要获取元素位置的上一个元素，利用上一个元素的next找到要操作的元素位置
     {
@@ -46,6 +45,7 @@ protected:
     {
         return new Node();
     }
+
     virtual void destroy(Node* pn)
     {
         delete pn;

@@ -15,8 +15,7 @@ struct Edge : public Object
     int m_end;
     E data;
 
-    Edge(){}
-    Edge(int start, int end)
+    Edge(int start = -1, int end = -1)
     {
         m_start = start;
         m_end = end;
@@ -44,7 +43,7 @@ template <typename V, typename E>
 class Graph : public Object
 {
 protected:
-    DynamicArray<int>* toArray(LinkQueue& lq)
+    DynamicArray<int>* toArray(LinkQueue<int>& lq)
     {
         DynamicArray<int>* ret = new DynamicArray<int>(lq.lenght());
 

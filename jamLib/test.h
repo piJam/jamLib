@@ -67,19 +67,19 @@ void testMatrixGraph()
 
 void testLinkGarph()
 {
-//    LinkGraph<char, int> g(4);
-//    g.setVertex(0, 'A');
-//    g.setVertex(1, 'B');
-//    g.setVertex(2, 'C');
-//    g.setVertex(3, 'D');
+    LinkGraph<char, int> g(4);
+    g.setVertex(0, 'A');
+    g.setVertex(1, 'B');
+    g.setVertex(2, 'C');
+    g.setVertex(3, 'D');
 
-    LinkGraph<char, int> g;
-    g.addVertex('A');
-    g.addVertex('B');
-    g.addVertex('C');
-    g.addVertex('D');
+//    LinkGraph<char, int> g;
+//    g.addVertex('A');
+//    g.addVertex('B');
+//    g.addVertex('C');
+//    g.addVertex('D');
 
-//  g.removeVertex();
+  g.removeVertex();
 
     for( int i=0; i<g.vCount(); i++)
     {
@@ -126,4 +126,5 @@ void testLinkGarph()
     cout << "w(0, 1)" << g.getEdge(0, 1) << endl;
     cout << "w(1, 2)" << g.getEdge(1, 2) << endl;
 }
+
 #endif // TEST_H
