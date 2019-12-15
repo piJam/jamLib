@@ -4,6 +4,8 @@
 #include <ctime>
 
 #include "test.h"
+#include "DynamicArray.h"
+#include "LinkQueue.h"
 
 using namespace std;
 using namespace jamLib;
@@ -12,6 +14,7 @@ using namespace jamLib;
 int main()
 {
 
+    testBFS();
 
 
 

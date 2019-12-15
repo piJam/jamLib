@@ -102,13 +102,13 @@ public:
 
             ret = new DynamicArray<int>(index);
 
-            if( ret != nullptr)
+            if( ret != NULL)
             {
-                for(int j=0; j<vCount(); j++)
+                 for(int j=0, k=0; j<vCount(); j++)
                 {
-                    if( m_edges[i][j] != nullptr )
+                    if( m_edges[i][j] != NULL )
                     {
-                        ret->set(j, j);
+                        ret->set(k++, j);
                     }
                 }
 

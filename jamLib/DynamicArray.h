@@ -55,7 +55,7 @@ protected:
 public:
     DynamicArray(int length = 0)
     {
-        init(new T[length],length);
+        init(new T[length], length);
     }
 
     DynamicArray(const DynamicArray<T>& obj)

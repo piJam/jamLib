@@ -27,7 +27,9 @@ public:
           if(ret)
           {
                 m_array[i] = t;
+
           }
+
           return ret;
     }
 

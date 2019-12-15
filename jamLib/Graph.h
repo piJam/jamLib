@@ -43,16 +43,22 @@ template <typename V, typename E>
 class Graph : public Object
 {
 protected:
-    DynamicArray<int>* toArray(LinkQueue<int>& lq)
+    DynamicArray<int>* QueueToArray(LinkQueue<int>& lq)
     {
         DynamicArray<int>* ret = new DynamicArray<int>(lq.lenght());
 
         if(ret)
         {
-            for(int i=0; i<lq.lenght(); i++,lq.remove())
+            int i = 0;
+            while( lq.lenght() > 0 )
             {
-                ret->set(i, lq.front());
+                 ret->set(i, lq.front());
+
+                 lq.remove();
+
+                 i++;
             }
+
         }
         else
         {
@@ -107,12 +113,15 @@ public:
 
             while( q.lenght() > 0 )
             {
+
                 int i = q.front();
+
                 q.remove();
 
                 if( !markArray[i] )
                 {
                     markArray[i] = true;
+
                     r.add(i);
 
                     SharedPointer< Array<int> > adjacent = getAdjacent(i);
@@ -120,11 +129,12 @@ public:
                     for(int j=0; j<adjacent->length(); j++)
                     {
                         q.add((*adjacent)[j]);
+
                     }
                 }
             }
 
-            ret = toArray(r);
+            ret = QueueToArray(r);
         }
         else
         {

@@ -44,11 +44,11 @@ void testMatrixGraph()
     cout<< "w(1, 0):" << g.getEdge(1, 0) << endl;
     cout << "w(1, 2):" << g.getEdge(1, 2) << endl;
 
-    SharedPointer< Array<int> > aj = g.getAdjacent(2);
+    SharedPointer< Array<int> > aj = g.getAdjacent(1);
 
     for(int i=0; i<aj->length(); i++)
     {
-        cout << (*aj)[i] << " ";
+        cout << "Adjacent = " << (*aj)[i] << " ";
     }
     cout << endl;
 
@@ -62,7 +62,7 @@ void testMatrixGraph()
 
     cout << "v(0)" << g.getVertex(0) << endl;
 
-    cout<< "W(0, 1):" << g.getEdge(0, 1) << endl; //边删除后，重新使用这条边会报错
+//    cout<< "W(0, 1):" << g.getEdge(0, 1) << endl; //边删除后，重新使用这条边会报错
 }
 
 void testLinkGarph()
@@ -127,4 +127,54 @@ void testLinkGarph()
     cout << "w(1, 2)" << g.getEdge(1, 2) << endl;
 }
 
+void testBFS()
+{
+    MatrixGraph<9, char, int> g;
+    const char* VD = "ABCDEFGHI";
+
+    for(int i=0; i<9; i++)
+    {
+        g.setVertex(i, VD[i]);
+
+    }
+
+    g.setEdge(0, 1, 0); //无向边用0表示权值
+    g.setEdge(1, 0, 0);
+
+    g.setEdge(0, 3, 0);
+    g.setEdge(3, 0, 0);
+
+    g.setEdge(0, 4, 0);
+    g.setEdge(4, 0, 0);
+
+    g.setEdge(1, 2, 0);
+    g.setEdge(2, 1, 0);
+
+    g.setEdge(1, 4, 0);
+    g.setEdge(4, 1, 0);
+
+    g.setEdge(2, 5, 0);
+    g.setEdge(5, 2, 0);
+
+    g.setEdge(3, 6, 0);
+    g.setEdge(6, 3, 0);
+
+    g.setEdge(4, 6, 0);
+    g.setEdge(6, 4, 0);
+
+    g.setEdge(6, 7, 0);
+    g.setEdge(7, 6, 0);
+
+    g.setEdge(7, 8, 0);
+    g.setEdge(8, 7, 0);
+
+    SharedPointer< Array<int> > sp = g.BFS(0);
+
+
+    for(int i=0; i<sp->length(); i++)
+    {
+         cout<< (*sp)[i] << ' ';
+    }
+    cout << endl;
+}
 #endif // TEST_H

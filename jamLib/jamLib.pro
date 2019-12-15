@@ -48,6 +48,7 @@ HEADERS += \
     Graph.h \
     MatrixGraph.h \
     test.h \
-    LinkGraph.h
+    LinkGraph.h \
+    LinkQueueByLinuxList.h
 	
 
