@@ -170,7 +170,16 @@ void testBFS()
 
    // SharedPointer< Array<int> > sp = g.BFS(0);
 
-   SharedPointer< Array<int> > sp = g.DFS(0);
+   SharedPointer< Array<int> > sp1 = g.DFS(0);
+
+    for(int i=0; i<sp1->length(); i++)
+    {
+         cout<< (*sp1)[i] << ' ';
+    }
+    cout << endl;
+
+
+    SharedPointer< Array<int> > sp = g.DFSByRecursion(g, 0);
 
     for(int i=0; i<sp->length(); i++)
     {
@@ -178,6 +187,6 @@ void testBFS()
     }
     cout << endl;
 
-    g.DFSByRecursion(g, 0);
+
 }
 #endif // TEST_H

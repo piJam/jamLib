@@ -192,11 +192,12 @@ public:
         return ret;
     }
 
-    void DFSByRecursion(Graph<V,E>& g, int v, Array<bool>& visit)
+    void DFSByRecursion(Graph<V,E>& g, int v, Array<bool>& visit, LinkQueue<int>& lp)
     {
         if( ( 0 <= v ) && ( v < vCount() ) )
         {
-            cout << v << endl;
+            //cout << v << endl;
+            lp.add(v);
 
             visit[v] = true;
 
@@ -206,7 +207,7 @@ public:
             {
                 if( !visit[(*sa)[i]] )
                 {
-                    DFSByRecursion(g, (*sa)[i], visit);
+                    DFSByRecursion(g, (*sa)[i], visit, lp);
                 }
             }
 
@@ -219,16 +220,23 @@ public:
 
     }
 
-    void DFSByRecursion(Graph<V,E>& g, int v)
+    SharedPointer< Array<int> > DFSByRecursion(Graph<V,E>& g, int v)
     {
-           DynamicArray<bool> visit(g.vCount());
+        DynamicArray<int>* ret = NULL;
 
-            for(int i=0; i<visit.length(); i++)
-            {
-                visit[i] = false;
-            }
+        LinkQueue<int> lq;
+        DynamicArray<bool> visit(g.vCount());
 
-            DFSByRecursion(g, v, visit);
+        for(int i=0; i<visit.length(); i++)
+        {
+            visit[i] = false;
+        }
+
+        DFSByRecursion(g, v, visit, lq);
+
+        ret = g.QueueToArray(lq);
+
+        return ret;
      }
 
 };
