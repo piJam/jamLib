@@ -6,6 +6,7 @@
 #include "DynamicArray.h"
 #include "Object.h"
 #include "LinkQueue.h"
+#include "LinkStack.h"
 
 namespace jamLib {
 template<typename E>
@@ -145,6 +146,51 @@ public:
         return ret;
     }
 
+    SharedPointer< Array<int> > DFS(int index)
+    {
+        DynamicArray<int>* ret = NULL;
+
+        if( ( 0 <= index ) && ( index < vCount() ) )
+        {
+            LinkStack<int> ls;
+            LinkQueue<int> re;
+
+            DynamicArray<bool> visitArray(vCount());
+
+            for(int i=0; i<visitArray.length(); i++)
+            {
+                visitArray[i] = false;
+            }
+
+            ls.push(index);
+
+            while( ls.size() > 0 )
+            {
+                int v = ls.top();
+                ls.pop();
+
+                if( !visitArray[v] )
+                {
+                    visitArray[v] = true;
+                    re.add(v);
+
+                    SharedPointer< Array<int> > sa = getAdjacent(v);
+                    for(int i=sa->length()-1; i>=0; i--) //将数组第一个元素留到栈顶
+                    {
+                        ls.push((*sa)[i]);
+                    }
+
+                }
+            }
+            cout << "re lenght ="<< re.lenght() << endl;
+            ret = QueueToArray(re);
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidOperationException, "index is valid ...");
+        }
+        return ret;
+    }
 };
 
 

@@ -42,7 +42,7 @@ void testMatrixGraph()
 
     cout<< "W(0, 1):" << g.getEdge(0, 1) << endl;
     cout<< "w(1, 0):" << g.getEdge(1, 0) << endl;
-    cout << "w(1, 2):" << g.getEdge(1, 2) << endl;
+    cout<< "w(1, 2):" << g.getEdge(1, 2) << endl;
 
     SharedPointer< Array<int> > aj = g.getAdjacent(1);
 
@@ -168,8 +168,9 @@ void testBFS()
     g.setEdge(7, 8, 0);
     g.setEdge(8, 7, 0);
 
-    SharedPointer< Array<int> > sp = g.BFS(0);
+   // SharedPointer< Array<int> > sp = g.BFS(0);
 
+   SharedPointer< Array<int> > sp = g.DFS(0);
 
     for(int i=0; i<sp->length(); i++)
     {
