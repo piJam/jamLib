@@ -196,7 +196,6 @@ public:
     {
         if( ( 0 <= v ) && ( v < vCount() ) )
         {
-            //cout << v << endl;
             lp.add(v);
 
             visit[v] = true;
@@ -210,14 +209,11 @@ public:
                     DFSByRecursion(g, (*sa)[i], visit, lp);
                 }
             }
-
         }
         else
         {
             THROW_EXCEPTION(InvalidParameterException, "V is invaild ...");
         }
-
-
     }
 
     SharedPointer< Array<int> > DFSByRecursion(Graph<V,E>& g, int v)
