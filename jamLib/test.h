@@ -177,5 +177,7 @@ void testBFS()
          cout<< (*sp)[i] << ' ';
     }
     cout << endl;
+
+    g.DFSByRecursion(g, 0);
 }
 #endif // TEST_H

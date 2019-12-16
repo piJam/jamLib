@@ -191,9 +191,47 @@ public:
         }
         return ret;
     }
+
+    void DFSByRecursion(Graph<V,E>& g, int v, Array<bool>& visit)
+    {
+        if( ( 0 <= v ) && ( v < vCount() ) )
+        {
+            cout << v << endl;
+
+            visit[v] = true;
+
+            SharedPointer< Array<int> > sa = g.getAdjacent(v);
+
+            for(int i=0; i<sa->length(); i++)
+            {
+                if( !visit[(*sa)[i]] )
+                {
+                    DFSByRecursion(g, (*sa)[i], visit);
+                }
+            }
+
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "V is invaild ...");
+        }
+
+
+    }
+
+    void DFSByRecursion(Graph<V,E>& g, int v)
+    {
+           DynamicArray<bool> visit(g.vCount());
+
+            for(int i=0; i<visit.length(); i++)
+            {
+                visit[i] = false;
+            }
+
+            DFSByRecursion(g, v, visit);
+     }
+
 };
-
-
 }
 
 
