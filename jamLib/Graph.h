@@ -248,6 +248,48 @@ public:
         return ret;
      }
 
+    SharedPointer< Array<Edge<E>> > Prim(int v, E LIMIT)
+    {
+        DynamicArray< Edge<E> >* ret = NULL;
+
+        if(asUndirected())
+        {
+            Array<bool> mark;
+            Array<E> cost;
+            Array<int> adjVex;
+            LinkQueue<Edge<E>> ret;
+            bool end = false;
+
+            for(int i=0; i<vCount(); i++)
+            {
+                mark[i] = false;
+                cost[i] = LIMIT;
+                adjVex[i] = -1;
+            }
+
+            mark[v] = true;
+            SharedPointer< Array<int> > aj = getAdjacent(v);
+
+            for(int i=0; i<(*aj).length(); i++)
+            {
+                cost[(*aj)[i]] = getEdge(v, (*aj)[i]);
+                adjVex[(*aj)[i]] = v;
+            }
+
+            for()
+            {
+
+
+            }
+
+        else
+        {
+            THROW_EXCEPTION(InvalidOperationException, "invaild graph ...");
+        }
+
+        return ret;
+    }
+
 };
 }
 
