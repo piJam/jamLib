@@ -75,6 +75,7 @@ public:
 
     virtual bool setVertex(int i, const V& value) = 0; //设置顶点相关的元素值
     virtual SharedPointer< Array<int> > getAdjacent(int i) = 0; //获取以i为起点，所有的终点
+    virtual bool isAdjacent(int i, int j) = 0;  //判断i到j是否邻接
 
     virtual E getEdge(int i, int j) = 0; //获取边相关的元素值
     virtual bool getEdge(int i, int j, E& value) = 0;
@@ -94,6 +95,18 @@ public:
         return OD(i) + ID(i);
     }
 
+    bool asUndirected()
+    {
+        bool ret = true;
+        for(int i=0; i<vCount(); i++)
+        {
+            for(int j=0; j<vCount(); j++)
+            {
+                ret = ret && isAdjacent(i, j) && isAdjacent(j, i) && ( getEdge(i, j) == getEdge(j, i) );
+            }
+        }
+        return ret;
+    }
     SharedPointer< Array<int> > BFS(int index)
     {
         DynamicArray<int>* ret = NULL;
