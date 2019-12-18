@@ -44,9 +44,10 @@ template <typename V, typename E>
 class Graph : public Object
 {
 protected:
-    DynamicArray<int>* QueueToArray(LinkQueue<int>& lq)
+    template<typename T>
+    DynamicArray<T>* QueueToArray(LinkQueue<T>& lq)
     {
-        DynamicArray<int>* ret = new DynamicArray<int>(lq.lenght());
+        DynamicArray<T>* ret = new DynamicArray<T>(lq.lenght());
 
         if(ret)
         {
@@ -102,11 +103,17 @@ public:
         {
             for(int j=0; j<vCount(); j++)
             {
-                ret = ret && isAdjacent(i, j) && isAdjacent(j, i) && ( getEdge(i, j) == getEdge(j, i) );
+                if(isAdjacent(i, j))
+                {
+                     ret = ret && isAdjacent(j, i) && ( getEdge(i, j) == getEdge(j, i) );
+                }
+
             }
         }
+
         return ret;
     }
+
     SharedPointer< Array<int> > BFS(int index)
     {
         DynamicArray<int>* ret = NULL;
@@ -248,17 +255,19 @@ public:
         return ret;
      }
 
-    SharedPointer< Array<Edge<E>> > Prim(int v, E LIMIT)
+    SharedPointer< Array<Edge<E>> > Prim(E LIMIT)
     {
-        DynamicArray< Edge<E> >* ret = NULL;
+        LinkQueue<Edge<E>> ret;
 
         if(asUndirected())
         {
-            Array<bool> mark;
-            Array<E> cost;
-            Array<int> adjVex;
-            LinkQueue<Edge<E>> ret;
-            bool end = false;
+            DynamicArray<bool> mark(vCount());
+            DynamicArray<E> cost(vCount());
+            DynamicArray<int> adjVex(vCount());
+
+            int v = 0;
+
+            SharedPointer< Array<int> > aj = NULL;
 
             for(int i=0; i<vCount(); i++)
             {
@@ -267,8 +276,11 @@ public:
                 adjVex[i] = -1;
             }
 
+            bool end = false;
+
             mark[v] = true;
-            SharedPointer< Array<int> > aj = getAdjacent(v);
+
+            aj = getAdjacent(v);
 
             for(int i=0; i<(*aj).length(); i++)
             {
@@ -276,18 +288,51 @@ public:
                 adjVex[(*aj)[i]] = v;
             }
 
-            for()
+            for(int i=0; i<vCount() && !end; i++)
             {
+                int k = -1;
+                E m = LIMIT;
 
+                for(int j=0; j<vCount(); j++)
+                {
+                    if( !mark[j] && (cost[j] < m) )
+                    {
+                        m = cost[j];
+                        k = j;
+                    }
+                }
 
+                end = (k == -1);
+
+                if(!end)
+                {
+                    ret.add( Edge<E>(adjVex[k], k, getEdge(adjVex[k], k)) );
+                    mark[k] = true;
+                    aj = getAdjacent(k);
+
+                    for(int j=0; j<(*aj).length(); j++)
+                    {
+                        if( !mark[(*aj)[j]] && (getEdge(k, (*aj)[j]) < cost[(*aj)[j]]) )
+                        {
+                            cost[(*aj)[j]] = getEdge(k, (*aj)[j]);
+                            adjVex[(*aj)[j]] = k;
+                        }
+                    }
+                }
             }
 
+            if( ret.lenght() != (vCount()-1)) //不符合边，报异常
+            {
+                THROW_EXCEPTION(InvalidOperationException, "no enough edge ...");
+            }
+        }
         else
         {
             THROW_EXCEPTION(InvalidOperationException, "invaild graph ...");
         }
 
-        return ret;
+
+        return QueueToArray(ret);
     }
 
 };

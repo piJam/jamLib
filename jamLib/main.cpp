@@ -14,9 +14,8 @@ using namespace jamLib;
 int main()
 {
 
-    testBFS();
-
-
+//    testBFS();
+    testPrim();
 
 
     return 0;
