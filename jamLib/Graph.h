@@ -7,6 +7,7 @@
 #include "Object.h"
 #include "LinkQueue.h"
 #include "LinkStack.h"
+#include "Sort.h"
 
 namespace jamLib {
 template<typename E>
@@ -38,6 +39,16 @@ struct Edge : public Object
     {
         return !(*this == obj);
     }
+
+    bool operator > (const Edge<E>& obj)
+    {
+        return (data > obj.data);
+    }
+
+    bool operator < (const Edge<E>& obj)
+    {
+        return (data < obj.data);
+    }
 };
 
 template <typename V, typename E>
@@ -66,6 +77,45 @@ protected:
         {
             THROW_EXCEPTION(NoEnoughMemoryException, "no enough memory to create DynamicArray ... ");
         }
+
+        return ret;
+    }
+
+    int find( Array<int>& p, int v)
+    {
+        while(p[v] != -1)
+        {
+            v = p[v];
+        }
+
+       return v;
+    }
+
+   SharedPointer< Array<Edge<E>> > getUndirectedEdges()
+    {
+        DynamicArray< Edge<E> >* ret = NULL;
+
+        if( asUndirected() )
+        {
+            LinkQueue< Edge<E> > queue;
+
+            for( int i=0; i<vCount(); i++ )
+            {
+                for( int j=i; j<vCount(); j++)
+                {
+                    if( isAdjacent(i, j) )
+                        queue.add( Edge<E>(i, j, getEdge(i, j)) );
+                }
+
+            }
+
+            ret = QueueToArray(queue);
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidOperationException, "this graph not Undirected ...");
+        }
+
 
         return ret;
     }
@@ -331,6 +381,39 @@ public:
             THROW_EXCEPTION(InvalidOperationException, "invaild graph ...");
         }
 
+
+        return QueueToArray(ret);
+    }
+
+    SharedPointer< Array<Edge<E>> > Kruskal()
+    {
+        LinkQueue< Edge<E> > ret;
+        DynamicArray<int> p(vCount());
+        SharedPointer< Array< Edge<E> > > edges = getUndirectedEdges();
+
+        for(int i=0; i<vCount(); i++)
+        {
+            p[i] = -1;
+        }
+
+        Sort::Shell_insert(*edges);
+
+        for( int i=0; ( i<edges->length() ) && ( ret.lenght() != (vCount()-1)); i++ )
+        {
+           int b = find(p, (*edges)[i].m_start);
+           int e = find(p, (*edges)[i].m_end);
+
+           if(b != e)
+           {
+               p[e] = b;
+               ret.add((*edges)[i]);
+           }
+        }
+
+        if( ret.lenght() != (vCount()-1)) //不符合边，报异常
+        {
+            THROW_EXCEPTION(InvalidOperationException, "no enough edge ...");
+        }
 
         return QueueToArray(ret);
     }

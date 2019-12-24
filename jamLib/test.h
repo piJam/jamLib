@@ -259,7 +259,8 @@ void testPrim()
     g.setEdge(7, 6, 19);
 
 
-    SharedPointer< Array<Edge<int>> > sp = g.Prim(999);
+//    SharedPointer< Array<Edge<int>> > sp = g.Prim(999);
+    SharedPointer< Array<Edge<int>> > sp = g.Kruskal();
 
     int index = 0;
     for(int i=0; i<(*sp).length(); i++)
