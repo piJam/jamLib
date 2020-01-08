@@ -271,4 +271,30 @@ void testPrim()
     cout << "w = " << index << endl;
 }
 
+void testDijkstra()
+{
+
+    LinkGraph<int, int> g(5);
+
+    g.setEdge(0, 1, 10);
+    g.setEdge(0, 3, 30);
+    g.setEdge(0, 4, 100);
+
+    g.setEdge(1, 2, 50);
+
+    g.setEdge(2, 4, 10);
+
+    g.setEdge(3, 2, 20);
+    g.setEdge(3, 4, 60);
+
+    SharedPointer< Array<int> > p = g.dijkstra(0, 4, 65535);
+
+    for(int i=0; i<p->length(); i++)
+    {
+        cout << (*p)[i] << " ";
+    }
+
+    cout << endl;
+
+}
 #endif // TEST_H

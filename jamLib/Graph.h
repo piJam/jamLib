@@ -418,6 +418,84 @@ public:
         return QueueToArray(ret);
     }
 
+    SharedPointer< Array<int> > dijkstra(int start, int end, const E& MAX)
+    {
+
+        LinkQueue<int> ret;
+
+        if( ( 0<=start ) && ( start<vCount() ) && ( 0<=end ) && ( end<vCount() ) )
+        {
+            DynamicArray<E> dist(vCount());
+            DynamicArray<int> path(vCount());
+            DynamicArray<bool> mark(vCount());
+
+            for(int i=0; i<vCount(); i++)
+            {
+                path[i] = -1;
+                mark[i] = false;
+
+                dist[i] = isAdjacent(start, i) ? (path[i]=start, getEdge(start, i)) : MAX;
+            }
+
+            mark[start] = true;
+
+            for(int k=0; k<vCount(); k++)
+            {
+                E temp = MAX;
+                int u = -1;
+
+                for(int i=0; i<vCount(); i++)
+                {
+                    if( temp > dist[i] && !mark[i])
+                    {
+                        temp = dist[i];
+                        u = i;
+                    }
+                }
+
+                if(u == -1)  //如果图无边，会存在找不到最小值。u == -1
+                {
+                    break;
+                }
+
+                mark[u] = true;
+
+                for(int w=0; w<vCount(); w++)
+                {
+                    if( !mark[w] && isAdjacent(u, w) && (dist[u] + getEdge(u ,w) < dist[w]) )
+                    {
+                        dist[w] = dist[u] + getEdge(u, w);
+                        path[w] = u;
+                    }
+                }
+
+            }
+
+            LinkStack<int> stack;
+
+            stack.push(end);
+
+            for(int w=path[end]; w<vCount() && w != -1; w=path[w])
+            {
+                stack.push(w);
+            }
+
+            while(stack.size()>0)
+            {
+                ret.add(stack.top());
+                stack.pop();
+            }
+        }
+        else
+        {
+
+            THROW_EXCEPTION(InvalidParameterException, "start ot end is invaild...");
+        }
+
+
+        return QueueToArray(ret);
+    }
+
 };
 }
 

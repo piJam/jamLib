@@ -10,12 +10,10 @@
 using namespace std;
 using namespace jamLib;
 
-
 int main()
 {
 
-//    testBFS();
-    testPrim();
+    testDijkstra();
 
 
     return 0;
