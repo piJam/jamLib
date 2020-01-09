@@ -496,6 +496,57 @@ public:
         return QueueToArray(ret);
     }
 
+    SharedPointer< Array<int> > floyd(int start, int end, const E& LIMIT)
+    {
+        LinkQueue<int> ret;
+
+        if( (0 <= start) && (start < vCount()) &&  (0 <= end)  && (end < vCount()) )
+        {
+            DynamicArray< DynamicArray<E> > dist(vCount());
+            DynamicArray< DynamicArray<int> > path(vCount());
+
+            for(int k=0; k<vCount(); k++)
+            {
+                dist[k].resize(vCount());
+                path[k].resize(vCount());
+            }
+
+            for(int i=0; i<vCount(); i++)
+            {
+                for(int j=0; j<vCount(); j++)
+                {
+                    path[i][j] = -1;
+                    dist[i][j] = isAdjacent(i, j) ? ( path[i][j] = j, getEdge(i, j) ) : LIMIT;
+                }
+            }
+
+            for(int k=0; k<vCount(); k++)
+            {
+                for(int i=0; i<vCount(); i++)
+                {
+                    for(int j=0; j<vCount(); j++)
+                    {
+                        if( dist[i][j] > (dist[i][k] + dist[k][j]) )
+                        {
+                            dist[i][j] = dist[i][k] + dist[k][j];
+                            path[i][j] = path[i][k];
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            THROW_EXCEPTION(InvalidParameterException, "start ot end is invaild...");
+        }
+
+
+
+
+
+        return ret;
+    }
+
 };
 }
 
