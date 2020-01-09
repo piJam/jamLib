@@ -287,7 +287,8 @@ void testDijkstra()
     g.setEdge(3, 2, 20);
     g.setEdge(3, 4, 60);
 
-    SharedPointer< Array<int> > p = g.dijkstra(0, 4, 65535);
+//    SharedPointer< Array<int> > p = g.dijkstra(0, 4, 65535);
+    SharedPointer< Array<int> > p = g.floyd(0, 4, 65535);
 
     for(int i=0; i<p->length(); i++)
     {

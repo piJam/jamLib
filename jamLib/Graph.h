@@ -534,6 +534,12 @@ public:
                     }
                 }
             }
+
+            while( (start != -1) && (start != end) )
+            {
+                ret.add(start);
+                start = path[start][end];
+            }
         }
         else
         {
@@ -544,7 +550,7 @@ public:
 
 
 
-        return ret;
+        return QueueToArray(ret);
     }
 
 };
