@@ -287,8 +287,8 @@ void testDijkstra()
     g.setEdge(3, 2, 20);
     g.setEdge(3, 4, 60);
 
-//    SharedPointer< Array<int> > p = g.dijkstra(0, 4, 65535);
-    SharedPointer< Array<int> > p = g.floyd(0, 4, 65535);
+    SharedPointer< Array<int> > p = g.dijkstra(0, 4, 65535);
+
 
     for(int i=0; i<p->length(); i++)
     {
@@ -297,5 +297,27 @@ void testDijkstra()
 
     cout << endl;
 
+}
+
+void testFloyd()
+{
+    LinkGraph<int, int> g(3);
+
+    g.setEdge(0, 1, 4);
+    g.setEdge(0, 2, 11);
+
+    g.setEdge(1, 2, 2);
+    g.setEdge(1, 0, 6);
+
+    g.setEdge(2, 0, 3);
+
+    SharedPointer< Array<int> > p = g.floyd(0, 2, 65535);
+
+    for(int i=0; i<p->length(); i++)
+    {
+       cout << (*p)[i] << " ";
+    }
+
+    cout << endl;
 }
 #endif // TEST_H

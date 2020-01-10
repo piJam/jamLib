@@ -14,7 +14,7 @@ int main()
 {
 
     testDijkstra();
-
+testFloyd();
 
     return 0;
 }

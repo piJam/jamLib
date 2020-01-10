@@ -489,9 +489,13 @@ public:
         else
         {
 
-            THROW_EXCEPTION(InvalidParameterException, "start ot end is invaild...");
+            THROW_EXCEPTION(InvalidParameterException, "start or end is invaild...");
         }
 
+        if( ret.lenght() < 2 )
+        {
+            THROW_EXCEPTION(ArithmeticException, "There is no path from start to end ...");
+        }
 
         return QueueToArray(ret);
     }
@@ -540,15 +544,22 @@ public:
                 ret.add(start);
                 start = path[start][end];
             }
+
+            if( start != -1 ) //start经过不断赋值，start会等于end，再将end（最后一个顶定点）放入集合。
+            {
+                ret.add(start);
+            }
+
         }
         else
         {
             THROW_EXCEPTION(InvalidParameterException, "start ot end is invaild...");
         }
 
-
-
-
+        if( ret.lenght() < 2 )
+        {
+            THROW_EXCEPTION(ArithmeticException, "There is no path from start to end ...");
+        }
 
         return QueueToArray(ret);
     }
