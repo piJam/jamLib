@@ -13,8 +13,7 @@ using namespace jamLib;
 int main()
 {
 
-    testDijkstra();
-testFloyd();
+
 
     return 0;
 }
