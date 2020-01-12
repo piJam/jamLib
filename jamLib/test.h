@@ -320,4 +320,26 @@ void testFloyd()
 
     cout << endl;
 }
+
+//最长不下降序列
+template <typename V>
+SharedPointer< Graph<V, int> > create_graph(V* v, int len)
+{
+     LinkGraph<V, int>* ret = new LinkGraph<V, int>(len);
+
+     for(int i=0; i<len; i++)
+     {
+         ret->setVertex(i, v[i]);
+
+         for(int j=0; j<len; j++)
+         {
+             if(v[i] < v[j])
+             {
+                 ret->setEdge(i, j, 1);
+             }
+         }
+     }
+
+     return ret;
+}
 #endif // TEST_H

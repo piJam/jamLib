@@ -252,8 +252,9 @@ public:
 
                 }
             }
-            cout << "re lenght ="<< re.lenght() << endl;
+
             ret = QueueToArray(re);
+
         }
         else
         {
