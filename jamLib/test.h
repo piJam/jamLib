@@ -322,6 +322,7 @@ void testFloyd()
 }
 
 //最长不下降序列
+//创建根据数组创建图，数值小的元素，指向大的元素
 template <typename V>
 SharedPointer< Graph<V, int> > create_graph(V* v, int len)
 {
@@ -342,4 +343,46 @@ SharedPointer< Graph<V, int> > create_graph(V* v, int len)
 
      return ret;
 }
+
+//寻找最大的路径
+template<typename V>
+int search_max_path(Graph<V, int>& g, int v, Array<int>& count, Array<int>& path, Array<bool>& mark)
+{
+    int ret = 0;
+    int k = -1;
+
+    SharedPointer< Array<int> > aj = g.getAdjacent(v);
+
+    for(int i=0; i<aj->length(); i++)
+    {
+        int num = 0;
+
+        if( !mark[(*aj)[i]] )
+        {
+            num = search_max_path(g, (*aj)[i], count, path, mark);
+        }
+        else
+        {
+            num = count[(*aj)[i]];
+        }
+
+        if( ret < num )
+        {
+            ret = num;
+            k = (*aj)[i];
+        }
+    }
+
+    ret++;
+
+    count[v] = ret;
+    path[v] = k;
+    mark[v] = true;
+
+    return ret;
+}
+
+
+
+
 #endif // TEST_H

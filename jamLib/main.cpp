@@ -18,16 +18,21 @@ int main()
         cout << a[i] << endl;
     }
 
-    SharedPointer< Graph<int, int> > sp = create_graph(a, 7);
+    SharedPointer< Graph<int, int> > sp = create_graph<int>(a, 7);
 
     SharedPointer< Array<int> > sp1 = (*sp).DFS(5);
 
     for(int i=0; i<sp1->length(); i++)
     {
         int k = (*sp1)[i];
-         cout<< (*sp1)[i] << ":" << a[k] << "  ";
+         cout<< (*sp1)[i] << ":" << (*sp).getVertex(i) << "_" << a[i] << "  ";
     }
     cout << endl;
+
+    int al = 100;
+    int& b = al;
+
+    cout << &al << " " << &b << endl;
 
     return 0;
 }
