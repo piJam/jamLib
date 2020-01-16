@@ -29,10 +29,7 @@ int main()
     }
     cout << endl;
 
-    int al = 100;
-    int& b = al;
 
-    cout << &al << " " << &b << endl;
 
     return 0;
 }
