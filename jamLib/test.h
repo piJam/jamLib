@@ -346,10 +346,9 @@ SharedPointer< Graph<V, int> > create_graph(V* v, int len)
 
 //寻找最大的路径
 template<typename V>
-int search_max_path(Graph<V, int>& g, int v, Array<int>& count, Array<int>& path, Array<bool>& mark)
+int search_max_path(Graph<V, int>& g, int v, Array<int>& count, Array< LinkList<int>* >& path, Array<bool>& mark)
 {
     int ret = 0;
-    int k = -1;
 
     SharedPointer< Array<int> > aj = g.getAdjacent(v);
 
@@ -369,21 +368,27 @@ int search_max_path(Graph<V, int>& g, int v, Array<int>& count, Array<int>& path
         if( ret < num )
         {
             ret = num;
-            k = (*aj)[i];
+        }
+    }
+
+    for(int i=0; i<aj->length(); i++)
+    {
+        if( ret == count[(*aj)[i]] )
+        {
+            path[v]->insert((*aj)[i]);
         }
     }
 
     ret++;
 
     count[v] = ret;
-    path[v] = k;
     mark[v] = true;
 
     return ret;
 }
 
 template <typename V>
-void search_max_path(Graph<V, int>& g, Array<int>& count, Array<int>& path, Array<bool>& mark)
+void search_max_path(Graph<V, int>& g, Array<int>& count, Array< LinkList<int>* >& path, Array<bool>& mark)
 {
     for (int i=0; i<g.vCount(); i++)
     {
@@ -396,7 +401,7 @@ void search_max_path(Graph<V, int>& g, Array<int>& count, Array<int>& path, Arra
 }
 
 //初始化数组
-void init_array(Array<int>& count, Array<int>& path, Array<bool>& mark)
+void init_array(Array<int>& count, Array< LinkList<int>* >& path, Array<bool>& mark)
 {
     for(int i=0; i<count.length(); i++)
     {
@@ -405,7 +410,7 @@ void init_array(Array<int>& count, Array<int>& path, Array<bool>& mark)
 
     for(int i=0; i<path.length(); i++)
     {
-        path[i] = -1;
+        path[i] = new LinkList<int>();
     }
 
     for(int i=0; i<mark.length(); i++)
@@ -413,11 +418,43 @@ void init_array(Array<int>& count, Array<int>& path, Array<bool>& mark)
         mark[i] = false;
     }
 }
+
+
 //打印
+template < typename V >
+void print_path(Graph<V, int>& g, int v, Array< LinkList<int>* >& path, LinkList<int>& cp)
+{
+    cp.insert(v);
+
+    if( path[v]->length() > 0 )
+    {
+        for(path[v]->move(0); !path[v]->end(); path[v]->next())
+        {
+            print_path(g, path[v]->current(), path, cp);
+        }
+    }
+    else
+    {
+        cout << "Element: ";
+
+        for(cp.move(0); !cp.end(); cp.next())
+        {
+            cout << g.getVertex(cp.current()) << " ";
+        }
+
+        cout << endl;
+    }
+
+    cp.remove(cp.length() - 1);
+}
+
+
 template<typename V>
-void print_max_path(Graph<V, int>& g, Array<int>& count, Array<int>& path)
+void print_max_path(Graph<V, int>& g, Array<int>& count, Array< LinkList<int>* >& path)
 {
     int max = 0;
+
+    LinkList<int> cp;
 
     for(int i=0; i<count.length(); i++)
     {
@@ -433,13 +470,8 @@ void print_max_path(Graph<V, int>& g, Array<int>& count, Array<int>& path)
     {
         if( max == count[i] )
         {
-            cout << "Element :" << g.getVertex(i) << " ";
+            print_path(g, i, path, cp);
 
-            for(int j=path[i]; j!=-1; j=path[j])
-            {
-                cout << g.getVertex(j) << " ";
-            }
-            cout << endl;
         }
     }
 
@@ -452,7 +484,7 @@ void solution(int* a, int len)
 {
 
     DynamicArray<int> count(len);
-    DynamicArray<int> path(len);
+    DynamicArray< LinkList<int>* > path(len);
     DynamicArray<bool> mark(len);
 
     SharedPointer< Graph<V, int> > g;
