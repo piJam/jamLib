@@ -12,27 +12,9 @@ using namespace jamLib;
 
 int main()
 {
-    int a[] = {2,15,3,4,20,0,23};
-    for(int i=0; i<7; i++)
-    {
-        cout << a[i] << endl;
-    }
+    int a[] = {1,3,4,2,5};
 
-    SharedPointer< Graph<int, int> > sp = create_graph<int>(a, 7);
-
-    SharedPointer< Array<int> > sp1 = (*sp).DFS(5);
-
-    for(int i=0; i<sp1->length(); i++)
-    {
-        int k = (*sp1)[i];
-         cout<< (*sp1)[i] << ":" << (*sp).getVertex(i) << "_" << a[i] << "  ";
-    }
-    cout << endl;
-
-    int al = 100;
-    int& b = al;
-
-    cout << &al << " " << &b << endl;
+    solution<int>(a, 5);
 
     return 0;
 }

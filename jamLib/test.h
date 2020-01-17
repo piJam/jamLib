@@ -323,7 +323,7 @@ void testFloyd()
 
 //最长不下降序列
 //创建根据数组创建图，数值小的元素，指向大的元素
-template <typename V>
+template<typename V>
 SharedPointer< Graph<V, int> > create_graph(V* v, int len)
 {
      LinkGraph<V, int>* ret = new LinkGraph<V, int>(len);
@@ -382,8 +382,76 @@ int search_max_path(Graph<V, int>& g, int v, Array<int>& count, Array<int>& path
     return ret;
 }
 
+//初始化数组
+void init_array(Array<int>& count, Array<int>& path, Array<bool>& mark)
+{
+    for(int i=0; i<count.length(); i++)
+    {
+        count[i] = 0;
+    }
 
-//
+    for(int i=0; i<path.length(); i++)
+    {
+        path[i] = -1;
+    }
+
+    for(int i=0; i<mark.length(); i++)
+    {
+        mark[i] = false;
+    }
+}
+//打印
+template<typename V>
+void print_max_path(Graph<V, int>& g, Array<int>& count, Array<int>& path)
+{
+    int max = 0;
+
+    for(int i=0; i<count.length(); i++)
+    {
+        if(max < count[i])
+        {
+            max = count[i];
+        }
+    }
+
+    cout << "len :" << max << endl;
+    for(int i=0; i<count.length(); i++)
+    {
+        if( max == count[i] )
+        {
+            cout << "MAX_value :" << g.getVertex(i) << endl;
+
+            for(int j=path[i]; j!=-1; j=path[j])
+            {
+                cout << g.getVertex(j) << " ";
+            }
+            cout << endl;
+        }
+    }
+
+
+}
+
+//最长不下降序列,组合方法
+template<typename V>
+void solution(int* a, int len)
+{
+    DynamicArray<int> count(len);
+    DynamicArray<int> path(len);
+    DynamicArray<bool> mark(len);
+
+    SharedPointer< Graph<V, int> > g;
+
+    g = create_graph<V>(a, len);
+
+    init_array(count, path, mark);
+
+    search_max_path(*g, count, path, mark);
+
+    print_max_path(*g, count, path);
+
+}
+
 
 
 #endif // TEST_H
