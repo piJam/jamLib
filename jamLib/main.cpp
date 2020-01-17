@@ -4,7 +4,7 @@
 #include <ctime>
 
 #include "test.h"
-#include "Array.h".h"
+#include "Array.h"
 #include "LinkQueue.h"
 
 using namespace std;
@@ -12,18 +12,11 @@ using namespace jamLib;
 
 int main()
 {
-    int a[] = {1,3,4,2,5};
+    int a[] = {1, 3, 5, 4};
 
-
-    solution<int>(a, 5);
+//    int a[] = {3, 18, 7, 14, 10, 12, 23, 41, 16, 24};
+    solution<int>(a, sizeof (a) / sizeof (*a) );
 
 
     return 0;
 }
-
-
-
-
-
-
-

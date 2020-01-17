@@ -332,7 +332,7 @@ SharedPointer< Graph<V, int> > create_graph(V* v, int len)
      {
          ret->setVertex(i, v[i]);
 
-         for(int j=0; j<len; j++)
+         for(int j=i+1; j<len; j++)
          {
              if(v[i] < v[j])
              {
@@ -382,6 +382,19 @@ int search_max_path(Graph<V, int>& g, int v, Array<int>& count, Array<int>& path
     return ret;
 }
 
+template <typename V>
+void search_max_path(Graph<V, int>& g, Array<int>& count, Array<int>& path, Array<bool>& mark)
+{
+    for (int i=0; i<g.vCount(); i++)
+    {
+        if( !mark[i] )
+        {
+           search_max_path(g, i, count, path, mark);
+        }
+
+    }
+}
+
 //初始化数组
 void init_array(Array<int>& count, Array<int>& path, Array<bool>& mark)
 {
@@ -415,11 +428,12 @@ void print_max_path(Graph<V, int>& g, Array<int>& count, Array<int>& path)
     }
 
     cout << "len :" << max << endl;
+
     for(int i=0; i<count.length(); i++)
     {
         if( max == count[i] )
         {
-            cout << "MAX_value :" << g.getVertex(i) << endl;
+            cout << "Element :" << g.getVertex(i) << " ";
 
             for(int j=path[i]; j!=-1; j=path[j])
             {
@@ -436,6 +450,7 @@ void print_max_path(Graph<V, int>& g, Array<int>& count, Array<int>& path)
 template<typename V>
 void solution(int* a, int len)
 {
+
     DynamicArray<int> count(len);
     DynamicArray<int> path(len);
     DynamicArray<bool> mark(len);
