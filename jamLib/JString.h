@@ -57,6 +57,7 @@ public:
     JString& operator = (const JString& s);
     JString& operator = (const char s);
 
+
     char& operator[](int index);
     char operator[](int index) const;
 
